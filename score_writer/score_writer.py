@@ -49,7 +49,7 @@ def main(args):
 
                 writer.writerow({'Winner': winner_score_dict['Team'], 'Winner_score': winner_score_dict['Score'],
                                  'Loser': loser_score_dict['Team'], 'Loser_score': loser_score_dict['Score'],
-                                 'Date': date})
+                                 'Date': date.date()})
 
 
 def parse_args():
