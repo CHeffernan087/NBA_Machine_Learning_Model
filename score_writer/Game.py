@@ -22,17 +22,18 @@ class Game():
 
     def getRankings(self,team, game_date):
         team_rankings = rankings.query(f'TEAM_ID == "{team}"').sort_values(by=['STANDINGSDATE'])
-        for index, date in enumerate(team_rankings['STANDINGSDATE']):
-            if (date == game_date):
-                rec = team_rankings['HOME_RECORD'][index]
-                team_home_record = team_rankings['HOME_RECORD'][index].split("-")
-                team_road_record = team_rankings['ROAD_RECORD'][index].split("-")
+        team_rank_on_date = team_rankings.query(f'STANDINGSDATE == "{game_date}"')
 
-                team_home_wins = team_home_record[0]
-                team_home_loses = team_home_record[1]
+        hr = team_rank_on_date['HOME_RECORD'].iloc[0]
 
-                team_road_wins = team_road_record[0]
-                team_road_loses = team_road_record[1]
+        team_home_record = team_rank_on_date['HOME_RECORD'].iloc[0].split("-")
+        team_road_record = team_rank_on_date['ROAD_RECORD'].iloc[0].split("-")
+
+        team_home_wins = team_home_record[0]
+        team_home_loses = team_home_record[1]
+
+        team_road_wins = team_road_record[0]
+        team_road_loses = team_road_record[1]
         return [team_home_wins, team_home_loses, team_road_wins, team_road_loses]
 
 
