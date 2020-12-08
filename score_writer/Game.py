@@ -104,3 +104,5 @@ for game in gameList:
     f.write(game.toCsvLine() + "\n")
 f.close()
 
+
+
