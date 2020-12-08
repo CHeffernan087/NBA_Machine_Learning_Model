@@ -29,19 +29,20 @@ class Game():
         team_home_record = team_rank_on_date['HOME_RECORD'].iloc[0].split("-")
         team_road_record = team_rank_on_date['ROAD_RECORD'].iloc[0].split("-")
 
-        team_home_wins = team_home_record[0]
-        team_home_loses = team_home_record[1]
+        team_home_wins = int(team_home_record[0])
+        team_home_loses = int(team_home_record[1])
 
-        team_road_wins = team_road_record[0]
-        team_road_loses = team_road_record[1]
+        team_road_wins = int(team_road_record[0])
+        team_road_loses = int(team_road_record[1])
         return [team_home_wins, team_home_loses, team_road_wins, team_road_loses]
 
 
     '''
     get the records
     '''
-    def __init__(self, homeTeam, awayTeam, game_date):
+    def __init__(self, homeTeam, awayTeam, game_date, home_team_win):
 
+        self.home_team_wins= home_team_win;
 
         team_home_wins, team_home_loses, team_road_wins, team_road_loses = self.getRankings(homeTeam, game_date)
         self.home_team_home_wins = team_home_wins
@@ -54,6 +55,15 @@ class Game():
         self.away_team_home_loses = team_home_loses
         self.away_team_road_wins = team_road_wins
         self.away_team_road_loses = team_road_loses
+
+    def toFeatureVector(self):
+        return [self.home_team_home_wins,self.home_team_home_loses, self.home_team_road_wins, self.home_team_road_loses, self.away_team_home_wins, self.away_team_home_loses, self.away_team_road_wins, self.away_team_road_loses]
+
+    def toCsvLine(self):
+        features = str(self.toFeatureVector())[1:-1]
+        return features+ f", {self.home_team_wins}"
+
+
 
 
 
@@ -68,15 +78,28 @@ for every game:
 iterate over games - make game obj
 '''
 
-print(games['GAME_DATE_EST'][0])
 gameList = []
+
+'''
+
+'''
 
 
 for index, game_date in enumerate(games['GAME_DATE_EST']):
-    # year, month, day = game_date.split("-")
-    # current_date = datetime(int(year), int(month), int(day))
-    home_team = games['HOME_TEAM_ID'][index];
-    away_team = games['VISITOR_TEAM_ID'][index];
-    gameList.append(Game(home_team, away_team, game_date))
+    year, month, day = game_date.split("-")
+    if(year == "2019"):
+        home_team = games['HOME_TEAM_ID'].iloc[index];
+        away_team = games['VISITOR_TEAM_ID'].iloc[index];
+        home_team_win = games['HOME_TEAM_WINS'].iloc[index]
+        currentGame = Game(home_team, away_team, game_date, home_team_win)
+        gameList.append(currentGame)
+        currentGame.toCsvLine()
     break;
+
+f = open("2019_games.csv", "a")
+
+f.write("HOME_TEAM_HOME_WINS,HOME_TEAM_HOME_LOSES, HOME_TEAM_ROAD_WINS, HOME_TEAM_ROAD_LOSES, AWAY_TEAM_HOME_WINS, AWAY_TEAM_HOME_LOSES, AWAY_TEAM_ROAD_WINS, AWAY_TEAM_ROAD_LOSES\n")
+for game in gameList:
+    f.write(game.toCsvLine() + "\n")
+f.close()
 
