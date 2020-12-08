@@ -9,6 +9,7 @@ from sklearn.model_selection import KFold
 import matplotlib.patches as mpatches
 from datetime import timedelta, datetime
 
+
 # header = ["TEAM_ID", "LEAGUE_ID", "SEASON_ID", "STANDINGSDATE", "CONFERENCE", "TEAM", "G", "W", "L", "W_PCT",
 #           "HOME_RECORD", "ROAD_RECORD"]
 # header = ["LEAGUE_ID", "TEAM_ID", "MIN_YEAR", "MAX_YEAR", "ABBREVIATION", "NICKNAME", "YEARFOUNDED", "CITY", "ARENA",
@@ -96,9 +97,9 @@ for index, game_date in enumerate(games['GAME_DATE_EST']):
         currentGame.toCsvLine()
     break;
 
-f = open("2019_games.csv", "a")
+f = open("../data/2019_games.csv", "a")
 
-f.write("HOME_TEAM_HOME_WINS,HOME_TEAM_HOME_LOSES, HOME_TEAM_ROAD_WINS, HOME_TEAM_ROAD_LOSES, AWAY_TEAM_HOME_WINS, AWAY_TEAM_HOME_LOSES, AWAY_TEAM_ROAD_WINS, AWAY_TEAM_ROAD_LOSES\n")
+f.write("HOME_TEAM_HOME_WINS,HOME_TEAM_HOME_LOSES, HOME_TEAM_ROAD_WINS, HOME_TEAM_ROAD_LOSES, AWAY_TEAM_HOME_WINS, AWAY_TEAM_HOME_LOSES, AWAY_TEAM_ROAD_WINS, AWAY_TEAM_ROAD_LOSES, HOME_TEAM_WIN\n")
 for game in gameList:
     f.write(game.toCsvLine() + "\n")
 f.close()
