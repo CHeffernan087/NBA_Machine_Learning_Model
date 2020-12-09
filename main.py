@@ -14,8 +14,9 @@ def parseInput(input):
         return True
     return False
 
+YEAR_TO_GENERATE = 2020
 
-FILE_PATH = "data/2019_games.csv"
+FILE_PATH = f"data/{YEAR_TO_GENERATE}_games.csv"
 
 userInput = input("Do you want to generate CSV? (y/n)\n> ")
 shouldGenCsv = parseInput(userInput)
@@ -37,7 +38,7 @@ if(shouldGenCsv):
     nextProgressPrint = tenPercentData
     for index, game_date in enumerate(games_frame['GAME_DATE_EST']):
         year = int(game_date.split("-")[0])
-        if year == 2019:
+        if year == YEAR_TO_GENERATE:
             home_team_id = games_frame['HOME_TEAM_ID'].iloc[index];
             away_team_id = games_frame['VISITOR_TEAM_ID'].iloc[index];
             home_team = team_stats.getTeam(home_team_id)
@@ -59,16 +60,21 @@ if(shouldGenCsv):
     game_writer = GameWriter(FILE_PATH, games_list)
     game_writer.write()
 # ------------------------------------------------------------------------------------
+YEAR_FOR_TESTING = 2020
+FILE_PATH_TEST = f"data/{YEAR_FOR_TESTING}_games.csv"
+FILE_PATH_TRAIN = f"data/{YEAR_TO_GENERATE}_games.csv"
+training_csv_dataframe = pd.read_csv(FILE_PATH_TRAIN)
+testing_csv_dataframe = pd.read_csv(FILE_PATH_TEST)
+num_columns = len(training_csv_dataframe.columns)
 
-csv_dataframe = pd.read_csv(FILE_PATH)
-num_columns = len(csv_dataframe.columns)
-
-x_input_features = csv_dataframe.iloc[:, range(0, num_columns-1)]
-y_output_data = csv_dataframe.iloc[:, [num_columns-1]]
+x_input_features = training_csv_dataframe.iloc[:, range(0, num_columns-1)]
+y_output_data = training_csv_dataframe.iloc[:, [num_columns-1]]
 model = LogisticRegression(penalty='none',max_iter=200).fit(x_input_features, np.array(y_output_data).ravel())
 
-y_pred = model.predict(x_input_features)
-print(f'Model Accuracy : {accuracy_score(y_true=y_output_data, y_pred=y_pred)}')
+test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns-1)]
+test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns-1]]
+y_pred = model.predict(test_x_input_features)
+print(f'Model Accuracy : {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
 
 # baseline = DummyClassifier(strategy="uniform")
 # baseline = DummyClassifier(strategy="most_frequent")

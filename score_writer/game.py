@@ -59,5 +59,3 @@ class Game(OrderedDict):
             sufficientData = False
         return sufficientData
 
-    def getResult(self):
-        return [self.home_team, self.away_team, self.home_team_wins]

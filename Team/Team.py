@@ -2,6 +2,8 @@ HOME_TEAM = 0
 AWAY_TEAM = 1
 RESULT = 2
 
+NUMBER_OF_GAMES = 3
+
 class Team():
 
 
@@ -35,7 +37,7 @@ class Team():
         result = 1 if teamHasWon else 0
 
         self.last_five_games.insert(0, result)
-        if(len(self.last_five_games) > 3):
+        if(len(self.last_five_games) > NUMBER_OF_GAMES):
             self.last_five_games.pop()
 
 
