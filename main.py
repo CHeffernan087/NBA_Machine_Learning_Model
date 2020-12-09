@@ -31,6 +31,10 @@ team_stats = TeamStats(teams)
 
 if(shouldGenCsv):
     print("Generating data. This will take a minute....")
+    num_rows = num_columns = len(games_frame['GAME_DATE_EST'])
+    progress = 1
+    tenPercentData = int(num_rows /10)
+    nextProgressPrint = tenPercentData
     for index, game_date in enumerate(games_frame['GAME_DATE_EST']):
         year = int(game_date.split("-")[0])
         if year == 2019:
@@ -44,6 +48,12 @@ if(shouldGenCsv):
 
             if (currentGame.hasSufficientData()):
                 games_list.append(currentGame)
+
+       # just for us so we can see the CSV being processed (its boring to wait)
+        if(index == nextProgressPrint):
+            print(f"{progress*10}%")
+            progress = progress + 1
+            nextProgressPrint = tenPercentData * progress
 
     # print(games_list[0]) this shows how we can print games to examine the feature values
     game_writer = GameWriter(FILE_PATH, games_list)
