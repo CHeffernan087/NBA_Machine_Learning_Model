@@ -20,23 +20,23 @@ teams = pd.read_csv("data/teams.csv")['TEAM_ID']
 games_list = []
 team_stats = TeamStats(teams)
 
-for index, game_date in enumerate(games_frame['GAME_DATE_EST']):
-    year = int(game_date.split("-")[0])
-    if year == 2019:
-        home_team_id = games_frame['HOME_TEAM_ID'].iloc[index];
-        away_team_id = games_frame['VISITOR_TEAM_ID'].iloc[index];
-        home_team = team_stats.getTeam(home_team_id)
-        away_team = team_stats.getTeam(away_team_id)
-        home_team_win = games_frame['HOME_TEAM_WINS'].iloc[index]
-        team_stats.recordGame([home_team_id, away_team_id, home_team_win])
-        currentGame = Game(home_team, away_team, game_date, rankings_frame,home_team_win)
-
-        if (currentGame.hasSufficientData()):
-            games_list.append(currentGame)
-
-# print(games_list[0]) this shows how we can print games to examine the feature values
-game_writer = GameWriter(FILE_PATH, games_list)
-game_writer.write()
+# for index, game_date in enumerate(games_frame['GAME_DATE_EST']):
+#     year = int(game_date.split("-")[0])
+#     if year == 2019:
+#         home_team_id = games_frame['HOME_TEAM_ID'].iloc[index];
+#         away_team_id = games_frame['VISITOR_TEAM_ID'].iloc[index];
+#         home_team = team_stats.getTeam(home_team_id)
+#         away_team = team_stats.getTeam(away_team_id)
+#         home_team_win = games_frame['HOME_TEAM_WINS'].iloc[index]
+#         team_stats.recordGame([home_team_id, away_team_id, home_team_win])
+#         currentGame = Game(home_team, away_team, game_date, rankings_frame,home_team_win)
+#
+#         if (currentGame.hasSufficientData()):
+#             games_list.append(currentGame)
+#
+# # print(games_list[0]) this shows how we can print games to examine the feature values
+# game_writer = GameWriter(FILE_PATH, games_list)
+# game_writer.write()
 # ------------------------------------------------------------------------------------
 
 csv_dataframe = pd.read_csv(FILE_PATH)
@@ -44,7 +44,7 @@ num_columns = len(csv_dataframe.columns)
 
 x_input_features = csv_dataframe.iloc[:, range(0, num_columns-1)]
 y_output_data = csv_dataframe.iloc[:, [num_columns-1]]
-model = LogisticRegression(penalty='none',max_iter=100).fit(x_input_features, np.array(y_output_data).ravel())
+model = LogisticRegression(penalty='none',max_iter=200).fit(x_input_features, np.array(y_output_data).ravel())
 
 y_pred = model.predict(x_input_features)
 print(f'Model Accuracy : {accuracy_score(y_true=y_output_data, y_pred=y_pred)}')
