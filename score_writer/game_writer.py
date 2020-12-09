@@ -1,5 +1,6 @@
 from pathlib import Path
 import csv
+import os
 
 
 class GameWriter:
@@ -13,6 +14,7 @@ class GameWriter:
         with self.output_path.open("a") as games_csv:
             csv_writer = csv.DictWriter(games_csv, fieldnames=headers, lineterminator='\n')
             if not file_exists:
-                csv_writer.writeheader()
+                # csv_writer.writeheader() may want to include when scraping
+                os.remove(self.output_path)
             for game in self.games_list:
                 csv_writer.writerow(game)
