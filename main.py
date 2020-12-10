@@ -16,7 +16,7 @@ def parseInput(input):
     return False
 
 
-YEAR_TO_GENERATE = 2020
+YEAR_TO_GENERATE = 2019
 
 FILE_PATH = f"data/{YEAR_TO_GENERATE}_games.csv"
 
@@ -59,17 +59,21 @@ if shouldGenCsv:
         current_game_elo = current_game_elo[current_game_elo['team1'] == home_team_abbreviation]
         current_game_elo = current_game_elo[current_game_elo['team2'] == away_team_abbreviation]
 
-        home_team_elo = current_game_elo['elo1_pre'].iloc[0]
-        away_team_elo = current_game_elo['elo2_pre'].iloc[0]
-        home_team_raptor = current_game_elo['raptor1_pre'].iloc[0]
-        away_team_raptor = current_game_elo['raptor2_pre'].iloc[0]
+        try:
+            home_team_elo = current_game_elo['elo1_pre'].iloc[0]
+            away_team_elo = current_game_elo['elo2_pre'].iloc[0]
+            home_team_raptor = current_game_elo['raptor1_pre'].iloc[0]
+            away_team_raptor = current_game_elo['raptor2_pre'].iloc[0]
 
-        currentGame = Game(home_team, away_team, game_date, rankings_frame, home_team_win)
-        # currentGame = Game(home_team, away_team, game_date, rankings_frame, home_team_win, home_team_elo, away_team_elo,
-        #                    home_team_raptor, away_team_raptor)
+            currentGame = Game(home_team, away_team, game_date, rankings_frame, home_team_win, home_team_elo,
+                               away_team_elo,
+                               home_team_raptor, away_team_raptor)
 
-        if currentGame.hasSufficientData():
-            games_list.append(currentGame)
+            if currentGame.hasSufficientData():
+                games_list.append(currentGame)
+            # games_list.append(currentGame)
+        except:
+            print(f"Game played on {game_date} between {home_team_abbreviation} and {away_team_abbreviation} not in elo dataset")
 
         # just for us so we can see the CSV being processed (its boring to wait)
         if index == nextProgressPrint:
@@ -91,7 +95,7 @@ num_columns = len(training_csv_dataframe.columns)
 
 x_input_features = training_csv_dataframe.iloc[:, range(0, num_columns - 1)]
 y_output_data = training_csv_dataframe.iloc[:, [num_columns - 1]]
-model = LogisticRegression(penalty='none', max_iter=200).fit(x_input_features, np.array(y_output_data).ravel())
+model = LogisticRegression(penalty='none', max_iter=500).fit(x_input_features, np.array(y_output_data).ravel())
 
 test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]
 test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]
