@@ -30,9 +30,6 @@ teams = pd.read_csv("data/teams.csv")['TEAM_ID']
 games_list = []
 team_stats = TeamStats(teams)
 
-# test_team_id = teams.iloc[0]
-# testTeam = team_stats.getTeam(test_team_id)
-# test= "blood"
 
 if(shouldGenCsv):
     print("Generating data. This will take a minute....")
