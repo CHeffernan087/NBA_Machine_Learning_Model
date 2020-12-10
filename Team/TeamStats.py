@@ -1,15 +1,19 @@
 from .Team import Team
+import pandas as pd
 
 HOME_TEAM = 0
 AWAY_TEAM = 1
 RESULT = 2
 
+rankings_frame = pd.read_csv("data/rankings.csv")
+
 
 class TeamStats:
-
     def __init__(self, team_list):
         team_map = {}
         for team_id in team_list:
+            rankings = rankings_frame.query(
+                f'HOME_TEAM_ID == "{team_id}" | VISITOR_TEAM_ID == "{team_id}"').sort_values(by=['STANDINGSDATE'])
             team_map[team_id] = Team(team_id)
         self.team_map = team_map
 
