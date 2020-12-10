@@ -26,7 +26,7 @@ shouldGenCsv = parseInput(userInput)
 # ---------- (UN)COMMENT THIS TO MAKE CSV FILE / APPEND TO EXISTING CSV ----------------
 if shouldGenCsv:
     rankings_frame = pd.read_csv("data/ranking.csv")
-    teams = pd.read_csv("data/teams.csv")['TEAM_ID']
+    teams = pd.read_csv("data/teams.csv")[['TEAM_ID', 'ABBREVIATION']]
 
     games_frame = pd.read_csv("data/games.csv")
     games_frame = games_frame[games_frame.GAME_DATE_EST.str.contains(str(YEAR_TO_GENERATE))]
@@ -35,7 +35,7 @@ if shouldGenCsv:
     elo_frame = elo_frame[elo_frame['date'].isin(games_frame['GAME_DATE_EST'])]
 
     games_list = []
-    team_stats = TeamStats(teams)
+    team_stats = TeamStats(teams['TEAM_ID'])
 
     print("Generating data. This will take a minute....")
     num_rows = num_columns = len(games_frame['GAME_DATE_EST'])
@@ -45,11 +45,28 @@ if shouldGenCsv:
     for index, game_date in enumerate(games_frame['GAME_DATE_EST']):
         home_team_id = games_frame['HOME_TEAM_ID'].iloc[index]
         away_team_id = games_frame['VISITOR_TEAM_ID'].iloc[index]
+
         home_team = team_stats.getTeam(home_team_id)
         away_team = team_stats.getTeam(away_team_id)
         home_team_win = games_frame['HOME_TEAM_WINS'].iloc[index]
+
         team_stats.recordGame([home_team_id, away_team_id, home_team_win])
+
+        home_team_abbreviation = teams[teams['TEAM_ID'] == home_team_id]['ABBREVIATION'].iloc[0]
+        away_team_abbreviation = teams[teams['TEAM_ID'] == away_team_id]['ABBREVIATION'].iloc[0]
+
+        current_game_elo = elo_frame[elo_frame['date'] == game_date]
+        current_game_elo = current_game_elo[current_game_elo['team1'] == home_team_abbreviation]
+        current_game_elo = current_game_elo[current_game_elo['team2'] == away_team_abbreviation]
+
+        home_team_elo = current_game_elo['elo1_pre'].iloc[0]
+        away_team_elo = current_game_elo['elo2_pre'].iloc[0]
+        home_team_raptor = current_game_elo['raptor1_pre'].iloc[0]
+        away_team_raptor = current_game_elo['raptor2_pre'].iloc[0]
+
         currentGame = Game(home_team, away_team, game_date, rankings_frame, home_team_win)
+        # currentGame = Game(home_team, away_team, game_date, rankings_frame, home_team_win, home_team_elo, away_team_elo,
+        #                    home_team_raptor, away_team_raptor)
 
         if currentGame.hasSufficientData():
             games_list.append(currentGame)
@@ -64,6 +81,7 @@ if shouldGenCsv:
     game_writer = GameWriter(FILE_PATH, games_list)
     game_writer.write()
 # ------------------------------------------------------------------------------------
+
 YEAR_FOR_TESTING = 2020
 FILE_PATH_TEST = f"data/{YEAR_FOR_TESTING}_games.csv"
 FILE_PATH_TRAIN = f"data/{YEAR_TO_GENERATE}_games.csv"
