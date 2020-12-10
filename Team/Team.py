@@ -6,10 +6,9 @@ NUMBER_OF_GAMES = 3
 
 
 class Team:
-    def __init__(self, team_id, games):
+    def __init__(self, team_id):
         self.team_id = team_id
         self.last_five_games = []
-        self.games = games
 
     def getCurrentForm(self):
         wins = 0
@@ -39,10 +38,3 @@ class Team:
         self.last_five_games.insert(0, result)
         if len(self.last_five_games) > NUMBER_OF_GAMES:
             self.last_five_games.pop()
-
-    '''
-    If you want the record for the 2018-2019 season, just pass in 2019
-    '''
-    def getTeamRecordForSeason(self, season):
-        self.games.loc[f'{season}-01-01':f'{season}-07-07']
-        test = "blood"
