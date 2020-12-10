@@ -2,9 +2,9 @@ from collections import OrderedDict
 
 
 class Game(OrderedDict):
-    '''
+    """
     teams are a team object
-    '''
+    """
     def __init__(self, home_team, away_team, game_date, rankings_dataframe, home_team_win):
         super().__init__()
         self._rankings = rankings_dataframe
@@ -49,13 +49,14 @@ class Game(OrderedDict):
         team_road_wins = super().__getitem__("HOME_TEAM_ROAD_WINS")
         team_road_loses = super().__getitem__("HOME_TEAM_ROAD_LOSES")
 
-        homeGames = team_home_wins + team_home_loses
-        awayGames = team_road_wins + team_road_loses
-        numberOfGames = homeGames + awayGames
+        home_games = team_home_wins + team_home_loses
+        away_games = team_road_wins + team_road_loses
+        number_of_games = home_games + away_games
 
-        if (numberOfGames > 10):
-            sufficientData = True
+        if number_of_games > 10:
+            sufficient_data = True
         else:
-            sufficientData = False
-        return sufficientData
+            sufficient_data = False
+
+        return sufficient_data
 
