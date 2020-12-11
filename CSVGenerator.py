@@ -1,8 +1,12 @@
 import pandas as pd
-
+import os
+from pathlib import Path
 from score_writer.game import Game
 from score_writer.game_writer import GameWriter
 from Team.TeamStats import TeamStats
+from score_writer.score_scraper import ScoreScraper
+from datetime import date
+import csv
 
 
 class CSVGenerator:
@@ -69,3 +73,30 @@ class CSVGenerator:
         # print(games_list[0]) this shows how we can print games to examine the feature values
         game_writer = GameWriter(file_path, games_list)
         game_writer.write()
+
+def generateGameStats():
+    season_start_year = int(input("Choose a year to get the head to head data for\n > "))
+    start_date = date.fromisoformat(f'{season_start_year}-10-16')
+    if(season_start_year==2019):
+        end_date = date.fromisoformat(f'{season_start_year+1}-09-01')
+    else:
+        end_date = date.fromisoformat(f'{season_start_year + 1}-07-01')
+    gameScraper = ScoreScraper(start_date, end_date)
+    game_results = gameScraper.results_list
+    # for game in game_results:
+
+    outputFile = f"game_stats_{season_start_year}-{season_start_year+1}.csv"
+    is_file_existing = Path(outputFile).is_file()
+
+    if (is_file_existing):
+        os.remove(outputFile)
+
+    with open(outputFile, 'a') as output_csv:
+        headers = game_results[0].keys()
+        writer = csv.DictWriter(output_csv, fieldnames=headers, lineterminator='\n')
+        writer.writeheader()
+        for index, game_dict in enumerate(game_results):
+            writer.writerow(game_dict)
+
+
+generateGameStats()

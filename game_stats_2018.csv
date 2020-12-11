@@ -1,0 +1,1313 @@
+is_home_winner,home_team,home_team_id,home_team_score,away_team,away_team_id,away_team_score,date
+True,Boston,2,105,Philadelphia,5,87,2018-10-16
+True,Golden State,21,108,Oklahoma City,16,100,2018-10-16
+False,Charlotte,13,112,Milwaukee,10,113,2018-10-17
+True,Detroit,8,103,Brooklyn,4,100,2018-10-17
+False,Houston,29,112,New Orleans,30,131,2018-10-17
+True,Indiana,7,111,Memphis,28,83,2018-10-17
+False,LA Clippers,22,98,Denver,19,107,2018-10-17
+True,New York,3,126,Atlanta,12,107,2018-10-17
+True,Orlando,15,104,Miami,11,101,2018-10-17
+True,Phoenix,24,121,Dallas,27,100,2018-10-17
+False,Sacramento,23,117,Utah,18,123,2018-10-17
+True,San Antonio,26,112,Minnesota,20,108,2018-10-17
+True,Toronto,1,116,Cleveland,6,104,2018-10-17
+True,Philadelphia,5,127,Chicago,9,108,2018-10-18
+True,Portland,17,128,LA Lakers,25,119,2018-10-18
+False,Washington,14,112,Miami,11,113,2018-10-18
+True,Brooklyn,4,107,New York,3,105,2018-10-19
+True,LA Clippers,22,108,Oklahoma City,16,92,2018-10-19
+True,Memphis,28,131,Atlanta,12,117,2018-10-19
+True,Milwaukee,10,118,Indiana,7,101,2018-10-19
+True,Minnesota,20,131,Cleveland,6,123,2018-10-19
+True,New Orleans,30,149,Sacramento,23,129,2018-10-19
+False,Orlando,15,88,Charlotte,13,120,2018-10-19
+True,Toronto,1,113,Boston,2,101,2018-10-19
+False,Utah,18,123,Golden State,21,124,2018-10-19
+False,Chicago,9,116,Detroit,8,118,2018-10-20
+True,Dallas,27,140,Minnesota,20,136,2018-10-20
+True,Denver,19,119,Phoenix,24,91,2018-10-20
+True,Indiana,7,132,Brooklyn,4,112,2018-10-20
+False,LA Lakers,25,115,Houston,29,124,2018-10-20
+False,Miami,11,112,Charlotte,13,113,2018-10-20
+False,New York,3,101,Boston,2,103,2018-10-20
+True,Philadelphia,5,116,Orlando,15,115,2018-10-20
+True,Portland,17,121,San Antonio,26,108,2018-10-20
+False,Washington,14,113,Toronto,1,117,2018-10-20
+False,Cleveland,6,111,Atlanta,12,133,2018-10-21
+True,Denver,19,100,Golden State,21,98,2018-10-21
+True,LA Clippers,22,115,Houston,29,112,2018-10-21
+False,Oklahoma City,16,120,Sacramento,23,131,2018-10-21
+False,Boston,2,90,Orlando,15,93,2018-10-22
+True,Dallas,27,115,Chicago,9,109,2018-10-22
+True,Golden State,21,123,Phoenix,24,103,2018-10-22
+False,LA Lakers,25,142,San Antonio,26,143,2018-10-22
+True,Milwaukee,10,124,New York,3,113,2018-10-22
+True,Minnesota,20,101,Indiana,7,91,2018-10-22
+False,Portland,17,124,Washington,14,125,2018-10-22
+True,Toronto,1,127,Charlotte,13,106,2018-10-22
+False,Utah,18,84,Memphis,28,92,2018-10-22
+True,Denver,19,126,Sacramento,23,112,2018-10-23
+True,Detroit,8,133,Philadelphia,5,132,2018-10-23
+True,New Orleans,30,116,LA Clippers,22,109,2018-10-23
+True,Atlanta,12,111,Dallas,27,104,2018-10-24
+True,Chicago,9,112,Charlotte,13,110,2018-10-24
+False,Cleveland,6,86,Brooklyn,4,102,2018-10-24
+True,Golden State,21,144,Washington,14,122,2018-10-24
+False,Houston,29,89,Utah,18,100,2018-10-24
+True,Miami,11,110,New York,3,87,2018-10-24
+True,Milwaukee,10,123,Philadelphia,5,108,2018-10-24
+False,Phoenix,24,113,LA Lakers,25,131,2018-10-24
+True,Sacramento,23,97,Memphis,28,92,2018-10-24
+False,San Antonio,26,96,Indiana,7,116,2018-10-24
+True,Toronto,1,112,Minnesota,20,105,2018-10-24
+True,Detroit,8,110,Cleveland,6,103,2018-10-25
+True,LA Lakers,25,121,Denver,19,114,2018-10-25
+False,Oklahoma City,16,95,Boston,2,101,2018-10-25
+False,Orlando,15,114,Portland,17,128,2018-10-25
+True,Charlotte,13,135,Chicago,9,106,2018-10-26
+False,Houston,29,113,LA Clippers,22,133,2018-10-26
+False,Minnesota,20,95,Milwaukee,10,125,2018-10-26
+True,New Orleans,30,117,Brooklyn,4,115,2018-10-26
+False,New York,3,100,Golden State,21,128,2018-10-26
+True,Sacramento,23,116,Washington,14,112,2018-10-26
+True,Toronto,1,116,Dallas,27,107,2018-10-26
+False,Atlanta,12,85,Chicago,9,97,2018-10-27
+False,Cleveland,6,107,Indiana,7,119,2018-10-27
+False,Detroit,8,89,Boston,2,109,2018-10-27
+True,Memphis,28,117,Phoenix,24,96,2018-10-27
+True,Miami,11,120,Portland,17,111,2018-10-27
+True,Milwaukee,10,113,Orlando,15,91,2018-10-27
+False,New Orleans,30,111,Utah,18,132,2018-10-27
+True,Philadelphia,5,105,Charlotte,13,103,2018-10-27
+True,San Antonio,26,110,LA Lakers,25,106,2018-10-27
+False,Brooklyn,4,114,Golden State,21,120,2018-10-28
+False,Dallas,27,104,Utah,18,113,2018-10-28
+True,LA Clippers,22,136,Washington,14,104,2018-10-28
+True,Oklahoma City,16,117,Phoenix,24,110,2018-10-28
+False,Chicago,9,124,Golden State,21,149,2018-10-29
+True,Denver,19,116,New Orleans,30,111,2018-10-29
+False,Indiana,7,93,Portland,17,103,2018-10-29
+False,Miami,11,113,Sacramento,23,123,2018-10-29
+True,Milwaukee,10,124,Toronto,1,109,2018-10-29
+True,Minnesota,20,124,LA Lakers,25,120,2018-10-29
+True,New York,3,115,Brooklyn,4,96,2018-10-29
+True,Philadelphia,5,113,Atlanta,12,92,2018-10-29
+True,San Antonio,26,113,Dallas,27,108,2018-10-29
+True,Boston,2,108,Detroit,8,105,2018-10-30
+True,Charlotte,13,125,Miami,11,113,2018-10-30
+True,Cleveland,6,136,Atlanta,12,114,2018-10-30
+False,Houston,29,85,Portland,17,104,2018-10-30
+True,Memphis,28,107,Washington,14,95,2018-10-30
+True,Oklahoma City,16,128,LA Clippers,22,110,2018-10-30
+False,Orlando,15,99,Sacramento,23,107,2018-10-30
+True,Toronto,1,129,Philadelphia,5,112,2018-10-30
+True,Brooklyn,4,120,Detroit,8,119,2018-10-31
+False,Chicago,9,107,Denver,19,108,2018-10-31
+True,Golden State,21,131,New Orleans,30,121,2018-10-31
+True,LA Lakers,25,114,Dallas,27,113,2018-10-31
+True,Minnesota,20,128,Utah,18,125,2018-10-31
+False,New York,3,101,Indiana,7,107,2018-10-31
+False,Phoenix,24,90,San Antonio,26,120,2018-10-31
+False,Atlanta,12,115,Sacramento,23,146,2018-11-01
+True,Boston,2,117,Milwaukee,10,113,2018-11-01
+False,Charlotte,13,107,Oklahoma City,16,111,2018-11-01
+False,Cleveland,6,91,Denver,19,110,2018-11-01
+True,Philadelphia,5,122,LA Clippers,22,113,2018-11-01
+True,Portland,17,132,New Orleans,30,119,2018-11-01
+False,Brooklyn,4,111,Houston,29,119,2018-11-02
+False,Chicago,9,105,Indiana,7,107,2018-11-02
+False,Dallas,27,106,New York,3,118,2018-11-02
+True,Golden State,21,116,Minnesota,20,99,2018-11-02
+False,Orlando,15,95,LA Clippers,22,120,2018-11-02
+False,Phoenix,24,98,Toronto,1,107,2018-11-02
+False,Utah,18,100,Memphis,28,110,2018-11-02
+False,Washington,14,111,Oklahoma City,16,134,2018-11-02
+True,Atlanta,12,123,Miami,11,118,2018-11-03
+False,Chicago,9,88,Houston,29,96,2018-11-03
+True,Charlotte,13,126,Cleveland,6,94,2018-11-03
+True,Denver,19,103,Utah,18,88,2018-11-03
+True,Indiana,7,102,Boston,2,101,2018-11-03
+True,Philadelphia,5,109,Detroit,8,99,2018-11-03
+False,Portland,17,110,LA Lakers,25,114,2018-11-03
+True,San Antonio,26,109,New Orleans,30,95,2018-11-03
+True,Brooklyn,4,122,Philadelphia,5,97,2018-11-04
+False,LA Lakers,25,107,Toronto,1,121,2018-11-04
+True,Milwaukee,10,144,Sacramento,23,109,2018-11-04
+True,Phoenix,24,102,Memphis,28,100,2018-11-04
+True,Portland,17,111,Minnesota,20,81,2018-11-04
+False,San Antonio,26,110,Orlando,15,117,2018-11-04
+True,Washington,14,108,New York,3,95,2018-11-04
+True,Denver,19,115,Boston,2,107,2018-11-05
+False,Detroit,8,115,Miami,11,120,2018-11-05
+True,Golden State,21,117,Memphis,28,101,2018-11-05
+False,Indiana,7,94,Houston,29,98,2018-11-05
+True,LA Clippers,22,120,Minnesota,20,109,2018-11-05
+False,New York,3,115,Chicago,9,116,2018-11-05
+True,Oklahoma City,16,122,New Orleans,30,116,2018-11-05
+True,Orlando,15,102,Cleveland,6,100,2018-11-05
+False,Utah,18,111,Toronto,1,124,2018-11-05
+True,Charlotte,13,113,Atlanta,12,102,2018-11-06
+True,Dallas,27,119,Washington,14,100,2018-11-06
+False,Phoenix,24,82,Brooklyn,4,104,2018-11-06
+True,Portland,17,118,Milwaukee,10,103,2018-11-06
+False,Atlanta,12,107,New York,3,112,2018-11-07
+False,Cleveland,6,86,Oklahoma City,16,95,2018-11-07
+False,Indiana,7,94,Philadelphia,5,100,2018-11-07
+True,LA Lakers,25,114,Minnesota,20,110,2018-11-07
+True,Memphis,28,89,Denver,19,87,2018-11-07
+True,Miami,11,95,San Antonio,26,88,2018-11-07
+True,New Orleans,30,107,Chicago,9,98,2018-11-07
+False,Orlando,15,96,Detroit,8,103,2018-11-07
+False,Sacramento,23,105,Toronto,1,114,2018-11-07
+True,Utah,18,117,Dallas,27,102,2018-11-07
+False,Golden State,21,111,Milwaukee,10,134,2018-11-08
+True,Oklahoma City,16,98,Houston,29,80,2018-11-08
+False,Phoenix,24,109,Boston,2,116,2018-11-08
+True,Portland,17,116,LA Clippers,22,105,2018-11-08
+False,Atlanta,12,109,Detroit,8,124,2018-11-09
+False,Denver,19,110,Brooklyn,4,112,2018-11-09
+False,Miami,11,102,Indiana,7,110,2018-11-09
+True,Orlando,15,117,Washington,14,108,2018-11-09
+True,Philadelphia,5,133,Charlotte,13,132,2018-11-09
+True,Sacramento,23,121,Minnesota,20,110,2018-11-09
+True,Utah,18,123,Boston,2,115,2018-11-09
+True,Chicago,9,99,Cleveland,6,98,2018-11-10
+True,Dallas,27,111,Oklahoma City,16,96,2018-11-10
+True,Golden State,21,116,Brooklyn,4,100,2018-11-10
+True,LA Clippers,22,128,Milwaukee,10,126,2018-11-10
+True,Memphis,28,112,Philadelphia,5,106,2018-11-10
+False,Miami,11,110,Washington,14,116,2018-11-10
+True,New Orleans,30,119,Phoenix,24,99,2018-11-10
+False,Sacramento,23,86,LA Lakers,25,101,2018-11-10
+True,San Antonio,26,96,Houston,29,89,2018-11-10
+True,Toronto,1,128,New York,3,112,2018-11-10
+False,Denver,19,114,Milwaukee,10,121,2018-11-11
+False,Detroit,8,103,Charlotte,13,113,2018-11-11
+True,Houston,29,115,Indiana,7,103,2018-11-11
+True,LA Lakers,25,107,Atlanta,12,106,2018-11-11
+False,New York,3,89,Orlando,15,115,2018-11-11
+True,Portland,17,100,Boston,2,94,2018-11-11
+False,Chicago,9,98,Dallas,27,103,2018-11-12
+True,LA Clippers,22,121,Golden State,21,116,2018-11-12
+False,Memphis,28,88,Utah,18,96,2018-11-12
+False,Miami,11,114,Philadelphia,5,124,2018-11-12
+True,Minnesota,20,120,Brooklyn,4,113,2018-11-12
+True,Oklahoma City,16,118,Phoenix,24,101,2018-11-12
+True,Sacramento,23,104,San Antonio,26,99,2018-11-12
+False,Toronto,1,110,New Orleans,30,126,2018-11-12
+True,Washington,14,117,Orlando,15,109,2018-11-12
+True,Cleveland,6,113,Charlotte,13,89,2018-11-13
+False,Denver,19,99,Houston,29,109,2018-11-13
+True,Golden State,21,110,Atlanta,12,103,2018-11-13
+True,Boston,2,111,Chicago,9,82,2018-11-14
+False,Brooklyn,4,107,Miami,11,120,2018-11-14
+True,Dallas,27,118,Utah,18,68,2018-11-14
+True,LA Lakers,25,126,Portland,17,117,2018-11-14
+False,Milwaukee,10,113,Memphis,28,116,2018-11-14
+True,Minnesota,20,107,New Orleans,30,100,2018-11-14
+True,Oklahoma City,16,128,New York,3,103,2018-11-14
+True,Orlando,15,111,Philadelphia,5,106,2018-11-14
+True,Phoenix,24,116,San Antonio,26,96,2018-11-14
+False,Toronto,1,104,Detroit,8,106,2018-11-14
+True,Washington,14,119,Cleveland,6,95,2018-11-14
+True,Denver,19,138,Atlanta,12,93,2018-11-15
+True,Houston,29,107,Golden State,21,86,2018-11-15
+True,LA Clippers,22,116,San Antonio,26,111,2018-11-15
+True,Boston,2,123,Toronto,1,116,2018-11-16
+True,Indiana,7,99,Miami,11,91,2018-11-16
+True,Memphis,28,112,Sacramento,23,104,2018-11-16
+True,Milwaukee,10,123,Chicago,9,104,2018-11-16
+True,Minnesota,20,112,Portland,17,96,2018-11-16
+True,New Orleans,30,129,New York,3,124,2018-11-16
+True,Philadelphia,5,113,Utah,18,107,2018-11-16
+False,Washington,14,104,Brooklyn,4,115,2018-11-16
+False,Boston,2,86,Utah,18,98,2018-11-17
+False,Brooklyn,4,119,LA Clippers,22,127,2018-11-17
+False,Chicago,9,83,Toronto,1,122,2018-11-17
+False,Charlotte,13,119,Philadelphia,5,122,2018-11-17
+True,Dallas,27,112,Golden State,21,109,2018-11-17
+True,Houston,29,132,Sacramento,23,112,2018-11-17
+True,Indiana,7,97,Atlanta,12,89,2018-11-17
+True,New Orleans,30,125,Denver,19,115,2018-11-17
+True,Orlando,15,130,LA Lakers,25,117,2018-11-17
+False,Phoenix,24,100,Oklahoma City,16,110,2018-11-17
+False,Miami,11,97,LA Lakers,25,113,2018-11-18
+False,Minnesota,20,87,Memphis,28,100,2018-11-18
+True,Orlando,15,131,New York,3,117,2018-11-18
+True,San Antonio,26,104,Golden State,21,92,2018-11-18
+False,Washington,14,109,Portland,17,119,2018-11-18
+False,Atlanta,12,119,LA Clippers,22,127,2018-11-19
+True,Charlotte,13,117,Boston,2,112,2018-11-19
+True,Detroit,8,113,Cleveland,6,102,2018-11-19
+True,Indiana,7,121,Utah,18,94,2018-11-19
+True,Memphis,28,98,Dallas,27,88,2018-11-19
+True,Milwaukee,10,104,Denver,19,98,2018-11-19
+True,New Orleans,30,140,San Antonio,26,126,2018-11-19
+True,Philadelphia,5,119,Phoenix,24,114,2018-11-19
+True,Sacramento,23,117,Oklahoma City,16,113,2018-11-19
+False,Miami,11,92,Brooklyn,4,104,2018-11-20
+False,New York,3,114,Portland,17,118,2018-11-20
+False,Orlando,15,91,Toronto,1,93,2018-11-20
+True,Washington,14,125,LA Clippers,22,118,2018-11-20
+False,Atlanta,12,108,Toronto,1,124,2018-11-21
+False,Boston,2,109,New York,3,117,2018-11-21
+True,Chicago,9,124,Phoenix,24,116,2018-11-21
+True,Charlotte,13,127,Indiana,7,109,2018-11-21
+False,Cleveland,6,105,LA Lakers,25,109,2018-11-21
+True,Dallas,27,119,Brooklyn,4,113,2018-11-21
+False,Golden State,21,95,Oklahoma City,16,123,2018-11-21
+True,Houston,29,126,Detroit,8,124,2018-11-21
+True,Milwaukee,10,143,Portland,17,100,2018-11-21
+False,Minnesota,20,101,Denver,19,103,2018-11-21
+True,Philadelphia,5,121,New Orleans,30,120,2018-11-21
+False,San Antonio,26,103,Memphis,28,104,2018-11-21
+False,Utah,18,110,Sacramento,23,119,2018-11-21
+False,Atlanta,12,96,Boston,2,114,2018-11-23
+False,Brooklyn,4,102,Minnesota,20,112,2018-11-23
+False,Chicago,9,96,Miami,11,103,2018-11-23
+True,Denver,19,112,Orlando,15,87,2018-11-23
+True,Detroit,8,116,Houston,29,111,2018-11-23
+True,Golden State,21,125,Portland,17,97,2018-11-23
+False,Indiana,7,100,San Antonio,26,111,2018-11-23
+True,LA Clippers,22,112,Memphis,28,107,2018-11-23
+True,LA Lakers,25,90,Utah,18,83,2018-11-23
+False,Milwaukee,10,114,Phoenix,24,116,2018-11-23
+True,New York,3,114,New Orleans,30,109,2018-11-23
+True,Oklahoma City,16,109,Charlotte,13,104,2018-11-23
+False,Philadelphia,5,112,Cleveland,6,121,2018-11-23
+True,Toronto,1,125,Washington,14,107,2018-11-23
+True,Cleveland,6,117,Houston,29,108,2018-11-24
+True,Dallas,27,113,Boston,2,104,2018-11-24
+True,Golden State,21,117,Sacramento,23,116,2018-11-24
+True,Milwaukee,10,135,San Antonio,26,129,2018-11-24
+True,Minnesota,20,111,Chicago,9,96,2018-11-24
+False,Oklahoma City,16,98,Denver,19,105,2018-11-24
+True,Washington,14,124,New Orleans,30,114,2018-11-24
+True,Atlanta,12,124,Charlotte,13,123,2018-11-25
+False,Brooklyn,4,125,Philadelphia,5,127,2018-11-25
+True,Detroit,8,118,Phoenix,24,107,2018-11-25
+False,LA Lakers,25,104,Orlando,15,108,2018-11-25
+False,Memphis,28,98,New York,3,103,2018-11-25
+False,Portland,17,100,LA Clippers,22,104,2018-11-25
+False,Sacramento,23,112,Utah,18,133,2018-11-25
+True,Toronto,1,125,Miami,11,115,2018-11-25
+False,Chicago,9,107,San Antonio,26,108,2018-11-26
+True,Charlotte,13,110,Milwaukee,10,107,2018-11-26
+False,Cleveland,6,95,Minnesota,20,102,2018-11-26
+True,Golden State,21,116,Orlando,15,110,2018-11-26
+False,New Orleans,30,107,Boston,2,124,2018-11-26
+False,Utah,18,88,Indiana,7,121,2018-11-26
+True,Washington,14,135,Houston,29,131,2018-11-26
+True,Denver,19,117,LA Lakers,25,85,2018-11-27
+True,Detroit,8,115,New York,3,108,2018-11-27
+False,Memphis,28,114,Toronto,1,122,2018-11-27
+False,Miami,11,113,Atlanta,12,115,2018-11-27
+False,Phoenix,24,104,Indiana,7,109,2018-11-27
+False,Brooklyn,4,91,Utah,18,101,2018-11-28
+True,Charlotte,13,108,Atlanta,12,94,2018-11-28
+False,Houston,29,108,Dallas,27,128,2018-11-28
+True,LA Clippers,22,115,Phoenix,24,99,2018-11-28
+True,Milwaukee,10,116,Chicago,9,113,2018-11-28
+True,Minnesota,20,128,San Antonio,26,89,2018-11-28
+True,New Orleans,30,125,Washington,14,104,2018-11-28
+True,Oklahoma City,16,100,Cleveland,6,83,2018-11-28
+True,Philadelphia,5,117,New York,3,91,2018-11-28
+True,Portland,17,115,Orlando,15,112,2018-11-28
+True,LA Lakers,25,104,Indiana,7,96,2018-11-29
+False,Sacramento,23,121,LA Clippers,22,133,2018-11-29
+True,Toronto,1,131,Golden State,21,128,2018-11-29
+True,Boston,2,128,Cleveland,6,95,2018-11-30
+False,Brooklyn,4,125,Memphis,28,131,2018-11-30
+False,Charlotte,13,111,Utah,18,119,2018-11-30
+True,Detroit,8,107,Chicago,9,88,2018-11-30
+True,LA Lakers,25,114,Dallas,27,103,2018-11-30
+True,Miami,11,106,New Orleans,30,101,2018-11-30
+True,Oklahoma City,16,124,Atlanta,12,109,2018-11-30
+True,Philadelphia,5,123,Washington,14,98,2018-11-30
+False,Phoenix,24,85,Orlando,15,99,2018-11-30
+False,Portland,17,112,Denver,19,113,2018-11-30
+False,San Antonio,26,105,Houston,29,136,2018-11-30
+False,Cleveland,6,95,Toronto,1,106,2018-12-01
+True,Detroit,8,111,Golden State,21,102,2018-12-01
+True,Houston,29,121,Chicago,9,105,2018-12-01
+False,Minnesota,20,109,Boston,2,118,2018-12-01
+True,New York,3,136,Milwaukee,10,134,2018-12-01
+True,Sacramento,23,111,Indiana,7,110,2018-12-01
+True,Washington,14,102,Brooklyn,4,88,2018-12-01
+False,Charlotte,13,109,New Orleans,30,119,2018-12-02
+True,Dallas,27,114,LA Clippers,22,110,2018-12-02
+True,LA Lakers,25,120,Phoenix,24,96,2018-12-02
+True,Miami,11,102,Utah,18,100,2018-12-02
+True,Philadelphia,5,103,Memphis,28,95,2018-12-02
+True,San Antonio,26,131,Portland,17,118,2018-12-02
+False,Atlanta,12,111,Golden State,21,128,2018-12-03
+False,Brooklyn,4,97,Cleveland,6,99,2018-12-03
+False,Detroit,8,83,Oklahoma City,16,110,2018-12-03
+True,Minnesota,20,103,Houston,29,91,2018-12-03
+False,New Orleans,30,126,LA Clippers,22,129,2018-12-03
+False,New York,3,107,Washington,14,110,2018-12-03
+False,Toronto,1,103,Denver,19,106,2018-12-03
+True,Dallas,27,111,Portland,17,102,2018-12-04
+True,Indiana,7,96,Chicago,9,90,2018-12-04
+False,Miami,11,90,Orlando,15,105,2018-12-04
+False,Phoenix,24,105,Sacramento,23,122,2018-12-04
+True,Utah,18,139,San Antonio,26,105,2018-12-04
+False,Atlanta,12,117,Washington,14,131,2018-12-05
+False,Brooklyn,4,112,Oklahoma City,16,114,2018-12-05
+False,Cleveland,6,105,Golden State,21,129,2018-12-05
+True,LA Lakers,25,121,San Antonio,26,113,2018-12-05
+True,Memphis,28,96,LA Clippers,22,86,2018-12-05
+True,Milwaukee,10,115,Detroit,8,92,2018-12-05
+True,Minnesota,20,121,Charlotte,13,104,2018-12-05
+True,New Orleans,30,132,Dallas,27,106,2018-12-05
+False,Orlando,15,118,Denver,19,124,2018-12-05
+True,Toronto,1,113,Philadelphia,5,102,2018-12-05
+True,Boston,2,128,New York,3,100,2018-12-06
+True,Portland,17,108,Phoenix,24,86,2018-12-06
+True,Utah,18,118,Houston,29,91,2018-12-06
+True,Brooklyn,4,106,Toronto,1,105,2018-12-07
+True,Chicago,9,114,Oklahoma City,16,112,2018-12-07
+True,Charlotte,13,113,Denver,19,107,2018-12-07
+False,Cleveland,6,110,Sacramento,23,129,2018-12-07
+False,Detroit,8,111,Philadelphia,5,117,2018-12-07
+False,Milwaukee,10,95,Golden State,21,105,2018-12-07
+False,New Orleans,30,103,Memphis,28,107,2018-12-07
+False,Orlando,15,90,Indiana,7,112,2018-12-07
+False,Phoenix,24,98,Miami,11,115,2018-12-07
+True,San Antonio,26,133,LA Lakers,25,120,2018-12-07
+True,Atlanta,12,106,Denver,19,98,2018-12-08
+False,Chicago,9,77,Boston,2,133,2018-12-08
+True,Cleveland,6,116,Washington,14,101,2018-12-08
+True,Dallas,27,107,Houston,29,104,2018-12-08
+True,Indiana,7,107,Sacramento,23,97,2018-12-08
+False,LA Clippers,22,98,Miami,11,121,2018-12-08
+False,Memphis,28,88,LA Lakers,25,111,2018-12-08
+False,New York,3,104,Brooklyn,4,112,2018-12-08
+True,Portland,17,113,Minnesota,20,105,2018-12-08
+False,Detroit,8,108,New Orleans,30,116,2018-12-09
+False,New York,3,107,Charlotte,13,119,2018-12-09
+True,San Antonio,26,110,Utah,18,97,2018-12-09
+False,Toronto,1,99,Milwaukee,10,104,2018-12-09
+True,Boston,2,113,New Orleans,30,100,2018-12-10
+False,Chicago,9,89,Sacramento,23,108,2018-12-10
+True,Dallas,27,101,Orlando,15,76,2018-12-10
+True,Denver,19,105,Memphis,28,99,2018-12-10
+True,Golden State,21,116,Minnesota,20,108,2018-12-10
+True,Indiana,7,109,Washington,14,101,2018-12-10
+True,LA Lakers,25,108,Miami,11,105,2018-12-10
+True,Milwaukee,10,108,Cleveland,6,92,2018-12-10
+True,Oklahoma City,16,122,Utah,18,113,2018-12-10
+True,Philadelphia,5,116,Detroit,8,102,2018-12-10
+False,Phoenix,24,119,LA Clippers,22,123,2018-12-10
+True,Houston,29,111,Portland,17,104,2018-12-11
+False,LA Clippers,22,99,Toronto,1,123,2018-12-11
+True,San Antonio,26,111,Phoenix,24,86,2018-12-11
+True,Charlotte,13,108,Detroit,8,107,2018-12-12
+True,Cleveland,6,113,New York,3,106,2018-12-12
+True,Dallas,27,114,Atlanta,12,107,2018-12-12
+False,Golden State,21,93,Toronto,1,113,2018-12-12
+True,Indiana,7,113,Milwaukee,10,97,2018-12-12
+True,Memphis,28,92,Portland,17,83,2018-12-12
+True,New Orleans,30,118,Oklahoma City,16,114,2018-12-12
+False,Philadelphia,5,124,Brooklyn,4,127,2018-12-12
+True,Sacramento,23,141,Minnesota,20,130,2018-12-12
+True,Utah,18,111,Miami,11,84,2018-12-12
+False,Washington,14,125,Boston,2,130,2018-12-12
+True,Houston,29,126,LA Lakers,25,111,2018-12-13
+True,Orlando,15,97,Chicago,9,91,2018-12-13
+True,Phoenix,24,99,Dallas,27,89,2018-12-13
+True,San Antonio,26,125,LA Clippers,22,87,2018-12-13
+True,Boston,2,129,Atlanta,12,108,2018-12-14
+True,Brooklyn,4,125,Washington,14,118,2018-12-14
+False,Charlotte,13,124,New York,3,126,2018-12-14
+False,Cleveland,6,102,Milwaukee,10,114,2018-12-14
+True,Denver,19,109,Oklahoma City,16,98,2018-12-14
+False,Memphis,28,97,Miami,11,100,2018-12-14
+False,Philadelphia,5,101,Indiana,7,113,2018-12-14
+True,Portland,17,128,Toronto,1,122,2018-12-14
+False,Sacramento,23,125,Golden State,21,130,2018-12-14
+False,Charlotte,13,100,LA Lakers,25,128,2018-12-15
+True,Detroit,8,113,Boston,2,104,2018-12-15
+False,Memphis,28,97,Houston,29,105,2018-12-15
+True,Oklahoma City,16,110,LA Clippers,22,104,2018-12-15
+True,Orlando,15,96,Utah,18,89,2018-12-15
+True,Phoenix,24,107,Minnesota,20,99,2018-12-15
+False,San Antonio,26,93,Chicago,9,98,2018-12-15
+True,Brooklyn,4,144,Atlanta,12,127,2018-12-16
+False,Cleveland,6,105,Philadelphia,5,128,2018-12-16
+False,Dallas,27,113,Sacramento,23,120,2018-12-16
+True,Denver,19,95,Toronto,1,86,2018-12-16
+True,Indiana,7,110,New York,3,99,2018-12-16
+False,New Orleans,30,96,Miami,11,102,2018-12-16
+True,Washington,14,128,LA Lakers,25,110,2018-12-16
+False,Detroit,8,104,Milwaukee,10,107,2018-12-17
+True,Golden State,21,110,Memphis,28,93,2018-12-17
+True,Houston,29,102,Utah,18,97,2018-12-17
+False,LA Clippers,22,127,Portland,17,131,2018-12-17
+True,Minnesota,20,132,Sacramento,23,105,2018-12-17
+False,New York,3,110,Phoenix,24,128,2018-12-17
+True,Oklahoma City,16,121,Chicago,9,96,2018-12-17
+True,San Antonio,26,123,Philadelphia,5,96,2018-12-17
+True,Atlanta,12,118,Washington,14,110,2018-12-18
+True,Brooklyn,4,115,LA Lakers,25,110,2018-12-18
+True,Denver,19,126,Dallas,27,118,2018-12-18
+False,Indiana,7,91,Cleveland,6,92,2018-12-18
+False,Boston,2,103,Phoenix,24,111,2018-12-19
+False,Chicago,9,93,Brooklyn,4,96,2018-12-19
+True,Charlotte,13,110,Cleveland,6,99,2018-12-19
+True,Houston,29,136,Washington,14,118,2018-12-19
+True,Milwaukee,10,123,New Orleans,30,115,2018-12-19
+False,Minnesota,20,123,Detroit,8,129,2018-12-19
+False,Orlando,15,90,San Antonio,26,129,2018-12-19
+True,Philadelphia,5,131,New York,3,109,2018-12-19
+True,Portland,17,99,Memphis,28,92,2018-12-19
+False,Sacramento,23,113,Oklahoma City,16,132,2018-12-19
+True,Toronto,1,99,Indiana,7,96,2018-12-19
+True,Utah,18,108,Golden State,21,103,2018-12-19
+True,LA Clippers,22,125,Dallas,27,121,2018-12-20
+True,Miami,11,101,Houston,29,99,2018-12-20
+False,Boston,2,107,Milwaukee,10,120,2018-12-21
+False,Brooklyn,4,106,Indiana,7,114,2018-12-21
+True,Chicago,9,90,Orlando,15,80,2018-12-21
+True,Charlotte,13,98,Detroit,8,86,2018-12-21
+True,LA Lakers,25,112,New Orleans,30,104,2018-12-21
+False,New York,3,107,Atlanta,12,114,2018-12-21
+False,Portland,17,90,Utah,18,120,2018-12-21
+True,Sacramento,23,102,Memphis,28,99,2018-12-21
+True,San Antonio,26,124,Minnesota,20,98,2018-12-21
+True,Toronto,1,126,Cleveland,6,110,2018-12-21
+True,Golden State,21,120,Dallas,27,116,2018-12-22
+True,Houston,29,108,San Antonio,26,101,2018-12-22
+True,LA Clippers,22,132,Denver,19,111,2018-12-22
+True,Miami,11,94,Milwaukee,10,87,2018-12-22
+True,Philadelphia,5,126,Toronto,1,101,2018-12-22
+False,Utah,18,106,Oklahoma City,16,107,2018-12-22
+True,Washington,14,149,Phoenix,24,146,2018-12-22
+True,Boston,2,119,Charlotte,13,103,2018-12-23
+True,Brooklyn,4,111,Phoenix,24,103,2018-12-23
+False,Cleveland,6,92,Chicago,9,112,2018-12-23
+False,Detroit,8,95,Atlanta,12,98,2018-12-23
+True,Golden State,21,129,LA Clippers,22,127,2018-12-23
+True,Indiana,7,105,Washington,14,89,2018-12-23
+False,LA Lakers,25,99,Memphis,28,107,2018-12-23
+False,Oklahoma City,16,112,Minnesota,20,114,2018-12-23
+False,Orlando,15,91,Miami,11,115,2018-12-23
+True,Portland,17,121,Dallas,27,118,2018-12-23
+True,Sacramento,23,122,New Orleans,30,117,2018-12-23
+True,Boston,2,121,Philadelphia,5,114,2018-12-25
+False,Golden State,21,101,LA Lakers,25,127,2018-12-25
+True,Houston,29,113,Oklahoma City,16,109,2018-12-25
+False,New York,3,95,Milwaukee,10,109,2018-12-25
+True,Utah,18,117,Portland,17,96,2018-12-25
+False,Atlanta,12,121,Indiana,7,129,2018-12-26
+True,Brooklyn,4,134,Charlotte,13,132,2018-12-26
+False,Chicago,9,94,Minnesota,20,119,2018-12-26
+True,Dallas,27,122,New Orleans,30,119,2018-12-26
+True,Detroit,8,106,Washington,14,95,2018-12-26
+True,LA Clippers,22,127,Sacramento,23,118,2018-12-26
+True,Memphis,28,95,Cleveland,6,87,2018-12-26
+False,Miami,11,104,Toronto,1,106,2018-12-26
+False,Orlando,15,120,Phoenix,24,122,2018-12-26
+True,San Antonio,26,111,Denver,19,103,2018-12-26
+False,Golden State,21,109,Portland,17,110,2018-12-27
+True,Houston,29,127,Boston,2,113,2018-12-27
+True,Milwaukee,10,112,New York,3,96,2018-12-27
+True,Sacramento,23,117,LA Lakers,25,116,2018-12-27
+False,Utah,18,97,Philadelphia,5,114,2018-12-27
+True,Charlotte,13,100,Brooklyn,4,87,2018-12-28
+True,Denver,19,102,San Antonio,26,99,2018-12-28
+True,Indiana,7,125,Detroit,8,88,2018-12-28
+False,LA Lakers,25,107,LA Clippers,22,118,2018-12-28
+True,Miami,11,118,Cleveland,6,94,2018-12-28
+False,Minnesota,20,120,Atlanta,12,123,2018-12-28
+True,New Orleans,30,114,Dallas,27,112,2018-12-28
+True,Orlando,15,116,Toronto,1,87,2018-12-28
+False,Phoenix,24,102,Oklahoma City,16,118,2018-12-28
+False,Washington,14,92,Chicago,9,101,2018-12-28
+True,Atlanta,12,111,Cleveland,6,108,2018-12-29
+False,LA Clippers,22,111,San Antonio,26,122,2018-12-29
+False,Memphis,28,103,Boston,2,112,2018-12-29
+True,Milwaukee,10,129,Brooklyn,4,115,2018-12-29
+False,New Orleans,30,104,Houston,29,108,2018-12-29
+False,Phoenix,24,118,Denver,19,122,2018-12-29
+False,Portland,17,105,Golden State,21,115,2018-12-29
+True,Utah,18,129,New York,3,97,2018-12-29
+True,Washington,14,130,Charlotte,13,126,2018-12-29
+True,Dallas,27,105,Oklahoma City,16,103,2018-12-30
+True,LA Lakers,25,121,Sacramento,23,114,2018-12-30
+False,Miami,11,104,Minnesota,20,113,2018-12-30
+True,Orlando,15,109,Detroit,8,107,2018-12-30
+True,Portland,17,129,Philadelphia,5,95,2018-12-30
+True,Toronto,1,95,Chicago,9,89,2018-12-30
+True,Charlotte,13,125,Orlando,15,100,2018-12-31
+True,Houston,29,113,Memphis,28,101,2018-12-31
+True,Indiana,7,116,Atlanta,12,108,2018-12-31
+True,New Orleans,30,123,Minnesota,20,114,2018-12-31
+True,Oklahoma City,16,122,Dallas,27,102,2018-12-31
+False,Phoenix,24,109,Golden State,21,132,2018-12-31
+True,San Antonio,26,120,Boston,2,111,2018-12-31
+True,Denver,19,115,New York,3,108,2019-01-01
+False,LA Clippers,22,113,Philadelphia,5,119,2019-01-01
+True,Milwaukee,10,121,Detroit,8,98,2019-01-01
+False,Sacramento,23,108,Portland,17,113,2019-01-01
+True,Toronto,1,122,Utah,18,116,2019-01-01
+True,Boston,2,115,Minnesota,20,102,2019-01-02
+True,Brooklyn,4,126,New Orleans,30,121,2019-01-02
+False,Chicago,9,84,Orlando,15,112,2019-01-02
+False,Charlotte,13,84,Dallas,27,122,2019-01-02
+False,Cleveland,6,92,Miami,11,117,2019-01-02
+False,LA Lakers,25,100,Oklahoma City,16,107,2019-01-02
+False,Memphis,28,94,Detroit,8,101,2019-01-02
+False,Phoenix,24,127,Philadelphia,5,132,2019-01-02
+True,Washington,14,114,Atlanta,12,98,2019-01-02
+False,Golden State,21,134,Houston,29,135,2019-01-03
+False,Sacramento,23,113,Denver,19,117,2019-01-03
+True,San Antonio,26,125,Toronto,1,107,2019-01-03
+True,Boston,2,114,Dallas,27,93,2019-01-04
+False,Chicago,9,116,Indiana,7,119,2019-01-04
+False,Cleveland,6,91,Utah,18,117,2019-01-04
+False,LA Lakers,25,112,New York,3,119,2019-01-04
+False,Memphis,28,100,Brooklyn,4,109,2019-01-04
+True,Miami,11,115,Washington,14,109,2019-01-04
+True,Milwaukee,10,144,Atlanta,12,112,2019-01-04
+True,Minnesota,20,120,Orlando,15,103,2019-01-04
+False,Phoenix,24,111,LA Clippers,22,121,2019-01-04
+False,Portland,17,109,Oklahoma City,16,111,2019-01-04
+False,Cleveland,6,98,New Orleans,30,133,2019-01-05
+True,Denver,19,123,Charlotte,13,110,2019-01-05
+False,Detroit,8,105,Utah,18,110,2019-01-05
+False,Milwaukee,10,116,Toronto,1,123,2019-01-05
+True,Philadelphia,5,106,Dallas,27,100,2019-01-05
+True,Portland,17,110,Houston,29,101,2019-01-05
+False,Sacramento,23,123,Golden State,21,127,2019-01-05
+True,San Antonio,26,108,Memphis,28,88,2019-01-05
+True,Atlanta,12,106,Miami,11,82,2019-01-06
+False,Chicago,9,100,Brooklyn,4,117,2019-01-06
+True,LA Clippers,22,106,Orlando,15,96,2019-01-06
+True,Minnesota,20,108,LA Lakers,25,86,2019-01-06
+False,Oklahoma City,16,98,Washington,14,116,2019-01-06
+False,Phoenix,24,113,Charlotte,13,119,2019-01-06
+True,Toronto,1,121,Indiana,7,105,2019-01-06
+True,Boston,2,116,Brooklyn,4,95,2019-01-07
+False,Dallas,27,97,LA Lakers,25,107,2019-01-07
+False,Detroit,8,107,San Antonio,26,119,2019-01-07
+True,Houston,29,125,Denver,19,113,2019-01-07
+True,Milwaukee,10,114,Utah,18,102,2019-01-07
+True,New Orleans,30,114,Memphis,28,95,2019-01-07
+True,Portland,17,111,New York,3,101,2019-01-07
+True,Sacramento,23,111,Orlando,15,95,2019-01-07
+False,Cleveland,6,115,Indiana,7,123,2019-01-08
+True,Golden State,21,122,New York,3,95,2019-01-08
+True,LA Clippers,22,128,Charlotte,13,109,2019-01-08
+False,Miami,11,99,Denver,19,103,2019-01-08
+False,Oklahoma City,16,117,Minnesota,20,119,2019-01-08
+True,Philadelphia,5,132,Washington,14,115,2019-01-08
+True,Phoenix,24,115,Sacramento,23,111,2019-01-08
+True,Toronto,1,104,Atlanta,12,101,2019-01-08
+True,Boston,2,135,Indiana,7,108,2019-01-09
+True,Brooklyn,4,116,Atlanta,12,100,2019-01-09
+True,Dallas,27,104,Phoenix,24,94,2019-01-09
+False,Houston,29,109,Milwaukee,10,116,2019-01-09
+True,LA Lakers,25,113,Detroit,8,100,2019-01-09
+True,Memphis,28,96,San Antonio,26,86,2019-01-09
+True,New Orleans,30,140,Cleveland,6,124,2019-01-09
+True,Portland,17,124,Chicago,9,112,2019-01-09
+True,Utah,18,106,Orlando,15,93,2019-01-09
+True,Washington,14,123,Philadelphia,5,106,2019-01-09
+True,Denver,19,121,LA Clippers,22,100,2019-01-10
+True,Miami,11,115,Boston,2,99,2019-01-10
+True,Sacramento,23,112,Detroit,8,102,2019-01-10
+True,San Antonio,26,154,Oklahoma City,16,147,2019-01-10
+True,Golden State,21,146,Chicago,9,109,2019-01-11
+True,Houston,29,141,Cleveland,6,113,2019-01-11
+False,Minnesota,20,115,Dallas,27,119,2019-01-11
+False,New York,3,106,Indiana,7,121,2019-01-11
+False,Philadelphia,5,121,Atlanta,12,123,2019-01-11
+True,Portland,17,127,Charlotte,13,96,2019-01-11
+True,Toronto,1,122,Brooklyn,4,105,2019-01-11
+True,Utah,18,113,LA Lakers,25,95,2019-01-11
+True,Washington,14,113,Milwaukee,10,106,2019-01-11
+False,LA Clippers,22,104,Detroit,8,109,2019-01-12
+True,Miami,11,112,Memphis,28,108,2019-01-12
+True,Minnesota,20,110,New Orleans,30,106,2019-01-12
+True,Oklahoma City,16,122,San Antonio,26,112,2019-01-12
+True,Orlando,15,105,Boston,2,103,2019-01-12
+True,Phoenix,24,102,Denver,19,93,2019-01-12
+True,Sacramento,23,104,Charlotte,13,97,2019-01-12
+True,Utah,18,110,Chicago,9,102,2019-01-12
+False,Atlanta,12,114,Milwaukee,10,133,2019-01-13
+False,Dallas,27,114,Golden State,21,119,2019-01-13
+True,Denver,19,116,Portland,17,113,2019-01-13
+False,LA Lakers,25,95,Cleveland,6,101,2019-01-13
+False,New York,3,105,Philadelphia,5,108,2019-01-13
+True,Orlando,15,116,Houston,29,109,2019-01-13
+False,Washington,14,138,Toronto,1,140,2019-01-13
+True,Brooklyn,4,109,Boston,2,102,2019-01-14
+True,Houston,29,112,Memphis,28,94,2019-01-14
+False,LA Clippers,22,117,New Orleans,30,121,2019-01-14
+True,Sacramento,23,115,Portland,17,107,2019-01-14
+False,San Antonio,26,93,Charlotte,13,108,2019-01-14
+True,Utah,18,100,Detroit,8,94,2019-01-14
+True,Atlanta,12,142,Oklahoma City,16,126,2019-01-15
+False,Denver,19,111,Golden State,21,142,2019-01-15
+True,Indiana,7,131,Phoenix,24,97,2019-01-15
+True,LA Lakers,25,107,Chicago,9,100,2019-01-15
+True,Milwaukee,10,124,Miami,11,86,2019-01-15
+True,Philadelphia,5,149,Minnesota,20,107,2019-01-15
+True,Boston,2,117,Toronto,1,108,2019-01-16
+False,Dallas,27,101,San Antonio,26,105,2019-01-16
+True,Detroit,8,120,Orlando,15,115,2019-01-16
+True,Golden State,21,147,New Orleans,30,140,2019-01-16
+False,Houston,29,142,Brooklyn,4,145,2019-01-16
+False,LA Clippers,22,109,Utah,18,129,2019-01-16
+False,Memphis,28,101,Milwaukee,10,111,2019-01-16
+True,Portland,17,129,Cleveland,6,112,2019-01-16
+True,Charlotte,13,114,Sacramento,23,95,2019-01-17
+True,Denver,19,135,Chicago,9,105,2019-01-17
+False,Indiana,7,96,Philadelphia,5,120,2019-01-17
+False,Oklahoma City,16,128,LA Lakers,25,138,2019-01-17
+True,Toronto,1,111,Phoenix,24,109,2019-01-17
+True,Washington,14,101,New York,3,100,2019-01-17
+True,Boston,2,122,Memphis,28,116,2019-01-18
+True,Detroit,8,98,Miami,11,93,2019-01-18
+False,LA Clippers,22,94,Golden State,21,112,2019-01-18
+False,Minnesota,20,113,San Antonio,26,116,2019-01-18
+False,Orlando,15,115,Brooklyn,4,117,2019-01-18
+True,Portland,17,128,New Orleans,30,112,2019-01-18
+True,Utah,18,115,Cleveland,6,99,2019-01-18
+False,Atlanta,12,105,Boston,2,113,2019-01-19
+False,Chicago,9,103,Miami,11,117,2019-01-19
+True,Charlotte,13,135,Phoenix,24,115,2019-01-19
+True,Denver,19,124,Cleveland,6,102,2019-01-19
+False,Detroit,8,101,Sacramento,23,103,2019-01-19
+True,Houston,29,138,LA Lakers,25,134,2019-01-19
+True,Indiana,7,111,Dallas,27,99,2019-01-19
+False,Orlando,15,108,Milwaukee,10,118,2019-01-19
+False,Philadelphia,5,115,Oklahoma City,16,117,2019-01-19
+True,Toronto,1,119,Memphis,28,90,2019-01-19
+True,Indiana,7,120,Charlotte,13,95,2019-01-20
+True,Minnesota,20,116,Phoenix,24,114,2019-01-20
+False,San Antonio,26,95,LA Clippers,22,103,2019-01-20
+False,Atlanta,12,103,Orlando,15,122,2019-01-21
+True,Boston,2,107,Miami,11,99,2019-01-21
+True,Brooklyn,4,123,Sacramento,23,94,2019-01-21
+False,Cleveland,6,88,Chicago,9,104,2019-01-21
+False,LA Lakers,25,111,Golden State,21,130,2019-01-21
+False,Memphis,28,85,New Orleans,30,105,2019-01-21
+True,Milwaukee,10,116,Dallas,27,106,2019-01-21
+False,New York,3,109,Oklahoma City,16,127,2019-01-21
+True,Philadelphia,5,121,Houston,29,93,2019-01-21
+False,Utah,18,104,Portland,17,109,2019-01-21
+True,Washington,14,101,Detroit,8,87,2019-01-21
+True,Dallas,27,106,LA Clippers,22,98,2019-01-22
+True,Oklahoma City,16,123,Portland,17,114,2019-01-22
+False,Phoenix,24,91,Minnesota,20,118,2019-01-22
+True,Toronto,1,120,Sacramento,23,105,2019-01-22
+True,Boston,2,123,Cleveland,6,103,2019-01-23
+True,Brooklyn,4,114,Orlando,15,110,2019-01-23
+False,Chicago,9,101,Atlanta,12,121,2019-01-23
+True,Indiana,7,110,Toronto,1,106,2019-01-23
+False,Memphis,28,107,Charlotte,13,118,2019-01-23
+False,Miami,11,99,LA Clippers,22,111,2019-01-23
+False,New Orleans,30,94,Detroit,8,98,2019-01-23
+False,New York,3,110,Houston,29,114,2019-01-23
+True,Philadelphia,5,122,San Antonio,26,120,2019-01-23
+True,Utah,18,114,Denver,19,108,2019-01-23
+False,LA Lakers,25,105,Minnesota,20,120,2019-01-24
+True,Oklahoma City,16,122,New Orleans,30,116,2019-01-24
+False,Phoenix,24,106,Portland,17,120,2019-01-24
+False,Washington,14,118,Golden State,21,126,2019-01-24
+True,Brooklyn,4,109,New York,3,99,2019-01-25
+False,Chicago,9,101,LA Clippers,22,106,2019-01-25
+False,Cleveland,6,94,Miami,11,100,2019-01-25
+True,Dallas,27,106,Detroit,8,101,2019-01-25
+True,Denver,19,132,Phoenix,24,95,2019-01-25
+True,Houston,29,121,Toronto,1,119,2019-01-25
+False,Memphis,28,96,Sacramento,23,99,2019-01-25
+True,Milwaukee,10,108,Charlotte,13,99,2019-01-25
+False,Orlando,15,91,Washington,14,95,2019-01-25
+True,Utah,18,106,Minnesota,20,102,2019-01-25
+False,Boston,2,111,Golden State,21,115,2019-01-26
+True,Denver,19,126,Philadelphia,5,110,2019-01-26
+True,Memphis,28,106,Indiana,7,103,2019-01-26
+False,New Orleans,30,114,San Antonio,26,126,2019-01-26
+True,Portland,17,120,Atlanta,12,111,2019-01-26
+False,Chicago,9,101,Cleveland,6,104,2019-01-27
+False,Dallas,27,120,Toronto,1,123,2019-01-27
+True,Houston,29,103,Orlando,15,98,2019-01-27
+True,LA Clippers,22,122,Sacramento,23,108,2019-01-27
+True,LA Lakers,25,116,Phoenix,24,102,2019-01-27
+False,Minnesota,20,111,Utah,18,125,2019-01-27
+False,New York,3,97,Miami,11,106,2019-01-27
+True,Oklahoma City,16,118,Milwaukee,10,112,2019-01-27
+True,San Antonio,26,132,Washington,14,119,2019-01-27
+True,Boston,2,112,Brooklyn,4,104,2019-01-28
+True,Charlotte,13,101,New York,3,92,2019-01-28
+False,Indiana,7,100,Golden State,21,132,2019-01-28
+False,LA Clippers,22,118,Atlanta,12,123,2019-01-28
+False,Memphis,28,92,Denver,19,95,2019-01-28
+True,Brooklyn,4,122,Chicago,9,117,2019-01-29
+True,Cleveland,6,116,Washington,14,113,2019-01-29
+False,Detroit,8,105,Milwaukee,10,115,2019-01-29
+False,Houston,29,116,New Orleans,30,121,2019-01-29
+False,LA Lakers,25,105,Philadelphia,5,121,2019-01-29
+False,Orlando,15,117,Oklahoma City,16,126,2019-01-29
+True,San Antonio,26,126,Phoenix,24,124,2019-01-29
+True,Boston,2,126,Charlotte,13,94,2019-01-30
+False,Miami,11,89,Chicago,9,105,2019-01-30
+True,Minnesota,20,99,Memphis,28,97,2019-01-30
+False,New Orleans,30,99,Denver,19,105,2019-01-30
+False,New York,3,90,Dallas,27,114,2019-01-30
+True,Portland,17,132,Utah,18,105,2019-01-30
+True,Sacramento,23,135,Atlanta,12,113,2019-01-30
+True,Washington,14,107,Indiana,7,89,2019-01-30
+True,Detroit,8,93,Dallas,27,89,2019-01-31
+False,Golden State,21,104,Philadelphia,5,113,2019-01-31
+False,LA Clippers,22,120,LA Lakers,25,123,2019-01-31
+True,Orlando,15,107,Indiana,7,100,2019-01-31
+True,San Antonio,26,117,Brooklyn,4,114,2019-01-31
+False,Toronto,1,92,Milwaukee,10,105,2019-01-31
+True,Charlotte,13,100,Memphis,28,92,2019-02-01
+True,Denver,19,136,Houston,29,122,2019-02-01
+False,Miami,11,102,Oklahoma City,16,118,2019-02-01
+False,New York,3,99,Boston,2,113,2019-02-01
+True,Utah,18,128,Atlanta,12,112,2019-02-01
+True,Charlotte,13,125,Chicago,9,118,2019-02-02
+False,Cleveland,6,98,Dallas,27,111,2019-02-02
+False,Detroit,8,101,LA Clippers,22,111,2019-02-02
+True,Golden State,21,115,LA Lakers,25,101,2019-02-02
+False,Miami,11,88,Indiana,7,95,2019-02-02
+False,Minnesota,20,106,Denver,19,107,2019-02-02
+True,Orlando,15,102,Brooklyn,4,89,2019-02-02
+False,Phoenix,24,112,Atlanta,12,118,2019-02-02
+True,Sacramento,23,115,Philadelphia,5,108,2019-02-02
+True,San Antonio,26,113,New Orleans,30,108,2019-02-02
+False,Utah,18,98,Houston,29,125,2019-02-02
+False,Washington,14,115,Milwaukee,10,131,2019-02-02
+True,Boston,2,134,Oklahoma City,16,129,2019-02-03
+False,New York,3,84,Memphis,28,96,2019-02-03
+True,Toronto,1,121,LA Clippers,22,103,2019-02-03
+False,Brooklyn,4,94,Milwaukee,10,113,2019-02-04
+True,Detroit,8,129,Denver,19,103,2019-02-04
+False,New Orleans,30,107,Indiana,7,109,2019-02-04
+False,Phoenix,24,110,Houston,29,118,2019-02-04
+True,Sacramento,23,127,San Antonio,26,112,2019-02-04
+False,Washington,14,129,Atlanta,12,137,2019-02-04
+False,Charlotte,13,115,LA Clippers,22,117,2019-02-05
+False,Cleveland,6,96,Boston,2,103,2019-02-05
+True,Indiana,7,136,LA Lakers,25,94,2019-02-05
+True,Memphis,28,108,Minnesota,20,106,2019-02-05
+False,New York,3,92,Detroit,8,105,2019-02-05
+True,Oklahoma City,16,132,Orlando,15,122,2019-02-05
+False,Philadelphia,5,107,Toronto,1,119,2019-02-05
+False,Portland,17,108,Miami,11,118,2019-02-05
+True,Brooklyn,4,135,Denver,19,130,2019-02-06
+False,Chicago,9,120,New Orleans,30,125,2019-02-06
+True,Dallas,27,99,Charlotte,13,93,2019-02-06
+True,Golden State,21,141,San Antonio,26,102,2019-02-06
+True,Milwaukee,10,148,Washington,14,129,2019-02-06
+False,Sacramento,23,101,Houston,29,127,2019-02-06
+True,Utah,18,116,Phoenix,24,88,2019-02-06
+False,Atlanta,12,101,Toronto,1,119,2019-02-07
+False,Boston,2,128,LA Lakers,25,129,2019-02-07
+True,Indiana,7,116,LA Clippers,22,92,2019-02-07
+True,Oklahoma City,16,117,Memphis,28,95,2019-02-07
+True,Orlando,15,122,Minnesota,20,112,2019-02-07
+True,Portland,17,127,San Antonio,26,118,2019-02-07
+False,Brooklyn,4,106,Chicago,9,125,2019-02-08
+False,Dallas,27,107,Milwaukee,10,122,2019-02-08
+True,Detroit,8,120,New York,3,103,2019-02-08
+True,New Orleans,30,122,Minnesota,20,117,2019-02-08
+True,Philadelphia,5,117,Denver,19,110,2019-02-08
+False,Phoenix,24,107,Golden State,21,117,2019-02-08
+True,Sacramento,23,102,Miami,11,96,2019-02-08
+True,Washington,14,119,Cleveland,6,106,2019-02-08
+False,Atlanta,12,120,Charlotte,13,129,2019-02-09
+False,Boston,2,112,LA Clippers,22,123,2019-02-09
+False,Chicago,9,125,Washington,14,134,2019-02-09
+False,Houston,29,112,Oklahoma City,16,117,2019-02-09
+True,Indiana,7,105,Cleveland,6,90,2019-02-09
+True,Memphis,28,99,New Orleans,30,90,2019-02-09
+False,Milwaukee,10,83,Orlando,15,103,2019-02-09
+False,New York,3,99,Toronto,1,104,2019-02-09
+True,Utah,18,125,San Antonio,26,105,2019-02-09
+False,Atlanta,12,108,Orlando,15,124,2019-02-10
+True,Dallas,27,102,Portland,17,101,2019-02-10
+True,Golden State,21,120,Miami,11,118,2019-02-10
+True,Philadelphia,5,143,LA Lakers,25,120,2019-02-10
+True,Sacramento,23,117,Phoenix,24,104,2019-02-10
+False,Chicago,9,99,Milwaukee,10,112,2019-02-11
+True,Cleveland,6,107,New York,3,104,2019-02-11
+True,Denver,19,103,Miami,11,87,2019-02-11
+True,Detroit,8,121,Washington,14,112,2019-02-11
+True,Houston,29,120,Dallas,27,104,2019-02-11
+True,Indiana,7,99,Charlotte,13,90,2019-02-11
+True,Minnesota,20,130,LA Clippers,22,120,2019-02-11
+True,Oklahoma City,16,120,Portland,17,111,2019-02-11
+True,Toronto,1,127,Brooklyn,4,125,2019-02-11
+True,Atlanta,12,117,LA Lakers,25,113,2019-02-12
+True,Golden State,21,115,Utah,18,108,2019-02-12
+False,Memphis,28,107,San Antonio,26,108,2019-02-12
+False,New Orleans,30,88,Orlando,15,118,2019-02-12
+False,Philadelphia,5,109,Boston,2,112,2019-02-12
+True,Boston,2,118,Detroit,8,110,2019-02-13
+True,Chicago,9,122,Memphis,28,110,2019-02-13
+False,Cleveland,6,139,Brooklyn,4,148,2019-02-13
+False,Dallas,27,101,Miami,11,112,2019-02-13
+True,Denver,19,120,Sacramento,23,118,2019-02-13
+False,Indiana,7,97,Milwaukee,10,106,2019-02-13
+True,LA Clippers,22,134,Phoenix,24,107,2019-02-13
+True,Minnesota,20,121,Houston,29,111,2019-02-13
+False,New York,3,111,Philadelphia,5,126,2019-02-13
+True,Portland,17,129,Golden State,21,107,2019-02-13
+True,Toronto,1,129,Washington,14,120,2019-02-13
+False,Atlanta,12,91,New York,3,106,2019-02-14
+True,New Orleans,30,131,Oklahoma City,16,122,2019-02-14
+True,Orlando,15,127,Charlotte,13,89,2019-02-14
+False,Brooklyn,4,99,Portland,17,113,2019-02-21
+True,Cleveland,6,111,Phoenix,24,98,2019-02-21
+True,Golden State,21,125,Sacramento,23,123,2019-02-21
+True,LA Lakers,25,111,Houston,29,106,2019-02-21
+True,Milwaukee,10,98,Boston,2,97,2019-02-21
+True,Philadelphia,5,106,Miami,11,102,2019-02-21
+False,Atlanta,12,122,Detroit,8,125,2019-02-22
+True,Charlotte,13,123,Washington,14,110,2019-02-22
+False,Dallas,27,104,Denver,19,114,2019-02-22
+True,Indiana,7,126,New Orleans,30,111,2019-02-22
+False,Memphis,28,106,LA Clippers,22,112,2019-02-22
+False,New York,3,104,Minnesota,20,115,2019-02-22
+True,Oklahoma City,16,148,Utah,18,147,2019-02-22
+False,Orlando,15,109,Chicago,9,110,2019-02-22
+True,Toronto,1,120,San Antonio,26,117,2019-02-22
+True,Atlanta,12,120,Phoenix,24,112,2019-02-23
+True,Chicago,9,126,Boston,2,116,2019-02-23
+False,Charlotte,13,115,Brooklyn,4,117,2019-02-23
+True,Cleveland,6,112,Memphis,28,107,2019-02-23
+False,Golden State,21,112,Houston,29,118,2019-02-23
+False,Miami,11,96,Detroit,8,119,2019-02-23
+True,Milwaukee,10,140,Minnesota,20,128,2019-02-23
+True,New Orleans,30,128,LA Lakers,25,115,2019-02-23
+False,Oklahoma City,16,116,Sacramento,23,119,2019-02-23
+False,Philadelphia,5,115,Portland,17,130,2019-02-23
+True,Utah,18,125,Dallas,27,109,2019-02-23
+False,Washington,14,112,Indiana,7,119,2019-02-23
+True,Denver,19,123,LA Clippers,22,96,2019-02-24
+True,New York,3,130,San Antonio,26,118,2019-02-24
+False,Toronto,1,98,Orlando,15,113,2019-02-24
+True,Brooklyn,4,101,San Antonio,26,85,2019-02-25
+False,Chicago,9,106,Milwaukee,10,117,2019-02-25
+False,Charlotte,13,110,Golden State,21,121,2019-02-25
+False,Cleveland,6,110,Portland,17,123,2019-02-25
+True,Detroit,8,113,Indiana,7,109,2019-02-25
+True,Houston,29,119,Atlanta,12,111,2019-02-25
+True,LA Clippers,22,121,Dallas,27,112,2019-02-25
+True,Memphis,28,110,LA Lakers,25,105,2019-02-25
+False,Miami,11,121,Phoenix,24,124,2019-02-25
+True,Minnesota,20,112,Sacramento,23,105,2019-02-25
+False,New Orleans,30,110,Philadelphia,5,111,2019-02-25
+True,Denver,19,121,Oklahoma City,16,112,2019-02-26
+True,New York,3,108,Orlando,15,103,2019-02-26
+True,Toronto,1,118,Boston,2,95,2019-02-26
+True,Atlanta,12,131,Minnesota,20,123,2019-02-27
+False,Boston,2,92,Portland,17,97,2019-02-27
+False,Brooklyn,4,116,Washington,14,125,2019-02-27
+False,Charlotte,13,113,Houston,29,118,2019-02-27
+True,Dallas,27,110,Indiana,7,101,2019-02-27
+True,LA Lakers,25,125,New Orleans,30,119,2019-02-27
+False,Memphis,28,107,Chicago,9,109,2019-02-27
+True,Miami,11,126,Golden State,21,125,2019-02-27
+False,Sacramento,23,140,Milwaukee,10,141,2019-02-27
+True,San Antonio,26,105,Detroit,8,93,2019-02-27
+True,Utah,18,111,LA Clippers,22,105,2019-02-27
+False,Denver,19,104,Utah,18,111,2019-02-28
+True,Houston,29,121,Miami,11,118,2019-02-28
+True,Indiana,7,122,Minnesota,20,115,2019-02-28
+False,New York,3,118,Cleveland,6,125,2019-02-28
+False,Oklahoma City,16,104,Philadelphia,5,108,2019-02-28
+True,Orlando,15,103,Golden State,21,96,2019-02-28
+False,Atlanta,12,161,Chicago,9,168,2019-03-01
+True,Boston,2,107,Washington,14,96,2019-03-01
+False,Brooklyn,4,112,Charlotte,13,123,2019-03-01
+False,LA Lakers,25,120,Milwaukee,10,131,2019-03-01
+False,Phoenix,24,116,New Orleans,30,130,2019-03-01
+False,Sacramento,23,109,LA Clippers,22,116,2019-03-01
+True,Toronto,1,119,Portland,17,117,2019-03-01
+False,Cleveland,6,93,Detroit,8,129,2019-03-02
+False,Dallas,27,81,Memphis,28,111,2019-03-02
+False,Denver,19,112,New Orleans,30,120,2019-03-02
+False,Indiana,7,112,Orlando,15,117,2019-03-02
+True,Miami,11,117,Brooklyn,4,88,2019-03-02
+False,Philadelphia,5,117,Golden State,21,120,2019-03-02
+True,Phoenix,24,118,LA Lakers,25,109,2019-03-02
+True,San Antonio,26,116,Oklahoma City,16,102,2019-03-02
+True,Utah,18,115,Milwaukee,10,111,2019-03-02
+False,Boston,2,104,Houston,29,115,2019-03-03
+False,Chicago,9,118,Atlanta,12,123,2019-03-03
+False,Charlotte,13,108,Portland,17,118,2019-03-03
+True,Cleveland,6,107,Orlando,15,93,2019-03-03
+True,Detroit,8,112,Toronto,1,107,2019-03-03
+True,LA Clippers,22,128,New York,3,107,2019-03-03
+True,Oklahoma City,16,99,Memphis,28,95,2019-03-03
+True,Washington,14,135,Minnesota,20,121,2019-03-03
+True,Brooklyn,4,127,Dallas,27,88,2019-03-04
+False,LA Lakers,25,105,LA Clippers,22,113,2019-03-04
+True,Miami,11,114,Atlanta,12,113,2019-03-04
+True,Phoenix,24,114,Milwaukee,10,105,2019-03-04
+True,Sacramento,23,115,New York,3,108,2019-03-04
+True,San Antonio,26,104,Denver,19,103,2019-03-04
+False,Utah,18,112,New Orleans,30,115,2019-03-04
+False,Golden State,21,95,Boston,2,128,2019-03-05
+True,Indiana,7,105,Chicago,9,96,2019-03-05
+True,Memphis,28,120,Portland,17,111,2019-03-05
+True,Minnesota,20,131,Oklahoma City,16,120,2019-03-05
+True,Philadelphia,5,114,Orlando,15,106,2019-03-05
+False,Toronto,1,95,Houston,29,107,2019-03-05
+False,Atlanta,12,104,San Antonio,26,111,2019-03-06
+True,Brooklyn,4,113,Cleveland,6,107,2019-03-06
+True,Chicago,9,108,Philadelphia,5,107,2019-03-06
+False,Charlotte,13,84,Miami,11,91,2019-03-06
+True,Detroit,8,131,Minnesota,20,114,2019-03-06
+False,LA Lakers,25,99,Denver,19,115,2019-03-06
+False,New Orleans,30,104,Utah,18,114,2019-03-06
+True,Phoenix,24,107,New York,3,96,2019-03-06
+False,Sacramento,23,109,Boston,2,111,2019-03-06
+True,Washington,14,132,Dallas,27,123,2019-03-06
+True,Milwaukee,10,117,Indiana,7,98,2019-03-07
+False,Portland,17,121,Oklahoma City,16,129,2019-03-07
+False,Chicago,9,104,Detroit,8,112,2019-03-08
+True,Charlotte,13,112,Washington,14,111,2019-03-08
+True,Golden State,21,122,Denver,19,105,2019-03-08
+True,Houston,29,107,Philadelphia,5,91,2019-03-08
+True,LA Clippers,22,118,Oklahoma City,16,110,2019-03-08
+True,Memphis,28,114,Utah,18,104,2019-03-08
+True,Miami,11,126,Cleveland,6,110,2019-03-08
+False,New Orleans,30,104,Toronto,1,127,2019-03-08
+True,Orlando,15,111,Dallas,27,106,2019-03-08
+False,Atlanta,12,112,Brooklyn,4,114,2019-03-09
+False,LA Lakers,25,107,Boston,2,120,2019-03-09
+True,Milwaukee,10,131,Charlotte,13,114,2019-03-09
+True,Minnesota,20,135,Washington,14,130,2019-03-09
+False,New York,3,94,Sacramento,23,102,2019-03-09
+True,Portland,17,127,Phoenix,24,120,2019-03-09
+True,Atlanta,12,128,New Orleans,30,116,2019-03-10
+False,Dallas,27,93,Houston,29,94,2019-03-10
+True,Detroit,8,131,Chicago,9,108,2019-03-10
+False,Golden State,21,111,Phoenix,24,115,2019-03-10
+True,Memphis,28,105,Orlando,15,97,2019-03-10
+False,Miami,11,104,Toronto,1,125,2019-03-10
+True,Minnesota,20,103,New York,3,92,2019-03-10
+True,Philadelphia,5,106,Indiana,7,89,2019-03-10
+True,San Antonio,26,121,Milwaukee,10,114,2019-03-10
+True,Brooklyn,4,103,Detroit,8,75,2019-03-11
+True,Cleveland,6,126,Toronto,1,101,2019-03-11
+True,Houston,29,118,Charlotte,13,106,2019-03-11
+True,LA Clippers,22,140,Boston,2,115,2019-03-11
+False,Utah,18,89,Oklahoma City,16,98,2019-03-11
+True,Washington,14,121,Sacramento,23,115,2019-03-11
+False,Chicago,9,107,LA Lakers,25,123,2019-03-12
+False,Dallas,27,105,San Antonio,26,112,2019-03-12
+True,Denver,19,133,Minnesota,20,107,2019-03-12
+True,Indiana,7,103,New York,3,98,2019-03-12
+False,LA Clippers,22,104,Portland,17,125,2019-03-12
+False,New Orleans,30,113,Milwaukee,10,130,2019-03-12
+True,Philadelphia,5,106,Cleveland,6,99,2019-03-12
+True,Atlanta,12,132,Memphis,28,111,2019-03-13
+False,Houston,29,104,Golden State,21,106,2019-03-13
+True,Miami,11,108,Detroit,8,74,2019-03-13
+True,Oklahoma City,16,108,Brooklyn,4,96,2019-03-13
+False,Phoenix,24,97,Utah,18,114,2019-03-13
+True,Washington,14,100,Orlando,15,90,2019-03-13
+True,Boston,2,126,Sacramento,23,120,2019-03-14
+True,Denver,19,100,Dallas,27,99,2019-03-14
+True,Indiana,7,108,Oklahoma City,16,106,2019-03-14
+True,Orlando,15,120,Cleveland,6,91,2019-03-14
+True,Toronto,1,111,LA Lakers,25,98,2019-03-14
+True,Utah,18,120,Minnesota,20,100,2019-03-14
+True,Detroit,8,111,LA Lakers,25,97,2019-03-15
+True,Houston,29,108,Phoenix,24,102,2019-03-15
+True,LA Clippers,22,128,Chicago,9,121,2019-03-15
+False,Miami,11,98,Milwaukee,10,113,2019-03-15
+False,New Orleans,30,110,Portland,17,122,2019-03-15
+True,Philadelphia,5,123,Sacramento,23,114,2019-03-15
+True,San Antonio,26,109,New York,3,83,2019-03-15
+False,Washington,14,110,Charlotte,13,116,2019-03-15
+True,Boston,2,129,Atlanta,12,120,2019-03-16
+True,Dallas,27,121,Cleveland,6,116,2019-03-16
+True,Denver,19,102,Indiana,7,100,2019-03-16
+False,New Orleans,30,136,Phoenix,24,138,2019-03-16
+False,Oklahoma City,16,88,Golden State,21,110,2019-03-16
+True,San Antonio,26,108,Portland,17,103,2019-03-16
+True,Utah,18,114,Brooklyn,4,98,2019-03-16
+True,Washington,14,135,Memphis,28,128,2019-03-16
+True,Detroit,8,110,Toronto,1,107,2019-03-17
+True,Houston,29,117,Minnesota,20,102,2019-03-17
+True,LA Clippers,22,119,Brooklyn,4,116,2019-03-17
+True,Miami,11,93,Charlotte,13,75,2019-03-17
+False,Milwaukee,10,125,Philadelphia,5,130,2019-03-17
+True,New York,3,124,LA Lakers,25,123,2019-03-17
+True,Orlando,15,101,Atlanta,12,91,2019-03-17
+True,Sacramento,23,129,Chicago,9,102,2019-03-17
+False,Boston,2,105,Denver,19,114,2019-03-18
+True,Cleveland,6,126,Detroit,8,119,2019-03-18
+False,Dallas,27,125,New Orleans,30,129,2019-03-18
+False,Oklahoma City,16,107,Miami,11,116,2019-03-18
+False,Phoenix,24,101,Chicago,9,116,2019-03-18
+True,Portland,17,106,Indiana,7,98,2019-03-18
+True,San Antonio,26,111,Golden State,21,105,2019-03-18
+True,Toronto,1,128,New York,3,92,2019-03-18
+False,Washington,14,95,Utah,18,116,2019-03-18
+False,Atlanta,12,105,Houston,29,121,2019-03-19
+False,Charlotte,13,114,Philadelphia,5,118,2019-03-19
+True,LA Clippers,22,115,Indiana,7,109,2019-03-19
+True,Milwaukee,10,115,LA Lakers,25,101,2019-03-19
+False,Minnesota,20,107,Golden State,21,117,2019-03-19
+False,Sacramento,23,121,Brooklyn,4,123,2019-03-19
+True,Chicago,9,126,Washington,14,120,2019-03-20
+True,Cleveland,6,107,Milwaukee,10,102,2019-03-20
+True,Memphis,28,126,Houston,29,125,2019-03-20
+False,New York,3,116,Utah,18,137,2019-03-20
+False,Oklahoma City,16,114,Toronto,1,123,2019-03-20
+True,Orlando,15,119,New Orleans,30,96,2019-03-20
+True,Philadelphia,5,118,Boston,2,115,2019-03-20
+True,Portland,17,126,Dallas,27,118,2019-03-20
+False,San Antonio,26,105,Miami,11,110,2019-03-20
+True,Atlanta,12,117,Utah,18,114,2019-03-21
+True,Charlotte,13,113,Minnesota,20,106,2019-03-21
+True,Golden State,21,112,Indiana,7,89,2019-03-21
+False,Phoenix,24,98,Detroit,8,118,2019-03-21
+True,Sacramento,23,116,Dallas,27,100,2019-03-21
+False,Washington,14,108,Denver,19,113,2019-03-21
+False,Cleveland,6,108,LA Clippers,22,110,2019-03-22
+True,Houston,29,111,San Antonio,26,105,2019-03-22
+False,LA Lakers,25,106,Brooklyn,4,111,2019-03-22
+True,Milwaukee,10,116,Miami,11,87,2019-03-22
+False,New York,3,93,Denver,19,111,2019-03-22
+True,Orlando,15,123,Memphis,28,119,2019-03-22
+False,Toronto,1,109,Oklahoma City,16,116,2019-03-22
+True,Atlanta,12,129,Philadelphia,5,127,2019-03-23
+False,Chicago,9,83,Utah,18,114,2019-03-23
+True,Charlotte,13,124,Boston,2,117,2019-03-23
+False,Golden State,21,91,Dallas,27,126,2019-03-23
+False,Memphis,28,99,Minnesota,20,112,2019-03-23
+True,Portland,17,117,Detroit,8,112,2019-03-23
+True,Sacramento,23,112,Phoenix,24,103,2019-03-23
+False,Washington,14,108,Miami,11,113,2019-03-23
+False,Boston,2,96,San Antonio,26,115,2019-03-24
+True,Golden State,21,121,Detroit,8,114,2019-03-24
+True,Indiana,7,124,Denver,19,88,2019-03-24
+True,LA Lakers,25,111,Sacramento,23,106,2019-03-24
+True,Milwaukee,10,127,Cleveland,6,105,2019-03-24
+False,New Orleans,30,90,Houston,29,113,2019-03-24
+False,New York,3,113,LA Clippers,22,124,2019-03-24
+False,Toronto,1,114,Charlotte,13,115,2019-03-24
+True,Memphis,28,115,Oklahoma City,16,103,2019-03-25
+True,Orlando,15,119,Philadelphia,5,98,2019-03-25
+True,Portland,17,148,Brooklyn,4,144,2019-03-25
+True,Utah,18,125,Phoenix,24,92,2019-03-25
+True,Charlotte,13,125,San Antonio,26,116,2019-03-26
+False,Cleveland,6,106,Boston,2,116,2019-03-26
+False,Dallas,27,121,Sacramento,23,125,2019-03-26
+True,Denver,19,95,Detroit,8,92,2019-03-26
+True,LA Lakers,25,124,Washington,14,106,2019-03-26
+False,Miami,11,99,Orlando,15,104,2019-03-26
+True,Milwaukee,10,108,Houston,29,94,2019-03-26
+False,Minnesota,20,111,LA Clippers,22,122,2019-03-26
+False,New Orleans,30,120,Atlanta,12,130,2019-03-26
+True,Toronto,1,112,Chicago,9,103,2019-03-26
+False,Chicago,9,98,Portland,17,118,2019-03-27
+False,Memphis,28,103,Golden State,21,118,2019-03-27
+True,Oklahoma City,16,107,Indiana,7,99,2019-03-27
+False,Phoenix,24,121,Washington,14,124,2019-03-27
+True,Utah,18,115,LA Lakers,25,100,2019-03-27
+True,Detroit,8,115,Orlando,15,98,2019-03-28
+True,Houston,29,112,Denver,19,85,2019-03-28
+True,Miami,11,105,Dallas,27,99,2019-03-28
+True,Milwaukee,10,128,LA Clippers,22,118,2019-03-28
+True,New Orleans,30,121,Sacramento,23,118,2019-03-28
+False,New York,3,92,Toronto,1,117,2019-03-28
+True,Philadelphia,5,123,Brooklyn,4,110,2019-03-28
+True,San Antonio,26,116,Cleveland,6,110,2019-03-28
+False,Atlanta,12,98,Portland,17,118,2019-03-29
+True,Boston,2,114,Indiana,7,112,2019-03-29
+True,LA Lakers,25,129,Charlotte,13,115,2019-03-29
+True,Minnesota,20,131,Golden State,21,130,2019-03-29
+False,Oklahoma City,16,105,Denver,19,115,2019-03-29
+True,Utah,18,128,Washington,14,124,2019-03-29
+True,Brooklyn,4,110,Boston,2,96,2019-03-30
+False,Chicago,9,101,Toronto,1,124,2019-03-30
+True,Detroit,8,99,Portland,17,90,2019-03-30
+True,Houston,29,119,Sacramento,23,108,2019-03-30
+False,Indiana,7,116,Orlando,15,121,2019-03-30
+True,LA Clippers,22,132,Cleveland,6,108,2019-03-30
+False,Minnesota,20,109,Philadelphia,5,118,2019-03-30
+False,New York,3,92,Miami,11,100,2019-03-30
+False,Phoenix,24,115,Memphis,28,120,2019-03-30
+True,Atlanta,12,136,Milwaukee,10,135,2019-03-31
+False,Denver,19,90,Washington,14,95,2019-03-31
+True,Golden State,21,137,Charlotte,13,90,2019-03-31
+True,LA Clippers,22,113,Memphis,28,96,2019-03-31
+False,New Orleans,30,102,LA Lakers,25,130,2019-03-31
+False,Oklahoma City,16,103,Dallas,27,106,2019-03-31
+False,San Antonio,26,106,Sacramento,23,113,2019-03-31
+True,Boston,2,110,Miami,11,105,2019-04-01
+False,Brooklyn,4,121,Milwaukee,10,131,2019-04-01
+True,Dallas,27,122,Philadelphia,5,102,2019-04-01
+True,Indiana,7,111,Detroit,8,102,2019-04-01
+False,Minnesota,20,122,Portland,17,132,2019-04-01
+True,New York,3,113,Chicago,9,105,2019-04-01
+True,Phoenix,24,122,Cleveland,6,113,2019-04-01
+True,Toronto,1,121,Orlando,15,109,2019-04-01
+True,Utah,18,111,Charlotte,13,102,2019-04-01
+True,Golden State,21,116,Denver,19,102,2019-04-02
+True,Oklahoma City,16,119,LA Lakers,25,103,2019-04-02
+False,Sacramento,23,105,Houston,29,130,2019-04-02
+True,San Antonio,26,117,Atlanta,12,111,2019-04-02
+True,Atlanta,12,130,Philadelphia,5,122,2019-04-03
+False,Brooklyn,4,105,Toronto,1,115,2019-04-03
+False,Dallas,27,108,Minnesota,20,110,2019-04-03
+True,Denver,19,113,San Antonio,26,85,2019-04-03
+False,Detroit,8,89,Indiana,7,108,2019-04-03
+False,LA Clippers,22,103,Houston,29,135,2019-04-03
+False,Miami,11,102,Boston,2,112,2019-04-03
+False,New Orleans,30,109,Charlotte,13,115,2019-04-03
+True,Orlando,15,114,New York,3,100,2019-04-03
+False,Phoenix,24,97,Utah,18,118,2019-04-03
+True,Portland,17,116,Memphis,28,89,2019-04-03
+False,Washington,14,114,Chicago,9,115,2019-04-03
+False,LA Lakers,25,90,Golden State,21,108,2019-04-04
+False,Philadelphia,5,122,Milwaukee,10,128,2019-04-04
+True,Sacramento,23,117,Cleveland,6,104,2019-04-04
+True,Charlotte,13,113,Toronto,1,111,2019-04-05
+False,Dallas,27,112,Memphis,28,122,2019-04-05
+True,Denver,19,119,Portland,17,110,2019-04-05
+True,Golden State,21,120,Cleveland,6,114,2019-04-05
+True,Houston,29,120,New York,3,96,2019-04-05
+False,Indiana,7,97,Boston,2,117,2019-04-05
+False,LA Clippers,22,117,LA Lakers,25,122,2019-04-05
+True,Minnesota,20,111,Miami,11,109,2019-04-05
+True,Oklahoma City,16,123,Detroit,8,110,2019-04-05
+True,Orlando,15,149,Atlanta,12,113,2019-04-05
+True,Phoenix,24,133,New Orleans,30,126,2019-04-05
+True,Utah,18,119,Sacramento,23,98,2019-04-05
+False,Washington,14,112,San Antonio,26,129,2019-04-05
+False,Chicago,9,96,Philadelphia,5,116,2019-04-06
+False,Milwaukee,10,128,Brooklyn,4,133,2019-04-06
+False,Boston,2,108,Orlando,15,116,2019-04-07
+False,Cleveland,6,90,San Antonio,26,112,2019-04-07
+False,Detroit,8,91,Charlotte,13,104,2019-04-07
+True,Golden State,21,131,LA Clippers,22,104,2019-04-07
+True,Houston,29,149,Phoenix,24,113,2019-04-07
+False,Indiana,7,96,Brooklyn,4,108,2019-04-07
+True,LA Lakers,25,113,Utah,18,109,2019-04-07
+False,Memphis,28,127,Dallas,27,129,2019-04-07
+True,Milwaukee,10,115,Atlanta,12,107,2019-04-07
+False,Minnesota,20,126,Oklahoma City,16,132,2019-04-07
+True,New York,3,113,Washington,14,110,2019-04-07
+True,Portland,17,115,Denver,19,108,2019-04-07
+False,Sacramento,23,129,New Orleans,30,133,2019-04-07
+True,Toronto,1,117,Miami,11,109,2019-04-07
+False,Chicago,9,86,New York,3,96,2019-04-09
+False,Cleveland,6,97,Charlotte,13,124,2019-04-09
+True,Dallas,27,120,Phoenix,24,109,2019-04-09
+True,Detroit,8,100,Memphis,28,93,2019-04-09
+False,LA Lakers,25,101,Portland,17,104,2019-04-09
+True,Miami,11,122,Philadelphia,5,99,2019-04-09
+False,Minnesota,20,100,Toronto,1,120,2019-04-09
+False,New Orleans,30,103,Golden State,21,112,2019-04-09
+True,Oklahoma City,16,112,Houston,29,111,2019-04-09
+True,Utah,18,118,Denver,19,108,2019-04-09
+False,Washington,14,110,Boston,2,116,2019-04-09
+False,Atlanta,12,134,Indiana,7,135,2019-04-10
+True,Brooklyn,4,113,Miami,11,94,2019-04-10
+False,Charlotte,13,114,Orlando,15,122,2019-04-10
+True,Denver,19,99,Minnesota,20,95,2019-04-10
+True,LA Clippers,22,143,Utah,18,137,2019-04-10
+True,Memphis,28,132,Golden State,21,117,2019-04-10
+False,Milwaukee,10,116,Oklahoma City,16,127,2019-04-10
+False,New York,3,89,Detroit,8,115,2019-04-10
+True,Philadelphia,5,125,Chicago,9,109,2019-04-10
+True,Portland,17,136,Sacramento,23,131,2019-04-10
+True,San Antonio,26,105,Dallas,27,94,2019-04-10
+False,Denver,19,96,San Antonio,26,101,2019-04-13
+True,Golden State,21,121,LA Clippers,22,104,2019-04-13
+False,Philadelphia,5,102,Brooklyn,4,111,2019-04-13
+False,Toronto,1,101,Orlando,15,104,2019-04-13
+True,Boston,2,84,Indiana,7,74,2019-04-14
+True,Houston,29,122,Utah,18,90,2019-04-14
+True,Milwaukee,10,121,Detroit,8,86,2019-04-14
+True,Portland,17,104,Oklahoma City,16,99,2019-04-14
+False,Golden State,21,131,LA Clippers,22,135,2019-04-15
+True,Philadelphia,5,145,Brooklyn,4,123,2019-04-15
+True,Denver,19,114,San Antonio,26,105,2019-04-16
+True,Portland,17,114,Oklahoma City,16,94,2019-04-16
+True,Toronto,1,111,Orlando,15,82,2019-04-16
+True,Boston,2,99,Indiana,7,91,2019-04-17
+True,Houston,29,118,Utah,18,98,2019-04-17
+True,Milwaukee,10,120,Detroit,8,99,2019-04-17
+False,Brooklyn,4,115,Philadelphia,5,131,2019-04-18
+False,LA Clippers,22,105,Golden State,21,132,2019-04-18
+True,San Antonio,26,118,Denver,19,108,2019-04-18
+False,Indiana,7,96,Boston,2,104,2019-04-19
+True,Oklahoma City,16,120,Portland,17,108,2019-04-19
+False,Orlando,15,93,Toronto,1,98,2019-04-19
+False,Brooklyn,4,108,Philadelphia,5,112,2019-04-20
+False,Detroit,8,103,Milwaukee,10,119,2019-04-20
+False,San Antonio,26,103,Denver,19,117,2019-04-20
+False,Utah,18,101,Houston,29,104,2019-04-20
+False,Indiana,7,106,Boston,2,110,2019-04-21
+False,LA Clippers,22,105,Golden State,21,113,2019-04-21
+False,Oklahoma City,16,98,Portland,17,111,2019-04-21
+False,Orlando,15,85,Toronto,1,107,2019-04-21
+False,Detroit,8,104,Milwaukee,10,127,2019-04-22
+True,Utah,18,107,Houston,29,91,2019-04-22
+True,Denver,19,108,San Antonio,26,90,2019-04-23
+True,Philadelphia,5,122,Brooklyn,4,100,2019-04-23
+True,Portland,17,118,Oklahoma City,16,115,2019-04-23
+True,Toronto,1,115,Orlando,15,96,2019-04-23
+False,Golden State,21,121,LA Clippers,22,129,2019-04-24
+True,Houston,29,100,Utah,18,93,2019-04-24
+True,San Antonio,26,120,Denver,19,103,2019-04-25
+False,LA Clippers,22,110,Golden State,21,129,2019-04-26
+True,Denver,19,90,San Antonio,26,86,2019-04-27
+True,Toronto,1,108,Philadelphia,5,95,2019-04-27
+True,Golden State,21,104,Houston,29,100,2019-04-28
+False,Milwaukee,10,90,Boston,2,112,2019-04-28
+True,Denver,19,121,Portland,17,113,2019-04-29
+False,Toronto,1,89,Philadelphia,5,94,2019-04-29
+True,Golden State,21,115,Houston,29,109,2019-04-30
+True,Milwaukee,10,123,Boston,2,102,2019-04-30
+False,Denver,19,90,Portland,17,97,2019-05-01
+True,Philadelphia,5,116,Toronto,1,95,2019-05-02
+False,Boston,2,116,Milwaukee,10,123,2019-05-03
+True,Portland,17,140,Denver,19,137,2019-05-03
+True,Houston,29,126,Golden State,21,121,2019-05-04
+False,Philadelphia,5,96,Toronto,1,101,2019-05-05
+False,Portland,17,112,Denver,19,116,2019-05-05
+False,Boston,2,101,Milwaukee,10,113,2019-05-06
+True,Houston,29,112,Golden State,21,108,2019-05-06
+True,Denver,19,124,Portland,17,98,2019-05-07
+True,Toronto,1,125,Philadelphia,5,89,2019-05-07
+True,Golden State,21,104,Houston,29,99,2019-05-08
+True,Milwaukee,10,116,Boston,2,91,2019-05-08
+True,Philadelphia,5,112,Toronto,1,101,2019-05-09
+True,Portland,17,119,Denver,19,108,2019-05-09
+False,Houston,29,113,Golden State,21,118,2019-05-10
+False,Denver,19,96,Portland,17,100,2019-05-12
+True,Toronto,1,92,Philadelphia,5,90,2019-05-12
+True,Golden State,21,116,Portland,17,94,2019-05-14
+True,Milwaukee,10,108,Toronto,1,100,2019-05-15
+True,Golden State,21,114,Portland,17,111,2019-05-16
+True,Milwaukee,10,125,Toronto,1,103,2019-05-17
+False,Portland,17,99,Golden State,21,110,2019-05-18
+True,Toronto,1,118,Milwaukee,10,112,2019-05-19
+False,Portland,17,117,Golden State,21,119,2019-05-20
+True,Toronto,1,120,Milwaukee,10,102,2019-05-21
+False,Milwaukee,10,99,Toronto,1,105,2019-05-23
+True,Toronto,1,100,Milwaukee,10,94,2019-05-25
+True,Toronto,1,118,Golden State,21,109,2019-05-30
+False,Toronto,1,104,Golden State,21,109,2019-06-02
+False,Golden State,21,109,Toronto,1,123,2019-06-05
+False,Golden State,21,92,Toronto,1,105,2019-06-07
+False,Toronto,1,105,Golden State,21,106,2019-06-10
+False,Golden State,21,110,Toronto,1,114,2019-06-13

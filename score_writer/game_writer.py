@@ -16,5 +16,6 @@ class GameWriter:
             os.remove(self.output_path)
         with self.output_path.open("a") as games_csv:
             csv_writer = csv.DictWriter(games_csv, fieldnames=headers, lineterminator='\n')
+            csv_writer.writeheader()
             for game in self.games_list:
                 csv_writer.writerow(game)

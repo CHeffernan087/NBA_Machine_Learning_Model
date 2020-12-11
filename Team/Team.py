@@ -2,24 +2,24 @@ HOME_TEAM = 0
 AWAY_TEAM = 1
 RESULT = 2
 
-NUMBER_OF_GAMES = 3
+NUMBER_OF_GAMES = 10
 
 
 class Team:
     def __init__(self, team_id):
         self.team_id = team_id
-        self.last_five_games = []
+        self.game_history = [0]*NUMBER_OF_GAMES
 
     def getCurrentForm(self):
         wins = 0
         loses = 0
 
-        for game in self.last_five_games:
+        for game in self.game_history:
             if game == 1:
                 wins = wins + 1
             else:
                 loses = loses + 1
-        return [wins, loses]
+        return self.game_history
 
     def parseGame(self, game):
         home_team = game[HOME_TEAM]
@@ -35,6 +35,6 @@ class Team:
 
         result = 1 if team_has_won else 0
 
-        self.last_five_games.insert(0, result)
-        if len(self.last_five_games) > NUMBER_OF_GAMES:
-            self.last_five_games.pop()
+        self.game_history.insert(0, result)
+        if len(self.game_history) > NUMBER_OF_GAMES:
+            self.game_history.pop()
