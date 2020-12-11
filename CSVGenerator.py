@@ -1,24 +1,28 @@
-import pandas as pd
+import csv
 import os
+from datetime import date
 from pathlib import Path
+
+import pandas as pd
+
+from Team.TeamStats import TeamStats
 from score_writer.game import Game
 from score_writer.game_writer import GameWriter
-from Team.TeamStats import TeamStats
 from score_writer.score_scraper import ScoreScraper
-from datetime import date
-import csv
 
 
 class CSVGenerator:
-    @staticmethod
-    def Generator(year_to_generate):
-        file_path = f"data/{year_to_generate}_games.csv"
+    def __init__(self, year_to_generate):
+        self._year_to_generate = year_to_generate
+
+    def generate(self):
+        self.generate_game_stats()
 
         rankings_frame = pd.read_csv("data/ranking.csv")
         teams = pd.read_csv("data/teams.csv")[['TEAM_ID', 'ABBREVIATION']]
 
         games_frame = pd.read_csv("data/games.csv")
-        games_frame = games_frame[games_frame.GAME_DATE_EST.str.contains(str(year_to_generate))]
+        games_frame = games_frame[games_frame.GAME_DATE_EST.str.contains(str(self._year_to_generate))]
 
         elo_frame = pd.read_csv("data/nba_elo.csv")
         elo_frame = elo_frame[elo_frame['date'].isin(games_frame['GAME_DATE_EST'])]
@@ -27,7 +31,7 @@ class CSVGenerator:
         team_stats = TeamStats(teams['TEAM_ID'])
 
         print("Generating data. This will take a minute....")
-        num_rows = num_columns = len(games_frame['GAME_DATE_EST'])
+        num_rows = len(games_frame['GAME_DATE_EST'])
         progress = 1
         ten_percent_data = int(num_rows / 10)
         next_progress_print = ten_percent_data
@@ -60,43 +64,38 @@ class CSVGenerator:
                 if current_game.hasSufficientData():
                     games_list.append(current_game)
                 # games_list.append(current_game)
-            except:
+            except IndexError:
                 print(f"Game played on {game_date} between {home_team_abbreviation} and {away_team_abbreviation} "
                       f"not in elo dataset")
 
             # just for us so we can see the CSV being processed (its boring to wait)
             if index == next_progress_print:
                 print(f"{progress * 10}%")
-                progress = progress + 1
+                progress += 1
                 next_progress_print = ten_percent_data * progress
 
-        # print(games_list[0]) this shows how we can print games to examine the feature values
-        game_writer = GameWriter(file_path, games_list)
+        game_writer = GameWriter(f"data/{self._year_to_generate}_games.csv", games_list)
         game_writer.write()
 
-def generateGameStats():
-    season_start_year = int(input("Choose a year to get the head to head data for\n > "))
-    start_date = date.fromisoformat(f'{season_start_year}-10-01')
-    if(season_start_year==2019):
-        end_date = date.fromisoformat(f'{season_start_year+1}-09-01')
-    else:
-        end_date = date.fromisoformat(f'{season_start_year + 1}-07-01')
-    gameScraper = ScoreScraper(start_date, end_date)
-    game_results = gameScraper.results_list
-    # for game in game_results:
+    def generate_game_stats(self):
+        season_start_year = self._year_to_generate
+        start_date = date.fromisoformat(f'{season_start_year}-10-01')
+        if season_start_year == 2019:
+            end_date = date.fromisoformat(f'{season_start_year + 1}-09-01')
+        else:
+            end_date = date.fromisoformat(f'{season_start_year + 1}-07-01')
+        game_scraper = ScoreScraper(start_date, end_date)
+        game_results = game_scraper.results_list
 
-    outputFile = f"data/game_stats/{season_start_year}-{season_start_year+1}.csv"
-    is_file_existing = Path(outputFile).is_file()
+        output_file = f"data/game_stats/{season_start_year}-{season_start_year + 1}.csv"
+        is_file_existing = Path(output_file).is_file()
 
-    if (is_file_existing):
-        os.remove(outputFile)
+        if is_file_existing:
+            os.remove(output_file)
 
-    with open(outputFile, 'a') as output_csv:
-        headers = game_results[0].keys()
-        writer = csv.DictWriter(output_csv, fieldnames=headers, lineterminator='\n')
-        writer.writeheader()
-        for index, game_dict in enumerate(game_results):
-            writer.writerow(game_dict)
-
-
-generateGameStats()
+        with open(output_file, 'a') as output_csv:
+            headers = game_results[0].keys()
+            writer = csv.DictWriter(output_csv, fieldnames=headers, lineterminator='\n')
+            writer.writeheader()
+            for index, game_dict in enumerate(game_results):
+                writer.writerow(game_dict)

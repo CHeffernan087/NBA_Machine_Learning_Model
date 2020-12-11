@@ -6,9 +6,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
 
-def parseInput(input):
-    input = input.lower()[0]
-    if input == "y":
+def parseInput(user_input):
+    user_input = user_input.lower()[0]
+    if user_input == "y":
         return True
     return False
 
@@ -19,11 +19,12 @@ userInput = input("Do you want to generate CSV? (y/n)\n> ")
 shouldGenCsv = parseInput(userInput)
 
 if shouldGenCsv:
-    CSVGenerator.Generator(YEAR_TO_GENERATE)
+    CSVGenerator.generate(YEAR_TO_GENERATE)
 
 YEAR_FOR_TESTING = 2020
 FILE_PATH_TEST = f"data/{YEAR_FOR_TESTING}_games.csv"
 FILE_PATH_TRAIN = f"data/{YEAR_TO_GENERATE}_games.csv"
+
 training_csv_dataframe = pd.read_csv(FILE_PATH_TRAIN)
 testing_csv_dataframe = pd.read_csv(FILE_PATH_TEST)
 num_columns = len(training_csv_dataframe.columns)
