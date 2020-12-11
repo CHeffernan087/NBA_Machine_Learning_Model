@@ -3,6 +3,7 @@ from datetime import timedelta, datetime, date
 from typing import Union
 import requests
 from lxml import html
+from Team.Team import Team
 
 URL_TEMPLATE = "https://www.basketball-reference.com/boxscores/?month={month}&day={day}&year={year}"
 
@@ -36,14 +37,7 @@ class ScoreScraper:
             yield start_date + timedelta(day_offset)
 
     def getTeamId(self, team_name):
-        name_array = team_name.split(" ")
-
-        if name_array[0] == "Los":
-            franchise = f"LA {name_array[2]}"
-        elif len(name_array) > 2 and name_array[0] != "Portland":
-            franchise = f"{name_array[0]} {name_array[1]}"
-        else:
-            franchise = name_array[0]
+        franchise = Team.get_franchise(team_name)
         return self._team_name_to_id_dict[franchise]
 
     def getConferenceStandings(self, html_tree):
@@ -73,6 +67,7 @@ class ScoreScraper:
     The standings data scraped is updated with the result 
     so we need to decrement the stats to adjust for this
     '''
+
     @staticmethod
     def add_team_record_to_dict(team_score_dict, conference_standings):
         home_team_id = team_score_dict['home_team_id']
@@ -94,10 +89,25 @@ class ScoreScraper:
             home_team_record["loses"] -= 1
             away_team_record["wins"] -= 1
 
-        home_team_record["points_per_game"] = 0 if home_team_games_played == 1 else ((home_team_record["points_per_game"] * home_team_games_played) - home_team_score) / home_team_games_played - 1
-        home_team_record["points_against_per_game"] = 0 if home_team_games_played == 1 else ((home_team_record["points_against_per_game"] * home_team_games_played) - away_team_score) / home_team_games_played - 1
-        away_team_record["points_per_game"] = 0 if away_team_games_played == 1 else ((away_team_record["points_per_game"] * away_team_games_played) - away_team_score) / away_team_games_played - 1
-        away_team_record["points_against_per_game"] = 0 if away_team_games_played == 1 else ((away_team_record["points_against_per_game"] * away_team_games_played) - home_team_score) / away_team_games_played - 1
+        if home_team_games_played == 1:
+            home_team_record["points_per_game"] = 0
+            home_team_record["points_against_per_game"] = 0
+        else:
+            home_team_record["points_per_game"] = ((home_team_record["points_per_game"] * home_team_games_played) -
+                                                   home_team_score) / home_team_games_played - 1
+            home_team_record["points_against_per_game"] = ((home_team_record["points_against_per_game"] *
+                                                            home_team_games_played) -
+                                                           away_team_score) / home_team_games_played - 1
+
+        if away_team_games_played == 1:
+            away_team_record["points_per_game"] = 0
+            away_team_record["points_against_per_game"] = 0
+        else:
+            away_team_record["points_per_game"] = ((away_team_record["points_per_game"] * away_team_games_played)
+                                                   - away_team_score) / away_team_games_played - 1
+            away_team_record["points_against_per_game"] = ((away_team_record["points_against_per_game"] *
+                                                            away_team_games_played) -
+                                                           home_team_score) / away_team_games_played - 1
 
         team_score_dict["home_team_wins"] = home_team_record["wins"]
         team_score_dict["home_team_loses"] = home_team_record["loses"]

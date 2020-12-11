@@ -6,6 +6,17 @@ class Team:
         self.team_id = team_id
         self.game_history = []
 
+    @staticmethod
+    def get_franchise(team_name):
+        name_array = team_name.split(" ")
+        if name_array[0] == "Los":
+            franchise = f"LA {name_array[2]}"
+        elif len(name_array) > 2 and name_array[0] != "Portland":
+            franchise = f"{name_array[0]} {name_array[1]}"
+        else:
+            franchise = name_array[0]
+        return franchise
+
     def getCurrentForm(self):
         wins = 0
         loses = 0

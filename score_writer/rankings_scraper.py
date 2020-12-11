@@ -2,7 +2,7 @@ import csv
 import json
 import os
 from pathlib import Path
-
+from Team.Team import Team
 import requests
 from lxml import html
 
@@ -18,14 +18,7 @@ def getCellValueInRow(row, data_stat):
 
 
 def getTeamId(team_name):
-    name_array = team_name.split(" ")
-
-    if name_array[0] == "Los":
-        franchise = f"LA {name_array[2]}"
-    elif len(name_array) > 2 and name_array[0] != "Portland":
-        franchise = f"{name_array[0]} {name_array[1]}"
-    else:
-        franchise = name_array[0]
+    franchise = Team.get_franchise(team_name)
     return team_name_to_id_dict[franchise]
 
 
