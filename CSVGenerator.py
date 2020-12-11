@@ -16,7 +16,7 @@ class CSVGenerator:
         self._year_to_generate = year_to_generate
 
     def generate(self):
-        # self.generate_game_stats()
+        self.generate_game_stats()
 
         rankings_frame = pd.read_csv("data/ranking.csv")
         teams = pd.read_csv("data/teams.csv")[['TEAM_ID', 'ABBREVIATION']]

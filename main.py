@@ -13,7 +13,7 @@ def parseInput(user_input):
     return False
 
 
-YEAR_TO_GENERATE = 2018
+YEAR_TO_GENERATE = 2019
 
 userInput = input("Do you want to generate CSV? (y/n)\n> ")
 shouldGenCsv = parseInput(userInput)
