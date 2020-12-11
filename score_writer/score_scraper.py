@@ -29,7 +29,7 @@ class ScoreScraper:
             for game_result_element in games_results_list:
                 game_results_dict = {'date':str(date)}
                 game_results_dict = self.get_teams_and_scores_dict(game_result_element,game_results_dict)
-                game_results_dict = self.get_team_record(game_results_dict, conference_standings)
+                game_results_dict = self.add_team_record_to_dict(game_results_dict, conference_standings)
                 self.results_list.append(game_results_dict)
 
     @staticmethod
@@ -75,14 +75,13 @@ class ScoreScraper:
     The standings data scraped is updated with the result 
     so we need to decrement the stats to adjust for this
     '''
-    def get_team_record(self, team_score_dict, conference_standings):
+    def add_team_record_to_dict(self, team_score_dict, conference_standings):
         home_team_id = team_score_dict['home_team_id']
         home_team_score = team_score_dict['home_team_score']
         away_team_id = team_score_dict['away_team_id']
         away_team_score = team_score_dict['away_team_score']
         home_team_won = team_score_dict["is_home_winner"]
 
-        # currently working on this
         home_team_record = conference_standings[home_team_id]
         away_team_record = conference_standings[away_team_id]
 
@@ -111,7 +110,7 @@ class ScoreScraper:
         team_score_dict["away_team_points_per_game"] = away_team_record["points_per_game"]
         team_score_dict["away_team_points_against_per_game"] = away_team_record["points_against_per_game"]
 
-        return  team_score_dict
+        return team_score_dict
 
     def get_teams_and_scores_dict(self, game_result_element,team_score_dict):
         winner_loser_order = game_result_element.xpath(".//tr[@class='winner' or @class='loser']")
