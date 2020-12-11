@@ -63,7 +63,6 @@ class CSVGenerator:
 
                 if current_game.hasSufficientData():
                     games_list.append(current_game)
-                # games_list.append(current_game)
             except IndexError:
                 print(f"Game played on {game_date} between {home_team_abbreviation} and {away_team_abbreviation} "
                       f"not in elo dataset")
