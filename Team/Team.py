@@ -8,7 +8,7 @@ NUMBER_OF_GAMES = 3
 class Team:
     def __init__(self, team_id):
         self.team_id = team_id
-        self.game_history = [0]*NUMBER_OF_GAMES
+        self.game_history = []
 
     def getCurrentForm(self):
         wins = 0
