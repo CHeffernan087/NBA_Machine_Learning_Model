@@ -27,11 +27,8 @@ class Game(OrderedDict):
         '''
         get the teams record of the last 3 games
         '''
-        home_team_history = home_team.getCurrentForm()
-        away_team_history = away_team.getCurrentForm()
-        for index, game in enumerate(home_team_history):
-            super().__setitem__(f"HOME_TEAM_HISTORY_GAME_{index}", game)
-            super().__setitem__(f"AWAY_TEAM_HISTORY_GAME_{index}", away_team_history[index])
+        super().__setitem__("HOME_TEAM_FORM", home_team.getCurrentForm()[0])
+        super().__setitem__("AWAY_TEAM_FORM", away_team.getCurrentForm()[0])
 
         '''
         add the elo ratings for each game from https://projects.fivethirtyeight.com/nba-model/nba_elo.csv
@@ -39,8 +36,8 @@ class Game(OrderedDict):
         # super().__setitem__("HOME_TEAM_ELO", home_team_elo)
         # super().__setitem__("AWAY_TEAM_ELO", away_team_elo)
 
-        # super().__setitem__("HOME_TEAM_RAPTOR", home_team_raptor)
-        # super().__setitem__("AWAY_TEAM_RAPTOR", away_team_raptor)
+        super().__setitem__("HOME_TEAM_RAPTOR", home_team_raptor)
+        super().__setitem__("AWAY_TEAM_RAPTOR", away_team_raptor)
 
         '''
         MAKE SURE THIS IS ADDED LAST

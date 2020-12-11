@@ -2,7 +2,7 @@ HOME_TEAM = 0
 AWAY_TEAM = 1
 RESULT = 2
 
-NUMBER_OF_GAMES = 10
+NUMBER_OF_GAMES = 3
 
 
 class Team:
@@ -19,7 +19,7 @@ class Team:
                 wins = wins + 1
             else:
                 loses = loses + 1
-        return self.game_history
+        return [wins,loses]
 
     def parseGame(self, game):
         home_team = game[HOME_TEAM]
