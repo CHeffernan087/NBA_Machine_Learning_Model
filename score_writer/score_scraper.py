@@ -1,8 +1,10 @@
 import json
 from datetime import timedelta, datetime, date
 from typing import Union
+
 import requests
 from lxml import html
+
 from Team.Team import Team
 
 URL_TEMPLATE = "https://www.basketball-reference.com/boxscores/?month={month}&day={day}&year={year}"
@@ -71,7 +73,7 @@ class ScoreScraper:
     @staticmethod
     def add_team_record_to_dict(team_score_dict, conference_standings):
         home_team_id = team_score_dict['home_team_id']
-        home_team_score = team_score_dict['home_team_score']
+        home_team_score = team_score_dict['other_team_score']
         away_team_id = team_score_dict['away_team_id']
         away_team_score = team_score_dict['away_team_score']
         home_team_won = team_score_dict["is_home_winner"]
@@ -89,25 +91,11 @@ class ScoreScraper:
             home_team_record["loses"] -= 1
             away_team_record["wins"] -= 1
 
-        if home_team_games_played == 1:
-            home_team_record["points_per_game"] = 0
-            home_team_record["points_against_per_game"] = 0
-        else:
-            home_team_record["points_per_game"] = ((home_team_record["points_per_game"] * home_team_games_played) -
-                                                   home_team_score) / home_team_games_played - 1
-            home_team_record["points_against_per_game"] = ((home_team_record["points_against_per_game"] *
-                                                            home_team_games_played) -
-                                                           away_team_score) / home_team_games_played - 1
+        home_team_record = ScoreScraper.add_ppg_to_record(home_team_record, home_team_games_played, home_team_score,
+                                                          away_team_score)
 
-        if away_team_games_played == 1:
-            away_team_record["points_per_game"] = 0
-            away_team_record["points_against_per_game"] = 0
-        else:
-            away_team_record["points_per_game"] = ((away_team_record["points_per_game"] * away_team_games_played)
-                                                   - away_team_score) / away_team_games_played - 1
-            away_team_record["points_against_per_game"] = ((away_team_record["points_against_per_game"] *
-                                                            away_team_games_played) -
-                                                           home_team_score) / away_team_games_played - 1
+        away_team_record = ScoreScraper.add_ppg_to_record(away_team_record, away_team_games_played, away_team_score,
+                                                          home_team_score)
 
         team_score_dict["home_team_wins"] = home_team_record["wins"]
         team_score_dict["home_team_loses"] = home_team_record["loses"]
@@ -119,6 +107,18 @@ class ScoreScraper:
         team_score_dict["away_team_points_against_per_game"] = away_team_record["points_against_per_game"]
 
         return team_score_dict
+
+    @staticmethod
+    def add_ppg_to_record(team_record, games_played, team_score, other_team_score):
+        if games_played == 1:
+            team_record["points_per_game"] = 0
+            team_record["points_against_per_game"] = 0
+        else:
+            team_record["points_per_game"] = ((team_record["points_per_game"] * games_played) -
+                                              team_score) / games_played - 1
+            team_record["points_against_per_game"] = ((team_record["points_against_per_game"] * games_played) -
+                                                      other_team_score) / games_played - 1
+        return team_record
 
     def get_teams_and_scores_dict(self, game_result_element, team_score_dict):
         winner_loser_order = game_result_element.xpath(".//tr[@class='winner' or @class='loser']")
@@ -134,7 +134,7 @@ class ScoreScraper:
 
         team_score_dict['home_team'] = home_team
         team_score_dict['home_team_id'] = self._team_name_to_id_dict[home_team]
-        team_score_dict['home_team_score'] = winning_score if is_home_winner else losing_score
+        team_score_dict['other_team_score'] = winning_score if is_home_winner else losing_score
         team_score_dict['away_team'] = away_team
         team_score_dict['away_team_id'] = self._team_name_to_id_dict[away_team]
         team_score_dict['away_team_score'] = losing_score if is_home_winner else winning_score
