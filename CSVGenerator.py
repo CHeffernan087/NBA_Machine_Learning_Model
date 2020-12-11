@@ -76,7 +76,7 @@ class CSVGenerator:
 
 def generateGameStats():
     season_start_year = int(input("Choose a year to get the head to head data for\n > "))
-    start_date = date.fromisoformat(f'{season_start_year}-10-16')
+    start_date = date.fromisoformat(f'{season_start_year}-10-01')
     if(season_start_year==2019):
         end_date = date.fromisoformat(f'{season_start_year+1}-09-01')
     else:
@@ -85,7 +85,7 @@ def generateGameStats():
     game_results = gameScraper.results_list
     # for game in game_results:
 
-    outputFile = f"game_stats_{season_start_year}-{season_start_year+1}.csv"
+    outputFile = f"data/games_stats/{season_start_year}-{season_start_year+1}.csv"
     is_file_existing = Path(outputFile).is_file()
 
     if (is_file_existing):
