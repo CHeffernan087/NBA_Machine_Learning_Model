@@ -1,7 +1,3 @@
-HOME_TEAM = 0
-AWAY_TEAM = 1
-RESULT = 2
-
 NUMBER_OF_GAMES = 3
 
 
@@ -16,14 +12,14 @@ class Team:
 
         for game in self.game_history:
             if game == 1:
-                wins = wins + 1
+                wins += 1
             else:
-                loses = loses + 1
-        return [wins,loses]
+                loses += 1
+        return [wins, loses]
 
     def parseGame(self, game):
-        home_team = game[HOME_TEAM]
-        home_team_win = game[RESULT]
+        home_team = game["HOME_TEAM"]
+        home_team_win = game["RESULT"]
 
         team_has_won = False
         is_home_team = self.team_id == home_team

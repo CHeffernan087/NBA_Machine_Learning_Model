@@ -16,34 +16,34 @@ class CSVGenerator:
         self._year_to_generate = year_to_generate
 
     def generate(self):
-        self.generate_game_stats()
+        # self.generate_game_stats()
 
         rankings_frame = pd.read_csv("data/ranking.csv")
         teams = pd.read_csv("data/teams.csv")[['TEAM_ID', 'ABBREVIATION']]
 
-        games_frame = pd.read_csv("data/games.csv")
-        games_frame = games_frame[games_frame.GAME_DATE_EST.str.contains(str(self._year_to_generate))]
+        games_frame = pd.read_csv(f"data/game_stats/{self._year_to_generate}-{self._year_to_generate + 1}.csv")
+        games_frame = games_frame[games_frame.date.str.contains(str(self._year_to_generate))]
 
         elo_frame = pd.read_csv("data/nba_elo.csv")
-        elo_frame = elo_frame[elo_frame['date'].isin(games_frame['GAME_DATE_EST'])]
+        elo_frame = elo_frame[elo_frame['date'].isin(games_frame['date'])]
 
         games_list = []
         team_stats = TeamStats(teams['TEAM_ID'])
 
         print("Generating data. This will take a minute....")
-        num_rows = len(games_frame['GAME_DATE_EST'])
+        num_rows = len(games_frame['date'])
         progress = 1
         ten_percent_data = int(num_rows / 10)
         next_progress_print = ten_percent_data
-        for index, game_date in enumerate(games_frame['GAME_DATE_EST']):
-            home_team_id = games_frame['HOME_TEAM_ID'].iloc[index]
-            away_team_id = games_frame['VISITOR_TEAM_ID'].iloc[index]
+        for index, game_date in enumerate(games_frame['date']):
+            home_team_id = games_frame['home_team_id'].iloc[index]
+            away_team_id = games_frame['away_team_id'].iloc[index]
 
             home_team = team_stats.getTeam(home_team_id)
             away_team = team_stats.getTeam(away_team_id)
-            home_team_win = games_frame['HOME_TEAM_WINS'].iloc[index]
+            home_team_win = games_frame['is_home_winner'].iloc[index]
 
-            team_stats.recordGame([home_team_id, away_team_id, home_team_win])
+            team_stats.recordGame({"HOME_TEAM": home_team_id, "AWAY_TEAM": away_team_id, "RESULT": home_team_win})
 
             home_team_abbreviation = teams[teams['TEAM_ID'] == home_team_id]['ABBREVIATION'].iloc[0]
             away_team_abbreviation = teams[teams['TEAM_ID'] == away_team_id]['ABBREVIATION'].iloc[0]

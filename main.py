@@ -13,13 +13,13 @@ def parseInput(user_input):
     return False
 
 
-YEAR_TO_GENERATE = 2019
+YEAR_TO_GENERATE = 2018
 
 userInput = input("Do you want to generate CSV? (y/n)\n> ")
 shouldGenCsv = parseInput(userInput)
 
 if shouldGenCsv:
-    CSVGenerator.generate(YEAR_TO_GENERATE)
+    CSVGenerator(YEAR_TO_GENERATE).generate()
 
 YEAR_FOR_TESTING = 2020
 FILE_PATH_TEST = f"data/{YEAR_FOR_TESTING}_games.csv"
