@@ -73,7 +73,7 @@ class ScoreScraper:
     @staticmethod
     def add_team_record_to_dict(team_score_dict, conference_standings):
         home_team_id = team_score_dict['home_team_id']
-        home_team_score = team_score_dict['other_team_score']
+        home_team_score = team_score_dict['home_team_score']
         away_team_id = team_score_dict['away_team_id']
         away_team_score = team_score_dict['away_team_score']
         home_team_won = team_score_dict["is_home_winner"]
@@ -134,7 +134,7 @@ class ScoreScraper:
 
         team_score_dict['home_team'] = home_team
         team_score_dict['home_team_id'] = self._team_name_to_id_dict[home_team]
-        team_score_dict['other_team_score'] = winning_score if is_home_winner else losing_score
+        team_score_dict['home_team_score'] = winning_score if is_home_winner else losing_score
         team_score_dict['away_team'] = away_team
         team_score_dict['away_team_id'] = self._team_name_to_id_dict[away_team]
         team_score_dict['away_team_score'] = losing_score if is_home_winner else winning_score
