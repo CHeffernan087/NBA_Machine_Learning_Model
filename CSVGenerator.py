@@ -85,7 +85,7 @@ def generateGameStats():
     game_results = gameScraper.results_list
     # for game in game_results:
 
-    outputFile = f"data/games_stats/{season_start_year}-{season_start_year+1}.csv"
+    outputFile = f"data/game_stats/{season_start_year}-{season_start_year+1}.csv"
     is_file_existing = Path(outputFile).is_file()
 
     if (is_file_existing):
