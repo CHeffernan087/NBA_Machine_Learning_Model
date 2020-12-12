@@ -3,16 +3,8 @@ import pandas as pd
 from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.linear_model import RidgeClassifier
-from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import KFold
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.svm import SVC
-
 
 from CSVGenerator import CSVGenerator
-from helper_functions import cross_validate, HyperParam
 
 
 def parseInput(user_input):
