@@ -16,7 +16,10 @@ class CSVGenerator:
         self._year_to_generate = year_to_generate
 
     def generate(self):
+
+
         self.generate_game_stats()
+
 
         rankings_frame = pd.read_csv("data/ranking.csv")
         teams = pd.read_csv("data/teams.csv")[['TEAM_ID', 'ABBREVIATION']]
@@ -43,8 +46,6 @@ class CSVGenerator:
             away_team = team_stats.getTeam(away_team_id)
             home_team_win = games_frame['is_home_winner'].iloc[index]
 
-            team_stats.recordGame({"HOME_TEAM": home_team_id, "AWAY_TEAM": away_team_id, "RESULT": home_team_win})
-
             home_team_abbreviation = teams[teams['TEAM_ID'] == home_team_id]['ABBREVIATION'].iloc[0]
             away_team_abbreviation = teams[teams['TEAM_ID'] == away_team_id]['ABBREVIATION'].iloc[0]
 
@@ -58,7 +59,7 @@ class CSVGenerator:
                 home_team_raptor = current_game_elo['raptor1_pre'].iloc[0]
                 away_team_raptor = current_game_elo['raptor2_pre'].iloc[0]
 
-                current_game = Game(home_team, away_team, game_date, rankings_frame, home_team_win, home_team_elo,
+                current_game = Game(home_team, away_team, home_team_win, home_team_elo,
                                     away_team_elo, home_team_raptor, away_team_raptor)
 
                 if current_game.hasSufficientData():
@@ -66,7 +67,8 @@ class CSVGenerator:
             except IndexError:
                 print(f"Game played on {game_date} between {home_team_abbreviation} and {away_team_abbreviation} "
                       f"not in elo dataset")
-
+            team_stats.recordGame({"HOME_TEAM": home_team_id, "AWAY_TEAM": away_team_id, "RESULT": home_team_win, "HOME_TEAM_POINTS": 0,
+                 "AWAY_TEAM_POINTS": 0})
             # just for us so we can see the CSV being processed (its boring to wait)
             if index == next_progress_print:
                 print(f"{progress * 10}%")
@@ -77,24 +79,32 @@ class CSVGenerator:
         game_writer.write()
 
     def generate_game_stats(self):
+
         season_start_year = self._year_to_generate
         start_date = date.fromisoformat(f'{season_start_year}-10-01')
-        if season_start_year == 2019:
-            end_date = date.fromisoformat(f'{season_start_year + 1}-09-01')
+        if(season_start_year==2019):
+            end_date = date.fromisoformat(f'{season_start_year+1}-10-21')
         else:
-            end_date = date.fromisoformat(f'{season_start_year + 1}-07-01')
-        game_scraper = ScoreScraper(start_date, end_date)
-        game_results = game_scraper.results_list
+            end_date = date.fromisoformat(f'{season_start_year+1}-07-01')
+        gameScraper = ScoreScraper(start_date, end_date)
+        game_results = gameScraper.results_list
+        # for game in game_results:
 
-        output_file = f"data/game_stats/{season_start_year}-{season_start_year + 1}.csv"
-        is_file_existing = Path(output_file).is_file()
+        outputFile = f"data/game_stats/{season_start_year}-{season_start_year+1}.csv"
+        is_file_existing = Path(outputFile).is_file()
 
-        if is_file_existing:
-            os.remove(output_file)
+        if (is_file_existing):
+            os.remove(outputFile)
 
-        with open(output_file, 'a') as output_csv:
-            headers = game_results[0].keys()
-            writer = csv.DictWriter(output_csv, fieldnames=headers, lineterminator='\n')
-            writer.writeheader()
+        with open(outputFile, 'a') as output_csv:
+
+            '''
+            iterate over all the games scraped by the programme
+            '''
             for index, game_dict in enumerate(game_results):
+                if index == 0 :
+                    headers = game_dict.keys()
+                    writer = csv.DictWriter(output_csv, fieldnames=headers, lineterminator='\n')
+                    writer.writeheader()
                 writer.writerow(game_dict)
+
