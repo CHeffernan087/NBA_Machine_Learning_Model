@@ -62,3 +62,14 @@ class Game(OrderedDict):
             sufficient_data = False
 
         return sufficient_data
+
+    def _get_rankings(self, team_id, game_date):
+        team_rankings = self._rankings.query(f'TEAM_ID == "{team_id}"').sort_values(by=['STANDINGSDATE'])
+        team_rank_on_date = team_rankings.query(f'STANDINGSDATE == "{game_date}"')
+
+        team_home_record = team_rank_on_date['HOME_RECORD'].iloc[0].split("-")
+        team_home_wins, team_home_loses = map(int, team_home_record)
+
+        team_road_record = team_rank_on_date['ROAD_RECORD'].iloc[0].split("-")
+        team_road_wins, team_road_loses = map(int, team_road_record)
+        return team_home_wins, team_home_loses, team_road_wins, team_road_loses

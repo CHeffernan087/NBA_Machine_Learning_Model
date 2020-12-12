@@ -46,8 +46,6 @@ class CSVGenerator:
             away_team = team_stats.getTeam(away_team_id)
             home_team_win = games_frame['is_home_winner'].iloc[index]
 
-            team_stats.recordGame({"HOME_TEAM": home_team_id, "AWAY_TEAM": away_team_id, "RESULT": home_team_win, "HOME_TEAM_POINTS": 0 , "AWAY_TEAM_POINTS":0})
-
             home_team_abbreviation = teams[teams['TEAM_ID'] == home_team_id]['ABBREVIATION'].iloc[0]
             away_team_abbreviation = teams[teams['TEAM_ID'] == away_team_id]['ABBREVIATION'].iloc[0]
 
@@ -63,13 +61,14 @@ class CSVGenerator:
 
                 current_game = Game(home_team, away_team, home_team_win, home_team_elo,
                                     away_team_elo, home_team_raptor, away_team_raptor)
-                team_stats.recordGame({"HOME_TEAM": home_team_id, "AWAY_TEAM": away_team_id, "RESULT": home_team_win, "HOME_TEAM_POINTS": 0 , "AWAY_TEAM_POINTS":0})
+
                 if current_game.hasSufficientData():
                     games_list.append(current_game)
             except IndexError:
                 print(f"Game played on {game_date} between {home_team_abbreviation} and {away_team_abbreviation} "
                       f"not in elo dataset")
-
+            team_stats.recordGame({"HOME_TEAM": home_team_id, "AWAY_TEAM": away_team_id, "RESULT": home_team_win, "HOME_TEAM_POINTS": 0,
+                 "AWAY_TEAM_POINTS": 0})
             # just for us so we can see the CSV being processed (its boring to wait)
             if index == next_progress_print:
                 print(f"{progress * 10}%")
