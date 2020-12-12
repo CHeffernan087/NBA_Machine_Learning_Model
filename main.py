@@ -62,7 +62,7 @@ print(f'Model Accuracy : {accuracy_score(y_true=test_y_output_data, y_pred=y_pre
 
 feature_selector = FeatureSelector(testing_csv_dataframe, training_csv_dataframe)
 
-feature_selector.recursive_feature_selection()
+feature_selector.select_k_best()
 
 # baseline = DummyClassifier(strategy="uniform")
 # baseline = DummyClassifier(strategy="most_frequent")
