@@ -3,6 +3,9 @@ import pandas as pd
 from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
+from helper_functions import cross_validate, HyperParam
+from sklearn.svm import SVC
+from sklearn.linear_model import RidgeClassifier
 
 from CSVGenerator import CSVGenerator
 
@@ -36,11 +39,11 @@ model = LogisticRegression(penalty='none', max_iter=900).fit(x_input_features, n
 
 # cross_validate(LogisticRegression, HyperParam.C, [0.001, 0.01, 0.1, 1, 10, 50, 80], x_input_features,
 #                y_output_data, max_iter=900)
-
-# any more than 2 and it will take a good while. Also need a decent amount of iterations to avoid warning
+#
+# # any more than 2 and it will take a good while. Also need a decent amount of iterations to avoid warning
 # cross_validate(LogisticRegression, HyperParam.POWER, [1, 2], x_input_features,
 #                y_output_data, max_iter=5000)
-
+#
 # cross_validate(SVC, HyperParam.GAMMA, [0.001, 0.01, 0.1, 1, 10, 50, 80], x_input_features,
 #                y_output_data, max_iter=900)
 #
