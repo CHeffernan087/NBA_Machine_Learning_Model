@@ -39,7 +39,7 @@ class CSVGenerator:
             away_team = team_stats.getTeam(away_team_id)
             home_team_win = games_frame['HOME_TEAM_WINS'].iloc[index]
 
-            team_stats.recordGame([home_team_id, away_team_id, home_team_win])
+
 
             home_team_abbreviation = teams[teams['TEAM_ID'] == home_team_id]['ABBREVIATION'].iloc[0]
             away_team_abbreviation = teams[teams['TEAM_ID'] == away_team_id]['ABBREVIATION'].iloc[0]
@@ -54,9 +54,9 @@ class CSVGenerator:
                 home_team_raptor = current_game_elo['raptor1_pre'].iloc[0]
                 away_team_raptor = current_game_elo['raptor2_pre'].iloc[0]
 
-                current_game = Game(home_team, away_team, game_date, rankings_frame, home_team_win, home_team_elo,
+                current_game = Game(home_team, away_team, home_team_win, home_team_elo,
                                     away_team_elo, home_team_raptor, away_team_raptor)
-
+                team_stats.recordGame([home_team_id, away_team_id, home_team_win])
                 if current_game.hasSufficientData():
                     games_list.append(current_game)
                 # games_list.append(current_game)
@@ -75,12 +75,13 @@ class CSVGenerator:
         game_writer.write()
 
 def generateGameStats():
+    team_stats = TeamStats(range(1,31))
     season_start_year = int(input("Choose a year to get the head to head data for\n > "))
     start_date = date.fromisoformat(f'{season_start_year}-10-01')
     if(season_start_year==2019):
         end_date = date.fromisoformat(f'{season_start_year+1}-09-01')
     else:
-        end_date = date.fromisoformat(f'{season_start_year + 1}-07-01')
+        end_date = date.fromisoformat(f'{season_start_year}-11-01')
     gameScraper = ScoreScraper(start_date, end_date)
     game_results = gameScraper.results_list
     # for game in game_results:
@@ -92,11 +93,18 @@ def generateGameStats():
         os.remove(outputFile)
 
     with open(outputFile, 'a') as output_csv:
-        headers = game_results[0].keys()
-        writer = csv.DictWriter(output_csv, fieldnames=headers, lineterminator='\n')
-        writer.writeheader()
+
+        '''
+        iterate over all the games scraped by the programme
+        '''
         for index, game_dict in enumerate(game_results):
+            if index == 0 :
+                headers = game_dict.keys()
+                writer = csv.DictWriter(output_csv, fieldnames=headers, lineterminator='\n')
+                writer.writeheader()
             writer.writerow(game_dict)
+
+
 
 
 generateGameStats()
