@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score
 from helper_functions import cross_validate, HyperParam
 from sklearn.svm import SVC
 from sklearn.linear_model import RidgeClassifier
+from feature_processing.feature_selector import FeatureSelector
 
 from CSVGenerator import CSVGenerator
 
@@ -33,8 +34,8 @@ training_csv_dataframe = pd.read_csv(FILE_PATH_TRAIN)
 testing_csv_dataframe = pd.read_csv(FILE_PATH_TEST)
 num_columns = len(training_csv_dataframe.columns)
 
-x_input_features = training_csv_dataframe.iloc[:, range(0, num_columns - 1)]
-y_output_data = training_csv_dataframe.iloc[:, [num_columns - 1]]
+x_input_features = training_csv_dataframe.drop('HOME_TEAM_WINS', axis=1)
+y_output_data = training_csv_dataframe['HOME_TEAM_WINS']
 model = LogisticRegression(penalty='none', max_iter=900).fit(x_input_features, np.array(y_output_data).ravel())
 
 # cross_validate(LogisticRegression, HyperParam.C, [0.001, 0.01, 0.1, 1, 10, 50, 80], x_input_features,
@@ -54,10 +55,14 @@ model = LogisticRegression(penalty='none', max_iter=900).fit(x_input_features, n
 #                y_output_data, max_iter=900)
 
 
-test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]
-test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]
+test_x_input_features = testing_csv_dataframe.drop('HOME_TEAM_WINS', axis=1)
+test_y_output_data = testing_csv_dataframe['HOME_TEAM_WINS']
 y_pred = model.predict(test_x_input_features)
 print(f'Model Accuracy : {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+
+feature_selector = FeatureSelector(testing_csv_dataframe, training_csv_dataframe)
+
+feature_selector.recursive_feature_selection()
 
 # baseline = DummyClassifier(strategy="uniform")
 # baseline = DummyClassifier(strategy="most_frequent")

@@ -1,3 +1,4 @@
+import pandas as pd
 import feature_processing.feature_processor as fp
 from sklearn.metrics import accuracy_score
 
@@ -18,7 +19,12 @@ class FeatureSelector:
         estimator = LogisticRegression()
         selector = RFECV(estimator, step=1, cv=5).fit(norm_features, self.labels)
 
-        print(self.features.iloc[:, selector.support_].columns)
+        selected_features = pd.DataFrame(norm_features).iloc[:, selector.support_]
+
+        model = LogisticRegression(penalty='none', max_iter=900).fit(selected_features, self.labels)
+        test_features = pd.DataFrame(fp.min_max_scale_features(self.test_features)).iloc[:, selector.support_]
+        y_pred = model.predict(test_features)
+        print(f'Model Accuracy : {accuracy_score(y_true=self.test_labels, y_pred=y_pred)}')
 
     def test_with_all_scaling_methods(self):
         scaling_functions = [fp.min_max_scale_features, fp.standard_scale_features, fp.max_abs_scale_features,
@@ -26,6 +32,6 @@ class FeatureSelector:
                              fp.quantile_2_scale_features, fp.normalise_scale_features]
 
         for fn in scaling_functions:
-            model = LogisticRegression(penalty='none', max_iter=500).fit(fn(self.features), self.labels)
+            model = LogisticRegression(penalty='none', max_iter=900).fit(fn(self.features), self.labels)
             y_pred = model.predict(fn(self.test_features))
             print(f'Model Accuracy with {fn.__name__} : {accuracy_score(y_true=self.test_labels, y_pred=y_pred)}')
