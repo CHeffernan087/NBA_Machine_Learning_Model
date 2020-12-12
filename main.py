@@ -21,7 +21,7 @@ shouldGenCsv = parseInput(userInput)
 if shouldGenCsv:
     CSVGenerator(YEAR_TO_GENERATE).generate()
 
-YEAR_FOR_TESTING = 2020
+YEAR_FOR_TESTING = 2019
 FILE_PATH_TEST = f"data/{YEAR_FOR_TESTING}_games.csv"
 FILE_PATH_TRAIN = f"data/{YEAR_TO_GENERATE}_games.csv"
 
@@ -29,12 +29,12 @@ training_csv_dataframe = pd.read_csv(FILE_PATH_TRAIN)
 testing_csv_dataframe = pd.read_csv(FILE_PATH_TEST)
 num_columns = len(training_csv_dataframe.columns)
 
-x_input_features = training_csv_dataframe.iloc[:, range(0, num_columns - 1)]
-y_output_data = training_csv_dataframe.iloc[:, [num_columns - 1]]
+x_input_features = training_csv_dataframe.drop('HOME_TEAM_WINS', axis=1)
+y_output_data = training_csv_dataframe['HOME_TEAM_WINS']
 model = LogisticRegression(penalty='none', max_iter=500).fit(x_input_features, np.array(y_output_data).ravel())
 
-test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]
-test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]
+test_x_input_features = testing_csv_dataframe.drop('HOME_TEAM_WINS', axis=1)
+test_y_output_data = testing_csv_dataframe['HOME_TEAM_WINS']
 y_pred = model.predict(test_x_input_features)
 print(f'Model Accuracy : {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
 
