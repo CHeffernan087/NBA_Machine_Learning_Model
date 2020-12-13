@@ -37,33 +37,24 @@ class CSVGenerator:
             home_team_id = games_frame['home_team_id'].iloc[index]
             away_team_id = games_frame['away_team_id'].iloc[index]
 
+            # get the Team objects for the two teams in the game
             home_team = team_stats.getTeam(home_team_id)
             away_team = team_stats.getTeam(away_team_id)
             home_team_win = games_frame['is_home_winner'].iloc[index]
 
-            home_team_abbreviation = teams[teams['TEAM_ID'] == home_team_id]['ABBREVIATION'].iloc[0]
-            away_team_abbreviation = teams[teams['TEAM_ID'] == away_team_id]['ABBREVIATION'].iloc[0]
-
-            current_game_elo = elo_frame[elo_frame['date'] == game_date]
-            current_game_elo = current_game_elo[current_game_elo['team1'] == home_team_abbreviation]
-            current_game_elo = current_game_elo[current_game_elo['team2'] == away_team_abbreviation]
+            # get the elo stats from the CSV
+            home_team_elo = games_frame['home_team_elo'].iloc[index]
+            away_team_elo = games_frame['away_team_elo'].iloc[index]
+            home_team_raptor = games_frame['home_team_raptor'].iloc[index]
+            away_team_raptor = games_frame['away_team_raptor'].iloc[index]
 
             head_to_head = team_stats.get_head_to_head_data(home_team_id, away_team_id)
 
-            try:
-                home_team_elo = current_game_elo['elo1_pre'].iloc[0]
-                away_team_elo = current_game_elo['elo2_pre'].iloc[0]
-                home_team_raptor = current_game_elo['raptor1_pre'].iloc[0]
-                away_team_raptor = current_game_elo['raptor2_pre'].iloc[0]
+            current_game = Game(home_team, away_team, home_team_win, home_team_elo,
+                                away_team_elo, home_team_raptor, away_team_raptor, head_to_head)
+            if current_game.hasSufficientData(home_team):
+                games_list.append(current_game)
 
-                current_game = Game(home_team, away_team, home_team_win, home_team_elo,
-                                    away_team_elo, home_team_raptor, away_team_raptor, head_to_head)
-
-                if current_game.hasSufficientData(home_team):
-                    games_list.append(current_game)
-            except IndexError:
-                print(f"Game played on {game_date} between {home_team_abbreviation} and {away_team_abbreviation} "
-                      f"not in elo dataset")
             team_stats.recordGame({"HOME_TEAM": home_team_id, "AWAY_TEAM": away_team_id, "RESULT": home_team_win, "HOME_TEAM_POINTS": 0,
                  "AWAY_TEAM_POINTS": 0})
             # just for us so we can see the CSV being processed (its boring to wait)
@@ -83,6 +74,7 @@ class CSVGenerator:
             end_date = date.fromisoformat(f'{season_start_year+1}-10-21')
         else:
             end_date = date.fromisoformat(f'{season_start_year+1}-07-01')
+
         gameScraper = ScoreScraper(start_date, end_date)
         game_results = gameScraper.results_list
         # for game in game_results:
