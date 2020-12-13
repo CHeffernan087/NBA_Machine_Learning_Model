@@ -51,7 +51,7 @@ with open(outputFile, 'a') as output_csv:
     tree = html.fromstring(response_data.content)
     headToHeadTable = tree.xpath('//*[@id="team_vs_team"]')
     tableRows = headToHeadTable[0].xpath('.//tr')
-    tableRows = tableRows[2:len(tableRows)]
+    tableRows = tableRows[1:len(tableRows)]
     for row in tableRows:
         rankCell = row.xpath(f'th[@data-stat="ranker"]')
         row_has_data = len(rankCell) > 0

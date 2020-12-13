@@ -18,14 +18,20 @@ def parseInput(user_input):
 
 
 YEAR_TO_GENERATE = 2018
-
-userInput = input("Do you want to generate CSV? (y/n)\n> ")
-shouldGenCsv = parseInput(userInput)
-
-if shouldGenCsv:
-    CSVGenerator(YEAR_TO_GENERATE).generate()
-
 YEAR_FOR_TESTING = 2019
+
+should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
+should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
+
+if should_scrape_data:
+    CSVGenerator(YEAR_TO_GENERATE).generate_game_stats()
+    CSVGenerator(YEAR_FOR_TESTING).generate_game_stats()
+
+if should_gen_csv:
+    CSVGenerator(YEAR_TO_GENERATE).generate()
+    CSVGenerator(YEAR_FOR_TESTING).generate()
+
+
 FILE_PATH_TEST = f"data/{YEAR_FOR_TESTING}_games.csv"
 FILE_PATH_TRAIN = f"data/{YEAR_TO_GENERATE}_games.csv"
 

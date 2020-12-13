@@ -5,7 +5,7 @@ NUMBER_OF_GAMES = 3
 class Team:
     def __init__(self, team_id):
         self.team_id = team_id
-        self.game_history = []
+        self.game_history = [0]*NUMBER_OF_GAMES
         self.num_home_wins = 0
         self.num_home_loses = 0
         self.num_away_wins = 0
@@ -33,7 +33,7 @@ class Team:
                 wins += 1
             else:
                 loses += 1
-        return [wins, loses]
+        return self.game_history
 
     def parseGame(self, game):
         home_team = game["HOME_TEAM"]
