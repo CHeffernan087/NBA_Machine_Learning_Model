@@ -54,6 +54,10 @@ class ScoreScraper:
                 # add the elo to the game stats
                 game_results_dict.update(self.get_elo(home_team_id,away_team_id,str(scrape_date)))
 
+                # add the head to head stats to the game stats
+                home_team_hth_record, away_team_hth_record = team_stats.get_head_to_head_data(home_team_id, away_team_id)
+                game_results_dict.update({"home_team_hth_record":home_team_hth_record, "away_team_hth_record":away_team_hth_record})
+
                 self.get_win_loss_stats(game_results_dict, home_team, away_team)
                 game_results_dict["is_home_winner"] = game_result
 

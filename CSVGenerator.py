@@ -22,9 +22,6 @@ class CSVGenerator:
         games_frame = pd.read_csv(f"data/game_stats/{self._year_to_generate}-{self._year_to_generate + 1}.csv")
         games_frame = games_frame[games_frame.date.str.contains(str(self._year_to_generate))]
 
-        elo_frame = pd.read_csv("data/nba_elo.csv")
-        elo_frame = elo_frame[elo_frame['date'].isin(games_frame['date'])]
-
         games_list = []
         team_stats = TeamStats(teams['TEAM_ID'], self._year_to_generate)
 
@@ -48,10 +45,12 @@ class CSVGenerator:
             home_team_raptor = games_frame['home_team_raptor'].iloc[index]
             away_team_raptor = games_frame['away_team_raptor'].iloc[index]
 
-            head_to_head = team_stats.get_head_to_head_data(home_team_id, away_team_id)
+            home_team_hth_record= games_frame['home_team_hth_record'].iloc[index]
+            away_team_hth_record = games_frame['away_team_hth_record'].iloc[index]
 
             current_game = Game(home_team, away_team, home_team_win, home_team_elo,
-                                away_team_elo, home_team_raptor, away_team_raptor, head_to_head)
+                                away_team_elo, home_team_raptor, away_team_raptor, home_team_hth_record, away_team_hth_record)
+
             if current_game.hasSufficientData(home_team):
                 games_list.append(current_game)
 
