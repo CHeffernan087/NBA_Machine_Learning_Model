@@ -17,7 +17,7 @@ def parseInput(user_input):
     return False
 
 
-YEAR_TO_GENERATE = 2018
+YEAR_TO_GENERATE = 2015
 YEAR_FOR_TESTING = 2019
 
 should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))

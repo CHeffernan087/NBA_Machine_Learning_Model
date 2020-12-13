@@ -65,9 +65,9 @@ class CSVGenerator:
         game_writer = GameWriter(f"data/{self._year_to_generate}_games.csv", games_list)
         game_writer.write()
 
-    def generate_game_stats(self):
+    def generate_game_stats(self, year_to_generate=None, output_file_name = None, shouldOverwriteCSV = True):
 
-        season_start_year = self._year_to_generate
+        season_start_year = self._year_to_generate if year_to_generate == None else year_to_generate
         start_date = date.fromisoformat(f'{season_start_year}-10-01')
         if(season_start_year==2019):
             end_date = date.fromisoformat(f'{season_start_year+1}-10-21')
@@ -78,14 +78,13 @@ class CSVGenerator:
         game_results = gameScraper.results_list
         # for game in game_results:
 
-        outputFile = f"data/game_stats/{season_start_year}-{season_start_year+1}.csv"
+        outputFile = f"data/game_stats/{season_start_year}-{season_start_year+1}.csv" if output_file_name == None else output_file_name
         is_file_existing = Path(outputFile).is_file()
 
-        if (is_file_existing):
+        if (is_file_existing and shouldOverwriteCSV):
             os.remove(outputFile)
 
         with open(outputFile, 'a') as output_csv:
-
             '''
             iterate over all the games scraped by the programme
             '''
@@ -96,3 +95,8 @@ class CSVGenerator:
                     writer.writeheader()
                 writer.writerow(game_dict)
 
+
+    def scrapeAllTrainingData(self, yearsToScrape = [2016,2017,2018,2019]):
+        outputFileName = f"data/training_data/training_data_{yearsToScrape[0]}-{yearsToScrape[len(yearsToScrape)-1]}.csv"
+        for year in yearsToScrape:
+            self.generate_game_stats(year,outputFileName, shouldOverwriteCSV=False)

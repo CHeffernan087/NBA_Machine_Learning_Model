@@ -40,7 +40,7 @@ class ScoreScraper:
 
             for game_result_element in games_results_list:
 
-                game_results_dict = {'date':str(scrape_date)}
+                game_results_dict = {'date':str(scrape_date), 'season_id':self._start_date.year}
                 game_results_dict = self.get_teams_and_scores_dict(game_result_element,game_results_dict)
                 game_result = self.get_game_result(game_result_element)
 
