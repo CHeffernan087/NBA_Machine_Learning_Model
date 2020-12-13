@@ -20,7 +20,7 @@ class ScoreScraper:
         with open("Team/team_config.json") as team_config:
             self._team_name_to_id_dict = json.load(team_config)
             teams = self._team_name_to_id_dict.values()
-        team_stats = TeamStats(teams)
+        team_stats = TeamStats(teams, start_date.year)
         for scrape_date in ScoreScraper.date_range(self._start_date, self._end_date):
             print(f"Fetching data for: {scrape_date}")
             current_date_url = URL_TEMPLATE.format(month=scrape_date.month, day=scrape_date.day, year=scrape_date.year)

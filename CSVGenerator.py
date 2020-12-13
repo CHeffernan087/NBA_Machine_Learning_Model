@@ -17,11 +17,6 @@ class CSVGenerator:
 
     def generate(self):
 
-
-        self.generate_game_stats()
-
-
-        rankings_frame = pd.read_csv("data/ranking.csv")
         teams = pd.read_csv("data/teams.csv")[['TEAM_ID', 'ABBREVIATION']]
 
         games_frame = pd.read_csv(f"data/game_stats/{self._year_to_generate}-{self._year_to_generate + 1}.csv")
@@ -31,7 +26,7 @@ class CSVGenerator:
         elo_frame = elo_frame[elo_frame['date'].isin(games_frame['date'])]
 
         games_list = []
-        team_stats = TeamStats(teams['TEAM_ID'])
+        team_stats = TeamStats(teams['TEAM_ID'], self._year_to_generate)
 
         print("Generating data. This will take a minute....")
         num_rows = len(games_frame['date'])
@@ -53,6 +48,8 @@ class CSVGenerator:
             current_game_elo = current_game_elo[current_game_elo['team1'] == home_team_abbreviation]
             current_game_elo = current_game_elo[current_game_elo['team2'] == away_team_abbreviation]
 
+            head_to_head = team_stats.get_head_to_head_data(home_team_id, away_team_id)
+
             try:
                 home_team_elo = current_game_elo['elo1_pre'].iloc[0]
                 away_team_elo = current_game_elo['elo2_pre'].iloc[0]
@@ -60,9 +57,9 @@ class CSVGenerator:
                 away_team_raptor = current_game_elo['raptor2_pre'].iloc[0]
 
                 current_game = Game(home_team, away_team, home_team_win, home_team_elo,
-                                    away_team_elo, home_team_raptor, away_team_raptor)
+                                    away_team_elo, home_team_raptor, away_team_raptor, head_to_head)
 
-                if current_game.hasSufficientData():
+                if current_game.hasSufficientData(home_team):
                     games_list.append(current_game)
             except IndexError:
                 print(f"Game played on {game_date} between {home_team_abbreviation} and {away_team_abbreviation} "
