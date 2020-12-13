@@ -7,7 +7,7 @@ class Game(OrderedDict):
     """
 
     def __init__(self, home_team, away_team,home_team_win, home_team_elo, away_team_elo,
-                 home_team_raptor, away_team_raptor,head_to_head):
+                 home_team_raptor, away_team_raptor,home_team_hth, away_team_hth):
         super().__init__()
 
 
@@ -24,8 +24,8 @@ class Game(OrderedDict):
         # super().__setitem__("AWAY_TEAM_ROAD_WINS", away_team_record["AWAY_WINS"])
         # super().__setitem__("AWAY_TEAM_ROAD_LOSES", away_team_record["AWAY_LOSES"])
 
-        # super().__setitem__("HOME_TEAM_HTH_RECORD", head_to_head[0])
-        # super().__setitem__("AWAY_TEAM_HTH_RECORD", head_to_head[1])
+        super().__setitem__("HOME_TEAM_HTH_RECORD", home_team_hth)
+        super().__setitem__("AWAY_TEAM_HTH_RECORD", away_team_hth)
 
         '''
         get the teams record of the last 3 games
