@@ -20,12 +20,8 @@ def parseInput(user_input):
 YEAR_TO_GENERATE = 2018
 YEAR_FOR_TESTING = 2019
 
-# hard coded values for testing. we should remove this before merging
-# should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
-# should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
-
-should_scrape_data = False
-should_gen_csv = True
+should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
+should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
 
 if should_scrape_data:
     CSVGenerator(YEAR_TO_GENERATE).generate_game_stats()

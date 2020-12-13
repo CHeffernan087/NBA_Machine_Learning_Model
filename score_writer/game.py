@@ -13,19 +13,19 @@ class Game(OrderedDict):
 
         home_team_record = home_team.getTeamRecord()
         away_team_record = away_team.getTeamRecord()
-        super().__setitem__("HOME_TEAM_HOME_WINS", home_team_record["HOME_WINS"])
-        super().__setitem__("HOME_TEAM_HOME_LOSES", home_team_record["HOME_LOSES"])
+        # super().__setitem__("HOME_TEAM_HOME_WINS", home_team_record["HOME_WINS"])
+        # super().__setitem__("HOME_TEAM_HOME_LOSES", home_team_record["HOME_LOSES"])
         # super().__setitem__("HOME_TEAM_ROAD_WINS", home_team_record["AWAY_WINS"])
         # super().__setitem__("HOME_TEAM_ROAD_LOSES", home_team_record["AWAY_LOSES"])
-        #
-        #
+
+
         # super().__setitem__("AWAY_TEAM_HOME_WINS", away_team_record["HOME_WINS"])
         # super().__setitem__("AWAY_TEAM_HOME_LOSES", away_team_record["HOME_LOSES"])
-        super().__setitem__("AWAY_TEAM_ROAD_WINS", away_team_record["AWAY_WINS"])
-        super().__setitem__("AWAY_TEAM_ROAD_LOSES", away_team_record["AWAY_LOSES"])
+        # super().__setitem__("AWAY_TEAM_ROAD_WINS", away_team_record["AWAY_WINS"])
+        # super().__setitem__("AWAY_TEAM_ROAD_LOSES", away_team_record["AWAY_LOSES"])
 
-        super().__setitem__("HOME_TEAM_HTH_RECORD", head_to_head[0])
-        super().__setitem__("AWAY_TEAM_HTH_RECORD", head_to_head[1])
+        # super().__setitem__("HOME_TEAM_HTH_RECORD", head_to_head[0])
+        # super().__setitem__("AWAY_TEAM_HTH_RECORD", head_to_head[1])
 
         '''
         get the teams record of the last 3 games
@@ -43,8 +43,8 @@ class Game(OrderedDict):
         '''
         add the elo ratings for each game from https://projects.fivethirtyeight.com/nba-model/nba_elo.csv
         '''
-        # super().__setitem__("HOME_TEAM_ELO", home_team_elo)
-        # super().__setitem__("AWAY_TEAM_ELO", away_team_elo)
+        super().__setitem__("HOME_TEAM_ELO", home_team_elo)
+        super().__setitem__("AWAY_TEAM_ELO", away_team_elo)
 
         # super().__setitem__("HOME_TEAM_RAPTOR", home_team_raptor)
         # super().__setitem__("AWAY_TEAM_RAPTOR", away_team_raptor)
