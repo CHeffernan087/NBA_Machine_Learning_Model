@@ -17,8 +17,8 @@ def parseInput(user_input):
     return False
 
 
-YEAR_TO_GENERATE = 2018
-YEAR_FOR_TESTING = 2019
+YEAR_TO_GENERATE = 2017
+YEAR_FOR_TESTING = 2018
 
 should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
 should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
