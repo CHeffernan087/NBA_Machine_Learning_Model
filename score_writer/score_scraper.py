@@ -5,6 +5,7 @@ from typing import Union
 import pandas as pd
 import requests
 from lxml import html
+import os
 
 from Team.Team import Team
 

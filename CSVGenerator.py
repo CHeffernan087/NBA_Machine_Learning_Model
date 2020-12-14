@@ -97,14 +97,21 @@ class CSVGenerator:
 
 
     def scrapeAllTrainingData(self, yearsToScrape = [2016,2017,2018,2019]):
-        outputFileName = f"data/training_data/training_data_{yearsToScrape[0]}-{yearsToScrape[len(yearsToScrape)-1]}.csv"
         for year in yearsToScrape:
-            self.generate_game_stats(year,outputFileName, shouldOverwriteCSV=False)
+            self.generate_game_stats(year, shouldOverwriteCSV=True)
+        self.stitchLocalCsvs(yearsToScrape)
 
     def stitchLocalCsvs(self, yearsToScrape = [2016,2017,2018,2019]):
         outputFileName = f"data/training_data/training_data_{yearsToScrape[0]}-{yearsToScrape[len(yearsToScrape)-1]}.csv"
-        for year in yearsToScrape:
-            games_frame = pd.read_csv(f"data/game_stats/{year}-{year + 1}.csv")
-            games_frame.to_csv(f'{outputFileName}', mode='a', header=False)
+        output_file = open(outputFileName, "w")
+        for index,year in enumerate(yearsToScrape):
+            current_csv = pd.read_csv(f"data/game_stats/{year}-{year + 1}.csv")
+            if(index == 0 ):
+                headers = current_csv.head()
+                writer = csv.DictWriter(output_file, fieldnames=headers)
+                writer.writeheader()
+                output_file.close()
+
+            current_csv.to_csv(f'{outputFileName}', mode='a', header=False, index=False)
 
 
