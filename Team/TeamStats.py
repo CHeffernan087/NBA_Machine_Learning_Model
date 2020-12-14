@@ -31,7 +31,5 @@ class TeamStats:
         self.count += 1
         home_team_record  = self.head_to_head_frame.query(f"Team == {str(home_team_id)}")
         head_to_head_string =  home_team_record[str(away_team_id)].iloc[0]
-        if(head_to_head_string == None):
-            return [0,0]
         head_to_head_list =  head_to_head_string.split("-")
         return [int(i) for i in head_to_head_list]

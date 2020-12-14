@@ -100,3 +100,11 @@ class CSVGenerator:
         outputFileName = f"data/training_data/training_data_{yearsToScrape[0]}-{yearsToScrape[len(yearsToScrape)-1]}.csv"
         for year in yearsToScrape:
             self.generate_game_stats(year,outputFileName, shouldOverwriteCSV=False)
+
+    def stitchLocalCsvs(self, yearsToScrape = [2016,2017,2018,2019]):
+        outputFileName = f"data/training_data/training_data_{yearsToScrape[0]}-{yearsToScrape[len(yearsToScrape)-1]}.csv"
+        for year in yearsToScrape:
+            games_frame = pd.read_csv(f"data/game_stats/{year}-{year + 1}.csv")
+            games_frame.to_csv(f'{outputFileName}', mode='a', header=False)
+
+

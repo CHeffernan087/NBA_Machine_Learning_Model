@@ -17,7 +17,7 @@ def parseInput(user_input):
     return False
 
 
-YEAR_TO_GENERATE = 2015
+YEAR_TO_GENERATE = 2016
 YEAR_FOR_TESTING = 2019
 
 should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
@@ -28,7 +28,7 @@ if should_scrape_data:
     CSVGenerator(YEAR_FOR_TESTING).generate_game_stats()
 
 if should_gen_csv:
-    CSVGenerator(YEAR_TO_GENERATE).generate()
+    CSVGenerator(YEAR_TO_GENERATE).stitchLocalCsvs()
     CSVGenerator(YEAR_FOR_TESTING).generate()
 
 
