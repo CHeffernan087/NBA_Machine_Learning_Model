@@ -1,5 +1,5 @@
 
-NUMBER_OF_GAMES = 3
+NUMBER_OF_GAMES =3
 
 
 class Team:
@@ -10,6 +10,7 @@ class Team:
         self.num_home_loses = 0
         self.num_away_wins = 0
         self.num_away_loses = 0
+        self.number_games_played =0
         self.points_per_game = 0
         self.points_conceded_per_game = 0
 
@@ -43,18 +44,16 @@ class Team:
         is_home_team = self.team_id == home_team
 
         if(is_home_team):
-            if(len(game) > 2):
-                self.points_per_game += game["HOME_TEAM_POINTS"]
-                self.points_conceded_per_game += game["AWAY_TEAM_POINTS"]
+            self.points_per_game += game["HOME_TEAM_POINTS"]
+            self.points_conceded_per_game += game["AWAY_TEAM_POINTS"]
             if(home_team_win):
                 team_has_won = True
                 self.num_home_wins += 1
             else:
                 self.num_home_loses += 1
         else:
-            if(len(game) > 2):
-                self.points_per_game += game["AWAY_TEAM_POINTS"]
-                self.points_conceded_per_game += game["HOME_TEAM_POINTS"]
+            self.points_per_game += game["AWAY_TEAM_POINTS"]
+            self.points_conceded_per_game += game["HOME_TEAM_POINTS"]
             if(not home_team_win):
                 team_has_won = True
                 self.num_away_wins += 1
@@ -63,7 +62,7 @@ class Team:
 
 
         result = 1 if team_has_won else 0
-
+        self.number_games_played +=1
         self.game_history.insert(0, result)
         if len(self.game_history) > NUMBER_OF_GAMES:
             self.game_history.pop()
@@ -79,7 +78,10 @@ class Team:
 
     def getPointsPerGame(self):
         number_games_played = self.getNumberGamesPlayed()
-        return 0 if number_games_played ==0 else int(self.points_per_game / self.getNumberGamesPlayed())
+        if number_games_played == 0:
+            return 0
+        else:
+            return int(self.points_per_game / self.getNumberGamesPlayed())
 
     def getPointsConcededPerGame(self):
         number_games_played = self.getNumberGamesPlayed()
