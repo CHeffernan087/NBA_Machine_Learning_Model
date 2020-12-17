@@ -10,7 +10,7 @@ class Team:
         self.num_home_loses = 0
         self.num_away_wins = 0
         self.num_away_loses = 0
-        self.number_games_played =0
+        self.number_games_played = 0
         self.points_per_game = 0
         self.points_conceded_per_game = 0
 
@@ -89,8 +89,8 @@ class Team:
 
     def getTeamRecord(self):
         return {
-            "HOME_WINS": self.num_home_wins,
-            "HOME_LOSES": self.num_home_loses,
-            "AWAY_WINS": self.num_away_wins,
-            "AWAY_LOSES": self.num_away_loses,
+            "HOME_WINS": round((1+self.num_home_wins) / (1+self.num_home_wins + 1+self.num_home_loses),3),
+            "HOME_LOSES": round((1+self.num_home_loses) / (1+self.num_home_wins + 1+self.num_home_loses),3),
+            "AWAY_WINS": round((1+self.num_away_wins) / (1+self.num_away_wins+1+self.num_away_loses),3),
+            "AWAY_LOSES": round((1+self.num_away_loses) / (1+self.num_away_wins + 1+self.num_away_loses),3),
         }
