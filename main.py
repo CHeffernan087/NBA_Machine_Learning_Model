@@ -1,16 +1,16 @@
 import numpy as np
 import pandas as pd
+from matplotlib import pyplot
 from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, plot_confusion_matrix
+from sklearn.metrics import accuracy_score, plot_confusion_matrix, roc_curve, auc
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from helper_functions import cross_validate, HyperParam
-from CSVGenerator import CSVGenerator
 from sklearn.svm import SVC
-from matplotlib import pyplot
-from sklearn.preprocessing import StandardScaler
-from sklearn.neighbors import KNeighborsClassifier
+
+from CSVGenerator import CSVGenerator
 
 
 def parseInput(user_input):
@@ -51,10 +51,8 @@ test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]
 # num_features_to_accuracy_dit = {}
 # for n in range(len(x_input_features.columns)):
 #     selector = RFE(logistic_model, n_features_to_select=n + 1)
-#
 #     pipeline = make_pipeline(StandardScaler(), selector, logistic_model)
 #     pipeline.fit(x_input_features, np.array(y_output_data).ravel())
-#
 #     y_pred = pipeline.predict(test_x_input_features)
 #     num_features_to_accuracy_dit[n] = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
 #
@@ -63,8 +61,6 @@ test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]
 # for key, value in num_features_to_accuracy_dit.items():
 #     if value >= current_accuracy:
 #         ideal_num_features = key
-
-
 # print(f"Ideal num features = {ideal_num_features}")
 
 # cross_validate(LogisticRegression, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features, y_output_data)
@@ -95,6 +91,30 @@ knn_pipeline = make_pipeline(StandardScaler(), knn_model)
 knn_pipeline.fit(x_input_features, np.array(y_output_data).ravel())
 y_pred = knn_pipeline.predict(test_x_input_features)
 print(f'kNN Accuracy : {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+
+pyplot.title('ROC Curves')
+pyplot.ylabel('True Positive Rate')
+pyplot.xlabel('False Positive Rate')
+
+# split into x and y testing & training data
+x_train, x_test, y_train, y_test = train_test_split(test_x_input_features, test_y_output_data, test_size=0.2)
+knn_pipeline.fit(x_train, np.array(y_train).ravel())
+fpr, tpr, _ = roc_curve(y_test, knn_pipeline.predict_proba(x_test)[:, 1])
+roc_auc = auc(fpr, tpr)  # get the area under the curve
+pyplot.plot(fpr, tpr, color="blue", label='KNN AUC = %0.8f' % roc_auc)  # plot the curve
+
+svc_pipeline.fit(x_train, np.array(y_train).ravel())
+fpr, tpr, _ = roc_curve(y_test, svc_pipeline.decision_function(x_test))
+roc_auc = auc(fpr, tpr)
+pyplot.plot(fpr, tpr, color="green", label='SVC AUC = %0.8f' % roc_auc)
+
+logistic_pipeline.fit(x_train, np.array(y_train).ravel())
+fpr, tpr, _ = roc_curve(y_test, logistic_pipeline.decision_function(x_test))
+roc_auc = auc(fpr, tpr)
+pyplot.plot(fpr, tpr, color="orange", label='Logistic Regression AUC = %0.8f' % roc_auc)
+
+pyplot.legend(loc='lower right')
+pyplot.show()
 
 best_pipeline = logistic_pipeline
 plot_confusion_matrix(best_pipeline, test_x_input_features, test_y_output_data)
