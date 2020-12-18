@@ -124,7 +124,7 @@ pyplot.show()
 baseline = DummyClassifier(strategy="most_frequent")
 baseline.fit(x_input_features, y_output_data)
 plot_confusion_matrix(baseline, test_x_input_features, test_y_output_data)
-pyplot.title("Stratified Baseline")
+pyplot.title("Most Frequent Baseline")
 pyplot.show()
 
 print(f"Baseline Accuracy: {accuracy_score(y_pred=baseline.predict(test_x_input_features), y_true=test_y_output_data)}")
