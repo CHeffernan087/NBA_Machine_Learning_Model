@@ -97,7 +97,7 @@ pyplot.ylabel('True Positive Rate')
 pyplot.xlabel('False Positive Rate')
 
 # split into x and y testing & training data
-x_train, x_test, y_train, y_test = train_test_split(test_x_input_features, test_y_output_data, test_size=0.2)
+x_train, x_test, y_train, y_test = train_test_split(x_input_features, y_output_data, test_size=0.2)
 knn_pipeline.fit(x_train, np.array(y_train).ravel())
 fpr, tpr, _ = roc_curve(y_test, knn_pipeline.predict_proba(x_test)[:, 1])
 roc_auc = auc(fpr, tpr)  # get the area under the curve
