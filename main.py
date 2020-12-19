@@ -9,7 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
-
+from helper_functions import cross_validate, HyperParam
 from CSVGenerator import CSVGenerator
 
 
@@ -113,6 +113,12 @@ fpr, tpr, _ = roc_curve(y_test, logistic_pipeline.decision_function(x_test))
 roc_auc = auc(fpr, tpr)
 pyplot.plot(fpr, tpr, color="orange", label='Logistic Regression AUC = %0.8f' % roc_auc)
 
+baseline_pipeline = make_pipeline(StandardScaler(), DummyClassifier(strategy="most_frequent"))
+baseline_pipeline.fit(x_train, np.array(y_train).ravel())
+fpr, tpr, _ = roc_curve(y_test, baseline_pipeline.predict_proba(x_test)[:, 1])
+roc_auc = auc(fpr, tpr)
+pyplot.plot(fpr, tpr, color="red", label='Baseline AUC = %0.8f' % roc_auc)
+
 pyplot.legend(loc='lower right')
 pyplot.show()
 
@@ -121,10 +127,9 @@ plot_confusion_matrix(best_pipeline, test_x_input_features, test_y_output_data)
 pyplot.title("Logistic Regression")
 pyplot.show()
 
-baseline = DummyClassifier(strategy="most_frequent")
-baseline.fit(x_input_features, y_output_data)
-plot_confusion_matrix(baseline, test_x_input_features, test_y_output_data)
+baseline_pipeline.fit(x_input_features, y_output_data)
+plot_confusion_matrix(baseline_pipeline, test_x_input_features, test_y_output_data)
 pyplot.title("Most Frequent Baseline")
 pyplot.show()
 
-print(f"Baseline Accuracy: {accuracy_score(y_pred=baseline.predict(test_x_input_features), y_true=test_y_output_data)}")
+print(f"Baseline Accuracy: {accuracy_score(y_pred=baseline_pipeline.predict(test_x_input_features), y_true=test_y_output_data)}")
