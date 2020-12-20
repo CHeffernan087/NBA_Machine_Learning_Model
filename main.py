@@ -86,18 +86,12 @@ print(f'Neural Network Model Accuracy : {accuracy_score(y_true=test_y_output_dat
 
 feature_selector = FeatureSelector(training_csv_dataframe, testing_csv_dataframe)
 
-rfecv_best_feature_columns = feature_selector.recursive_feature_selection()
-rfecv_train_x = x_input_features[rfecv_best_feature_columns]
-col_indices = [x_input_features.columns.get_loc(c) for c in rfecv_best_feature_columns if c in x_input_features]
-rfecv_test_x = test_x_input_features.iloc[:, col_indices]
-model = LogisticRegression(penalty='none', max_iter=900).fit(rfecv_train_x, np.array(y_output_data).ravel())
-y_pred = model.predict(rfecv_test_x)
+rfe_train_x, rfe_test_x = feature_selector.get_rfe_train_test_split()
+model = LogisticRegression(penalty='none', max_iter=900).fit(rfe_train_x, np.array(y_output_data).ravel())
+y_pred = model.predict(rfe_test_x)
 print(f'Model Accuracy with RFECV best features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
 
-k_best_feature_columns = feature_selector.select_k_best(k=10)
-k_best_train_x = x_input_features[k_best_feature_columns]
-col_indices = [x_input_features.columns.get_loc(c) for c in k_best_feature_columns if c in x_input_features]
-k_best_test_x = test_x_input_features.iloc[:, col_indices]
+k_best_train_x, k_best_test_x = feature_selector.get_k_best_train_test_split()
 model = LogisticRegression(penalty='none', max_iter=900).fit(k_best_train_x, np.array(y_output_data).ravel())
 y_pred = model.predict(k_best_test_x)
 print(f'Model Accuracy with k best features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')

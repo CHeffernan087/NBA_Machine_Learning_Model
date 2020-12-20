@@ -50,3 +50,19 @@ class FeatureSelector:
             model = LogisticRegression(penalty='none', max_iter=900).fit(fn(self.features), self.labels)
             y_pred = model.predict(fn(self.test_features))
             print(f'Model Accuracy with {fn.__name__} : {accuracy_score(y_true=self.test_labels, y_pred=y_pred)}')
+
+    def get_k_best_train_test_split(self):
+        feature_cols = self.select_k_best(k=10)
+        train_x = self.features[feature_cols]
+        col_indices = [self.features.columns.get_loc(c) for c in feature_cols if c in self.features]
+        test_x = self.test_features.iloc[:, col_indices]
+
+        return train_x, test_x
+
+    def get_rfe_train_test_split(self):
+        feature_cols = self.recursive_feature_selection()
+        train_x = self.features[feature_cols]
+        col_indices = [self.features.columns.get_loc(c) for c in feature_cols if c in self.features]
+        test_x = self.test_features.iloc[:, col_indices]
+
+        return train_x, test_x
