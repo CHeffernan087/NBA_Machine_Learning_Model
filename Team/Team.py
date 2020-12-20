@@ -1,9 +1,9 @@
-
+import pandas as pd
 NUMBER_OF_GAMES =3
 
 
 class Team:
-    def __init__(self, team_id):
+    def __init__(self, team_id, team_rating):
         self.team_id = team_id
         self.game_history = [0]*NUMBER_OF_GAMES
         self.num_home_wins = 0
@@ -13,6 +13,7 @@ class Team:
         self.number_games_played = 0
         self.points_per_game = 0
         self.points_conceded_per_game = 0
+        self.team_rating = team_rating
 
     @staticmethod
     def get_franchise(team_name):
@@ -67,6 +68,9 @@ class Team:
         if len(self.game_history) > NUMBER_OF_GAMES:
             self.game_history.pop()
 
+    def getRating(self):
+        return self.team_rating
+
     def getWins(self):
         return self.num_away_wins + self.num_home_wins
 
@@ -94,3 +98,4 @@ class Team:
             "AWAY_WINS": round((1+self.num_away_wins) / (1+self.num_away_wins+1+self.num_away_loses),3),
             "AWAY_LOSES": round((1+self.num_away_loses) / (1+self.num_away_wins + 1+self.num_away_loses),3),
         }
+

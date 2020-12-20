@@ -4,9 +4,10 @@ import pandas as pd
 
 class TeamStats:
     def __init__(self, team_list, current_season):
+        previous_season_stats = pd.read_csv(f"data/season_rankings/{current_season-1}.csv")["TEAM_ID"].to_numpy().tolist()
         team_map = {}
         for team_id in team_list:
-            team_map[team_id] = Team(team_id)
+            team_map[team_id] = Team(team_id,1-(previous_season_stats.index(team_id)/30))
         self.team_map = team_map
         previous_season = current_season -1
         file_path = f"./data/head_to_head/{previous_season}.csv"
