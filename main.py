@@ -11,6 +11,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 from helper_functions import cross_validate, HyperParam
 from CSVGenerator import CSVGenerator
+from feature_processing.feature_selector import FeatureSelector
 
 
 def parseInput(user_input):
@@ -91,6 +92,17 @@ knn_pipeline = make_pipeline(StandardScaler(), knn_model)
 knn_pipeline.fit(x_input_features, np.array(y_output_data).ravel())
 y_pred = knn_pipeline.predict(test_x_input_features)
 print(f'kNN Accuracy : {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+
+feature_selector = FeatureSelector(training_csv_dataframe, testing_csv_dataframe)
+rfe_input_features, rfe_test_x_input_features = feature_selector.get_rfe_train_test_split()
+logistic_pipeline.fit(rfe_input_features, np.array(y_output_data).ravel())
+y_pred = logistic_pipeline.predict(rfe_test_x_input_features)
+print(f'Logistic Accuracy with RFE selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+
+k_best_input_features, k_best_test_x_input_features = feature_selector.get_k_best_train_test_split()
+logistic_pipeline.fit(k_best_input_features, np.array(y_output_data).ravel())
+y_pred = logistic_pipeline.predict(k_best_test_x_input_features)
+print(f'Logistic Accuracy with K best selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
 
 pyplot.title('ROC Curves')
 pyplot.ylabel('True Positive Rate')
