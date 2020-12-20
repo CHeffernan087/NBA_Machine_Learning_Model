@@ -2,9 +2,10 @@ import json
 from Team.TeamStats import TeamStats
 from datetime import timedelta, datetime, date
 from typing import Union
-
+import pandas as pd
 import requests
 from lxml import html
+import os
 
 from Team.Team import Team
 
@@ -17,10 +18,19 @@ class ScoreScraper:
         self._start_date = start_date
         self._end_date = start_date if end_date is None else end_date
         self.results_list = []
+
+        self.teams_frame = pd.read_csv("data/teams.csv")[['TEAM_ID', 'ABBREVIATION']]
+        elo_frame = pd.read_csv("data/nba_elo.csv")
+
+        date_list = pd.date_range(start=start_date, end=end_date).to_list()
+        date_list = [str(date.date()) for date in date_list]
+        dates = pd.DataFrame(date_list, columns=["date"])
+        self.elo_frame = elo_frame[elo_frame['date'].isin(dates["date"])]
+
         with open("Team/team_config.json") as team_config:
             self._team_name_to_id_dict = json.load(team_config)
             teams = self._team_name_to_id_dict.values()
-        team_stats = TeamStats(teams)
+        team_stats = TeamStats(teams, start_date.year)
         for scrape_date in ScoreScraper.date_range(self._start_date, self._end_date):
             print(f"Fetching data for: {scrape_date}")
             current_date_url = URL_TEMPLATE.format(month=scrape_date.month, day=scrape_date.day, year=scrape_date.year)
@@ -31,13 +41,23 @@ class ScoreScraper:
 
             for game_result_element in games_results_list:
 
-                game_results_dict = {'date':str(scrape_date)}
+                game_results_dict = {'date':str(scrape_date), 'season_id':self._start_date.year}
                 game_results_dict = self.get_teams_and_scores_dict(game_result_element,game_results_dict)
                 game_result = self.get_game_result(game_result_element)
 
-                home_team = team_stats.getTeam(game_results_dict["home_team_id"])
-                away_team = team_stats.getTeam(game_results_dict["away_team_id"])
+                home_team_id = game_results_dict["home_team_id"]
+                away_team_id = game_results_dict["away_team_id"]
+                home_team = team_stats.getTeam(home_team_id)
+                away_team = team_stats.getTeam(away_team_id)
+
                 self.get_home_and_road_record(game_results_dict, home_team, away_team)
+
+                # add the elo to the game stats
+                game_results_dict.update(self.get_elo(home_team_id,away_team_id,str(scrape_date)))
+
+                # add the head to head stats to the game stats
+                home_team_hth_record, away_team_hth_record = team_stats.get_head_to_head_data(home_team_id, away_team_id)
+                game_results_dict.update({"home_team_hth_record":home_team_hth_record, "away_team_hth_record":away_team_hth_record})
 
                 self.get_win_loss_stats(game_results_dict, home_team, away_team)
                 game_results_dict["is_home_winner"] = game_result
@@ -115,3 +135,20 @@ class ScoreScraper:
         winner_loser_order = game_result_element.xpath(".//tr[@class='winner' or @class='loser']")
         is_home_winner = winner_loser_order[1].attrib['class'] == 'winner'
         return 1 if is_home_winner else 0
+
+    def get_elo(self,home_team_id,away_team_id,game_date):
+        elo_dict = {}
+
+        home_team_abbreviation = self.teams_frame[self.teams_frame['TEAM_ID'] == home_team_id]['ABBREVIATION'].iloc[0]
+        away_team_abbreviation = self.teams_frame[self.teams_frame['TEAM_ID'] == away_team_id]['ABBREVIATION'].iloc[0]
+
+        current_game_elo = self.elo_frame[self.elo_frame['date'] == game_date]
+        current_game_elo = current_game_elo[current_game_elo['team1'] == home_team_abbreviation]
+        current_game_elo = current_game_elo[current_game_elo['team2'] == away_team_abbreviation]
+
+        elo_dict["home_team_elo"] = current_game_elo['elo1_pre'].iloc[0]
+        elo_dict["away_team_elo"] = current_game_elo['elo2_pre'].iloc[0]
+        elo_dict["home_team_raptor"] = current_game_elo['raptor1_pre'].iloc[0]
+        elo_dict["away_team_raptor"] = current_game_elo['raptor2_pre'].iloc[0]
+
+        return elo_dict

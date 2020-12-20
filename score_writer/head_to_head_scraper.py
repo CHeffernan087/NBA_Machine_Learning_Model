@@ -38,7 +38,14 @@ if(is_file_existing):
     os.remove(outputFile)
 
 with open(outputFile, 'a') as output_csv:
-    columnHeadings = ["Team","ATL","BOS","BRK","CHI","CHO","CLE","DAL","DEN","DET","GSW","HOU","IND","LAC","LAL","MEM","MIA","MIL","MIN","NOP","NYK","OKC","ORL","PHI","PHO","POR","SAC","SAS","TOR","UTA","WAS"]
+    current_date_url = URL_TEMPLATE.format(year=start_year)
+    response_data = requests.get(current_date_url)
+    tree = html.fromstring(response_data.content)
+    headToHeadTable = tree.xpath('//*[@id="team_vs_team"]')
+    tableRows = headToHeadTable[0].xpath('.//tr')
+    table_headings = tableRows[0].xpath('.//th')[1:]
+
+    columnHeadings = [heading.text for heading in table_headings]
     encodedColumnHeadings = []
     for heading in columnHeadings:
         encodedHeading = getTeamIdFromAbbreviation(heading)
@@ -46,12 +53,7 @@ with open(outputFile, 'a') as output_csv:
     writer = csv.DictWriter(output_csv, fieldnames=encodedColumnHeadings, lineterminator='\n')
     writer.writeheader()
 
-    current_date_url = URL_TEMPLATE.format(year=start_year)
-    response_data = requests.get(current_date_url)
-    tree = html.fromstring(response_data.content)
-    headToHeadTable = tree.xpath('//*[@id="team_vs_team"]')
-    tableRows = headToHeadTable[0].xpath('.//tr')
-    tableRows = tableRows[2:len(tableRows)]
+    tableRows = tableRows[1:len(tableRows)]
     for row in tableRows:
         rankCell = row.xpath(f'th[@data-stat="ranker"]')
         row_has_data = len(rankCell) > 0
