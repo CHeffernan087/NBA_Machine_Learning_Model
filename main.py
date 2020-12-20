@@ -6,10 +6,12 @@ from sklearn.metrics import accuracy_score
 from helper_functions import cross_validate, HyperParam
 from sklearn.svm import SVC
 from sklearn.linear_model import RidgeClassifier
+from sklearn.neural_network import MLPClassifier
 from sklearn.datasets import make_classification
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegression
+from feature_processing.feature_selector import FeatureSelector
 
 from CSVGenerator import CSVGenerator
 
@@ -75,6 +77,30 @@ test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]
 test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]
 y_pred = model.predict(test_x_input_features)
 print(f'Model Accuracy : {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+
+hidden_layer_size = (int(len(x_input_features.columns) / 2), )
+nn_model = MLPClassifier(random_state=4, hidden_layer_sizes=hidden_layer_size)
+nn_model = nn_model.fit(x_input_features, np.array(y_output_data).ravel())
+y_pred = nn_model.predict(test_x_input_features)
+print(f'Neural Network Model Accuracy : {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+
+feature_selector = FeatureSelector(training_csv_dataframe, testing_csv_dataframe)
+
+rfecv_best_feature_columns = feature_selector.recursive_feature_selection()
+rfecv_train_x = x_input_features[rfecv_best_feature_columns]
+col_indices = [x_input_features.columns.get_loc(c) for c in rfecv_best_feature_columns if c in x_input_features]
+rfecv_test_x = test_x_input_features.iloc[:, col_indices]
+model = LogisticRegression(penalty='none', max_iter=900).fit(rfecv_train_x, np.array(y_output_data).ravel())
+y_pred = model.predict(rfecv_test_x)
+print(f'Model Accuracy with RFECV best features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+
+k_best_feature_columns = feature_selector.select_k_best(k=10)
+k_best_train_x = x_input_features[k_best_feature_columns]
+col_indices = [x_input_features.columns.get_loc(c) for c in k_best_feature_columns if c in x_input_features]
+k_best_test_x = test_x_input_features.iloc[:, col_indices]
+model = LogisticRegression(penalty='none', max_iter=900).fit(k_best_train_x, np.array(y_output_data).ravel())
+y_pred = model.predict(k_best_test_x)
+print(f'Model Accuracy with k best features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
 
 # baseline = DummyClassifier(strategy="uniform")
 # baseline = DummyClassifier(strategy="most_frequent")

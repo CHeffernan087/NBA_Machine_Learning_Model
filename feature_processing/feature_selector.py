@@ -18,25 +18,17 @@ class FeatureSelector:
                                   fp.robust_scale_features, fp.power_transform_scale_features,
                                   fp.quantile_scale_features, fp.quantile_2_scale_features, fp.normalise_scale_features]
 
-        self.score_functions = [fs.mutual_info_classif, fs.f_classif, fs.chi2]
+    def select_k_best(self, k=10, score_func=fs.mutual_info_classif, verbose=False):
+        selector = SelectKBest(score_func=score_func, k=k).fit(self.features, self.labels)
+        selected_features = self.features.iloc[:, selector.get_support()].columns
 
-    def select_k_best(self, k=10):
-        best_features = {}
-        for sf in self.score_functions:
-            try:
-                selector = SelectKBest(sf, k=k).fit(self.features, self.labels)
-                selected_features = self.features.iloc[:, selector.get_support()].columns
-                for feature in selected_features:
-                    if feature in best_features:
-                        best_features[feature] = best_features[feature] + 1
-                    else:
-                        best_features[feature] = 1
-            except ValueError:
-                continue
-        print(best_features)
-        print(best_features.keys())
+        if verbose:
+            print(f"Selected {k} best features with {score_func.__name__}:")
+            print(selected_features)
 
-    def recursive_feature_selection(self, estimator=LogisticRegression(max_iter=900)):
+        return selected_features
+
+    def recursive_feature_selection(self, estimator=LogisticRegression(max_iter=900), verbose=False):
         selector = RFECV(estimator, step=1, cv=5).fit(self.features, self.labels)
 
         selected_features = pd.DataFrame(self.features).iloc[:, selector.support_]
@@ -46,8 +38,12 @@ class FeatureSelector:
 
         y_pred = model.predict(test_features)
         accuracy = accuracy_score(y_true=self.test_labels, y_pred=y_pred)
-        print(f'Model Accuracy with RFECV: {accuracy}')
-        print(f"Selected Columns = {selected_features.columns}")
+
+        if verbose:
+            print(f'Model Accuracy with RFECV: {accuracy}')
+            print(f"Selected Columns = {selected_features.columns}")
+
+        return selected_features.columns
 
     def test_with_all_scaling_methods(self):
         for fn in self.scaling_functions:
