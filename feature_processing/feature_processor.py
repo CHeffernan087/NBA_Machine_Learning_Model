@@ -18,7 +18,7 @@ def robust_scale_features(features):
 
 
 def power_transform_scale_features(features):
-    return pp.PowerTransformer(method='yeo-johnson', ).fit_transform(features)
+    return pp.PowerTransformer().fit_transform(features)
 
 
 def quantile_scale_features(features):
@@ -26,7 +26,7 @@ def quantile_scale_features(features):
 
 
 def quantile_2_scale_features(features):
-    return pp.QuantileTransformer(output_distribution='uniform', n_quantiles=len(features)).fit_transform(features)
+    return pp.QuantileTransformer(n_quantiles=len(features)).fit_transform(features)
 
 
 def normalise_scale_features(features):

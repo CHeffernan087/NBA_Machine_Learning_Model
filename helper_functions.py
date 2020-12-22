@@ -74,10 +74,10 @@ def cross_validate(model_type: Union[Type[LogisticRegression], Type[KNeighborsCl
         kf = KFold(n_splits=k_fold_splits)  # perform k-fold cross validation
         for train, test in kf.split(x_training_data):
             pipeline.fit(x_training_data[train], y_training_data[train].ravel())  # fit model for current split
-            y_pred = pipeline.predict(x_training_data[test]) # get predictions
-            temp.append(log_loss(y_training_data[test], y_pred)) # calculate log loss
-        log_loss_list.append(numpy.array(temp).mean()) # add log loss mean to final list
-        standard_dev.append(numpy.array(temp).std()) # add log loss standard deviation to list
+            y_pred = pipeline.predict(x_training_data[test])  # get predictions
+            temp.append(log_loss(y_training_data[test], y_pred))  # calculate log loss
+        log_loss_list.append(numpy.array(temp).mean())  # add log loss mean to final list
+        standard_dev.append(numpy.array(temp).std())  # add log loss standard deviation to list
 
     # plot using matplotlib and have error bars as standard_dev
     pyplot.errorbar(hyper_param_values_list, log_loss_list, yerr=standard_dev, label="Standard Deviation")

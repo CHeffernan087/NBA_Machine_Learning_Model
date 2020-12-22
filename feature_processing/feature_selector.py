@@ -29,7 +29,7 @@ class FeatureSelector:
         return selected_features
 
     def recursive_feature_selection(self, estimator=LogisticRegression(max_iter=900), verbose=False):
-        selector = RFECV(estimator, step=1, cv=5).fit(self.features, self.labels)
+        selector = RFECV(estimator, cv=5).fit(self.features, self.labels)
 
         selected_features = pd.DataFrame(self.features).iloc[:, selector.support_]
 
@@ -52,7 +52,7 @@ class FeatureSelector:
             print(f'Model Accuracy with {fn.__name__} : {accuracy_score(y_true=self.test_labels, y_pred=y_pred)}')
 
     def get_k_best_train_test_split(self):
-        feature_cols = self.select_k_best(k=10)
+        feature_cols = self.select_k_best()
         train_x = self.features[feature_cols]
         col_indices = [self.features.columns.get_loc(c) for c in feature_cols if c in self.features]
         test_x = self.test_features.iloc[:, col_indices]
