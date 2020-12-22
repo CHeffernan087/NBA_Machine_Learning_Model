@@ -9,7 +9,7 @@
 - Using a logisitic regression model, kNN classifier and Kernelized Support Vector Machine
 - Features we used in the model
   - Average Points per game
-  - Avergae Points conceded per game
+  - Average Points conceded per game
   - Wins so far this season 
   - Head to head record from the previous season 
   - Current form of the team
