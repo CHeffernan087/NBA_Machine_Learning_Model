@@ -28,7 +28,7 @@ def parseInput(user_input):
 
 
 years_for_testing = [2015, 2016, 2017, 2018, 2019]  # list of seasons to test the models
-
+should_run_cross_validation = False
 should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
 should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
 model_accuracies = {"LOGISTIC": [], "SVC": [], "KNN": []}  # dict for keeping track of model accuracies across seasons
@@ -63,7 +63,7 @@ for index, year_for_testing in enumerate(years_for_testing):  # iterate over yea
     test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]  # get the input data for testing
     test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]  # get output/label data for testing
 
-    if year_for_testing == 2019:  # only generate cross validation plots for 2018, just to make things easy to see
+    if year_for_testing == 2019 and should_run_cross_validation:  # only generate cross validation plots for 2018, just to make things easy to see
 
         cross_validate(LogisticRegression, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features,
                        y_output_data)
@@ -118,7 +118,7 @@ for index, year_for_testing in enumerate(years_for_testing):  # iterate over yea
     pyplot.ylabel('True Positive Rate')
     pyplot.xlabel('False Positive Rate')
 
-    if year_for_testing == 2019:  # plot roc curves for 2018
+    if year_for_testing == 2019 and should_run_cross_validation:  # plot roc curves for 2018
         # split into x and y testing & training data
         x_train, x_test, y_train, y_test = train_test_split(x_input_features, y_output_data, test_size=0.2)
         knn_pipeline.fit(x_train, np.array(y_train).ravel())
