@@ -6,7 +6,7 @@
 
 ## TLDR: 
 - We managed to predict the games in the seasons 2015-2019 with 65% accuracy 
-- Using a logisitic regression, Knn and Support vector classifier
+- Using a logisitic regression model, kNN classifier and Kernelized Support Vector Machine
 - Features we used in the model
   - Average Points per game
   - Avergae Points conceded per game
