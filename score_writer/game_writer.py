@@ -21,6 +21,7 @@ class GameWriter:
     def write(self):
         """
         Writes all games in self.games_list to the csv
+
         :return: None
         """
         headers = self.games_list[0].keys()  # get the list of csv headers
