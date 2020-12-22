@@ -59,7 +59,7 @@ class FeatureSelector:
         """
         logistic_pipeline = make_pipeline(StandardScaler(), estimator)
         scaled_features = StandardScaler().fit_transform(self.features)
-        selector = RFECV(estimator, step=1, cv=5).fit(scaled_features, self.labels)
+        selector = RFECV(estimator, cv=5).fit(scaled_features, self.labels)
 
         selected_features = pd.DataFrame(self.features).iloc[:, selector.support_]
 
