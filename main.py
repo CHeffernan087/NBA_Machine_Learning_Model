@@ -12,6 +12,7 @@ from sklearn.svm import SVC
 
 from CSVGenerator import CSVGenerator
 from feature_processing.feature_selector import FeatureSelector
+from helper_functions import cross_validate, HyperParam
 
 
 def parseInput(user_input):
@@ -62,21 +63,22 @@ for index, year_for_testing in enumerate(years_for_testing):  # iterate over yea
     test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]  # get the input data for testing
     test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]  # get output/label data for testing
 
-    if year_for_testing == 2018:  # only generate cross validation plots for 2018, just to make things easy to see
-        pass
-        # TODO delete pass when uncommenting below
-        # cross_validate(LogisticRegression, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features, y_output_data)
-        # cross_validate(SVC, HyperParam.GAMMA, [0.000001, 0.00001, 0.0001, 0.001, 0.005, 0.007], x_input_features, y_output_data)
-        # cross_validate(SVC, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features, y_output_data)
-        # cross_validate(KNeighborsClassifier, HyperParam.K, [1, 5, 10, 15, 25, 50, 75, 100, 125, 150, 175, 200],
-        #                x_input_features, y_output_data)
-        # cross_validate(KNeighborsClassifier, HyperParam.K, [1, 5, 10, 15, 25, 50, 75, 100, 125, 150, 175, 200],
-        #                x_input_features, y_output_data, weights="distance")
-        # cross_validate(LogisticRegression, HyperParam.POWER, [1, 2], x_input_features, y_output_data, max_iter=1500)
+    if year_for_testing == 2019:  # only generate cross validation plots for 2018, just to make things easy to see
 
-    logistic_model = LogisticRegression(class_weight='auto', max_iter=900, C=1)  # best LR from above plots
-    svc_model = SVC(gamma=0.001, C=1)  # best SVC from above plots
-    knn_model = KNeighborsClassifier(n_neighbors=100)  # best kNN from above plots
+        cross_validate(LogisticRegression, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features,
+                       y_output_data)
+        cross_validate(SVC, HyperParam.GAMMA, [0.000001, 0.00001, 0.0001, 0.001, 0.005, 0.007], x_input_features,
+                       y_output_data)
+        cross_validate(SVC, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features, y_output_data)
+        cross_validate(KNeighborsClassifier, HyperParam.K, [1, 5, 10, 15, 25, 50, 75, 100, 125, 150, 175, 200],
+                       x_input_features, y_output_data)
+        cross_validate(KNeighborsClassifier, HyperParam.K, [1, 5, 10, 15, 25, 50, 75, 100, 125, 150, 175, 200],
+                       x_input_features, y_output_data, weights="distance")
+        cross_validate(LogisticRegression, HyperParam.POWER, [1, 2], x_input_features, y_output_data, max_iter=1500)
+
+    logistic_model = LogisticRegression(class_weight='auto', max_iter=900, C=0.01)  # best LR from above plots
+    svc_model = SVC(gamma=0.001, C=5)  # best SVC from above plots
+    knn_model = KNeighborsClassifier(n_neighbors=150)  # best kNN from above plots
 
     logistic_pipeline = make_pipeline(StandardScaler(), logistic_model)  # add normalisation to pipeline
     logistic_pipeline.fit(x_input_features, np.array(y_output_data).ravel())  # fit model
@@ -116,7 +118,7 @@ for index, year_for_testing in enumerate(years_for_testing):  # iterate over yea
     pyplot.ylabel('True Positive Rate')
     pyplot.xlabel('False Positive Rate')
 
-    if year_for_testing == 2018:  # plot roc curves for 2018
+    if year_for_testing == 2019:  # plot roc curves for 2018
         # split into x and y testing & training data
         x_train, x_test, y_train, y_test = train_test_split(x_input_features, y_output_data, test_size=0.2)
         knn_pipeline.fit(x_train, np.array(y_train).ravel())
@@ -153,8 +155,9 @@ for index, year_for_testing in enumerate(years_for_testing):  # iterate over yea
         pyplot.title("Most Frequent Baseline")
         pyplot.show()
 
-        print(
-            f"Baseline Accuracy: {accuracy_score(y_pred=baseline_pipeline.predict(test_x_input_features), y_true=test_y_output_data)}")
+        baseline_accuracy = accuracy_score(y_pred=baseline_pipeline.predict(test_x_input_features),
+                                           y_true=test_y_output_data)
+        print(f"Baseline Accuracy: {baseline_accuracy}")
         print(f"\n-------  end of testing on {year_for_testing}  --------\n")
 
 print("------ AVERAGE ACCURACY -------")
