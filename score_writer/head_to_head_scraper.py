@@ -1,9 +1,10 @@
-import requests
-from lxml import html
 import csv
+import json
 import os
 from pathlib import Path
-import json
+
+import requests
+from lxml import html
 
 '''
 We had an idea that Team A's performance in the last year against Team B 
@@ -12,88 +13,96 @@ won the last 4 games that they played against Team B then it is likely that they
 will win the next game that they play against TeamB. With this assumption we wrote 
 this scraper to extract this data from basketballreference.com
 '''
-with open("../Team/team_config.json") as team_config:
-    team_name_to_id_dict = json.load(team_config)
 
 # The page we were trying to scrape was rendered using Javascript so it was necessary to proxy the request through a
 # node server to render the JS and return the result.
 
 PUPPETEER_URL_PREFIX = "http://localhost:3000?url="
-URL_TEMPLATE = PUPPETEER_URL_PREFIX + "https://www.basketball-reference.com/leagues/NBA_{year}_standings.html#expanded_standings::none"
+URL_TEMPLATE = PUPPETEER_URL_PREFIX + ("https://www.basketball-reference.com/leagues/NBA_{year}_standings.html"
+                                       "#expanded_standings::none")
 
-def getTeamIdFromAbbreviation(teamAbbreviation):
-    '''
-    :param teamAbbreviation: The Abbreviation of a team (CHI)
+
+def getTeamIdFromAbbreviation(team_name_to_id_dict, team_abbreviation):
+    """
+    :param team_name_to_id_dict: dictionary of team abbr to id
+    :param team_abbreviation: The Abbreviation of a team (CHI)
     :return: The ID associated with the team per team_config.json
-    '''
-    if(teamAbbreviation == "Team"):
-        return teamAbbreviation
-    return team_name_to_id_dict[teamAbbreviation]
+    """
+    if team_abbreviation == "Team":
+        return team_abbreviation
+    return team_name_to_id_dict[team_abbreviation]
 
-def getTeamId(teamName):
-    '''
-    :param teamName: the English name of the team e.g Chicago Bulls
+
+def getTeamId(team_name_to_id_dict, team_name):
+    """
+    :param team_name_to_id_dict: dictionary of team abbr to id
+    :param team_name: the English name of the team e.g Chicago Bulls
     :return: The ID associated with the team per team_config.json
-    '''
-    nameArray = teamName.split(" ")
+    """
+    name_array = team_name.split(" ")
 
-    if(nameArray[0] == "Los"):
-        franchise =  f"LA {nameArray[2]}"
-    elif(len(nameArray) > 2 and nameArray[0] != "Portland"):
-        franchise = f"{nameArray[0]} {nameArray[1]}"
+    if name_array[0] == "Los":
+        franchise = f"LA {name_array[2]}"
+    elif len(name_array) > 2 and name_array[0] != "Portland":
+        franchise = f"{name_array[0]} {name_array[1]}"
     else:
-        franchise = nameArray[0]
+        franchise = name_array[0]
     return team_name_to_id_dict[franchise]
 
 
-start_year = int(input("Choose a year to get the head to head data for\n > "))
-outputFile = f"../data/head_to_head/{start_year}.csv"
+def main():
+    with open("../Team/team_config.json") as team_config:
+        team_name_to_id_dict = json.load(team_config)
 
-is_file_existing = Path(outputFile).is_file()
+    start_year = int(input("Choose a year to get the head to head data for\n > "))
+    output_file = f"../data/head_to_head/{start_year}.csv"
 
-if(is_file_existing):
-    os.remove(outputFile)
+    is_file_existing = Path(output_file).is_file()
 
-with open(outputFile, 'a') as output_csv:
-    # fetch the data about a particular year
-    current_date_url = URL_TEMPLATE.format(year=start_year)
-    response_data = requests.get(current_date_url)
-    tree = html.fromstring(response_data.content)
+    if is_file_existing:
+        os.remove(output_file)
 
-    # using XPaths extract table headings and rows from the table we want
-    headToHeadTable = tree.xpath('//*[@id="team_vs_team"]')
-    tableRows = headToHeadTable[0].xpath('.//tr')
-    table_headings = tableRows[0].xpath('.//th')[1:]
+    with open(output_file, 'a') as output_csv:
+        # fetch the data about a particular year
+        current_date_url = URL_TEMPLATE.format(year=start_year)
+        response_data = requests.get(current_date_url)
+        tree = html.fromstring(response_data.content)
 
-    # Taking the headings from the table and add them to a dict. This is all the team names abbreviated e.g CHI - Chicago Bulls
-    columnHeadings = [heading.text for heading in table_headings]
-    encodedColumnHeadings = []
-    for heading in columnHeadings:
-        encodedHeading = getTeamIdFromAbbreviation(heading)
-        encodedColumnHeadings.append(encodedHeading)
-    writer = csv.DictWriter(output_csv, fieldnames=encodedColumnHeadings, lineterminator='\n')
-    writer.writeheader()
+        # using XPaths extract table headings and rows from the table we want
+        head_to_head_table = tree.xpath('//*[@id="team_vs_team"]')
+        table_rows = head_to_head_table[0].xpath('.//tr')
+        table_headings = table_rows[0].xpath('.//th')[1:]
 
-    # iterate over all the rows in the table and extract the head to head matrix that we want e.g
-    '''
-       A  B
-    A  -  0-2
-    B  2-0 -
-    '''
-    tableRows = tableRows[1:len(tableRows)]
-    for row in tableRows:
-        rankCell = row.xpath(f'th[@data-stat="ranker"]')
-        row_has_data = len(rankCell) > 0
-        if(row_has_data and rankCell[0].text != "Rk"):
-            data_cells = row.xpath("td")
-            teamCell = data_cells[0]
-            teamName = teamCell.xpath("a")[0].text
-            outputDict = {"Team":getTeamId(teamName)}
-            for index , data_cells in enumerate(data_cells):
-                if(index > 0):
-                    outputDict[encodedColumnHeadings[index]] = data_cells.text
-            writer.writerow(outputDict)
+        # Taking the headings from the table and add them to a dict. This is all the team names abbreviated
+        # e.g CHI - Chicago Bulls
+        column_headings = [heading.text for heading in table_headings]
+        encoded_column_headings = []
+        for heading in column_headings:
+            encoded_heading = getTeamIdFromAbbreviation(team_name_to_id_dict, heading)
+            encoded_column_headings.append(encoded_heading)
+        writer = csv.DictWriter(output_csv, fieldnames=encoded_column_headings, lineterminator='\n')
+        writer.writeheader()
+
+        # iterate over all the rows in the table and extract the head to head matrix that we want e.g
+        '''
+           A  B
+        A  -  0-2
+        B  2-0 -
+        '''
+        table_rows = table_rows[1:len(table_rows)]
+        for row in table_rows:
+            rank_cell = row.xpath(f'th[@data-stat="ranker"]')
+            row_has_data = len(rank_cell) > 0
+            if row_has_data and rank_cell[0].text != "Rk":
+                data_cells = row.xpath("td")
+                team_cell = data_cells[0]
+                team_name = team_cell.xpath("a")[0].text
+                output_dict = {"Team": getTeamId(team_name_to_id_dict, team_name)}
+                for index, data_cells in enumerate(data_cells):
+                    if index > 0:
+                        output_dict[encoded_column_headings[index]] = data_cells.text
+                writer.writerow(output_dict)
 
 
-
-
+if __name__ == '__main__':
+    main()

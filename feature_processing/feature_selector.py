@@ -1,9 +1,10 @@
 import pandas as pd
-import feature_processing.feature_processor as fp
-from sklearn.metrics import accuracy_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.feature_selection import RFECV, SelectKBest
 import sklearn.feature_selection as fs
+from sklearn.feature_selection import RFECV, SelectKBest
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+import feature_processing.feature_processor as fp
 
 
 class FeatureSelector:
