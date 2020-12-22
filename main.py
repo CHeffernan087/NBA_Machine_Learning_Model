@@ -14,7 +14,6 @@ from CSVGenerator import CSVGenerator
 from feature_processing.feature_selector import FeatureSelector
 
 
-
 def parseInput(user_input):
     user_input = user_input.lower()[0]
     if user_input == "y":
@@ -22,11 +21,11 @@ def parseInput(user_input):
     return False
 
 
-years_for_testing = [2015,2016, 2017, 2018, 2019]
+years_for_testing = [2015, 2016, 2017, 2018, 2019]
 
 should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
 should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
-model_accuracies = {"LOGISTIC":[], "SVC": [], "KNN":[]}
+model_accuracies = {"LOGISTIC": [], "SVC": [], "KNN": [], "LOGISTIC_RFECV": [], "LOGISTIC_KBEST": []}
 
 
 for index,year_for_testing in enumerate(years_for_testing):
@@ -57,7 +56,7 @@ for index,year_for_testing in enumerate(years_for_testing):
     test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]
     test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]
 
-    if(year_for_testing == 2019):
+    if year_for_testing == 2019:
         num_features_to_accuracy_dit = {}
         # for n in range(len(x_input_features.columns)):
         #     selector = RFE(logistic_model, n_features_to_select=n + 1)
@@ -82,7 +81,6 @@ for index,year_for_testing in enumerate(years_for_testing):
         #                x_input_features, y_output_data, weights="distance")
         # cross_validate(LogisticRegression, HyperParam.POWER, [1, 2], x_input_features, y_output_data, max_iter=1500)
 
-
     logistic_model = LogisticRegression(class_weight='auto', max_iter=900, C=1)  # best from above plots
     svc_model = SVC(gamma=0.001, C=1)
     knn_model = KNeighborsClassifier(n_neighbors=100)
@@ -93,6 +91,20 @@ for index,year_for_testing in enumerate(years_for_testing):
     logistic_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
     model_accuracies["LOGISTIC"].append(logistic_accuracy)
     print(f'Logistic Accuracy : {logistic_accuracy}')
+
+    if year_for_testing == 2019:
+        coefficients_dataframe = pd.DataFrame({'feature': x_input_features.columns,
+                                               'coef': logistic_pipeline.named_steps["logisticregression"].coef_[0]})
+        coefficients_dataframe['coef'] = coefficients_dataframe['coef'].apply(abs)
+        coefficients_dataframe = coefficients_dataframe.sort_values(by='coef', ascending=False)
+
+        pyplot.title("Feature coefficient magnitudes")
+        pyplot.xlabel('Feature')
+        pyplot.ylabel('Coefficient Magnitude')
+        pyplot.xticks(rotation=60, ha='right')
+        pyplot.bar(coefficients_dataframe['feature'], coefficients_dataframe['coef'])
+        pyplot.tight_layout()
+        pyplot.show()
 
     svc_pipeline = make_pipeline(StandardScaler(), svc_model)
     svc_pipeline.fit(x_input_features, np.array(y_output_data).ravel())
@@ -108,23 +120,26 @@ for index,year_for_testing in enumerate(years_for_testing):
     model_accuracies["KNN"].append(knn_accuracy)
     print(f'kNN Accuracy : {knn_accuracy}')
 
-
     feature_selector = FeatureSelector(training_csv_dataframe, testing_csv_dataframe)
     rfe_input_features, rfe_test_x_input_features = feature_selector.get_rfe_train_test_split()
     logistic_pipeline.fit(rfe_input_features, np.array(y_output_data).ravel())
     y_pred = logistic_pipeline.predict(rfe_test_x_input_features)
-    print(f'Logistic Accuracy with RFE selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+    rfe_logistic_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_accuracies["LOGISTIC_RFECV"].append(rfe_logistic_accuracy)
+    print(f'Logistic Accuracy with RFE selected features: {rfe_logistic_accuracy}')
 
     k_best_input_features, k_best_test_x_input_features = feature_selector.get_k_best_train_test_split()
     logistic_pipeline.fit(k_best_input_features, np.array(y_output_data).ravel())
     y_pred = logistic_pipeline.predict(k_best_test_x_input_features)
-    print(f'Logistic Accuracy with K best selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+    kbest_logistic_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_accuracies["LOGISTIC_KBEST"].append(kbest_logistic_accuracy)
+    print(f'Logistic Accuracy with Kbest selected features: {kbest_logistic_accuracy}')
 
     pyplot.title('ROC Curves')
     pyplot.ylabel('True Positive Rate')
     pyplot.xlabel('False Positive Rate')
 
-    if(year_for_testing == 2019):
+    if year_for_testing == 2019:
         # split into x and y testing & training data
         x_train, x_test, y_train, y_test = train_test_split(x_input_features, y_output_data, test_size=0.2)
         knn_pipeline.fit(x_train, np.array(y_train).ravel())
@@ -177,3 +192,11 @@ print("\nKNN:")
 print(f"K-Fold Results : {np.array(model_accuracies['KNN'])}")
 print(f"Mean Accuracy : {np.mean(model_accuracies['KNN'])}")
 print(f"Variance:{np.var(model_accuracies['KNN'])}")
+print("\nLogistic Regression with RFECV:")
+print(f"K-Fold Results : {np.array(model_accuracies['LOGISTIC_RFECV'])}")
+print(f"Mean Accuracy : {np.mean(model_accuracies['LOGISTIC_RFECV'])}")
+print(f"Variance:{np.var(model_accuracies['LOGISTIC_RFECV'])}")
+print("\nLogistic Regression with KBest:")
+print(f"K-Fold Results : {np.array(model_accuracies['LOGISTIC_KBEST'])}")
+print(f"Mean Accuracy : {np.mean(model_accuracies['LOGISTIC_KBEST'])}")
+print(f"Variance:{np.var(model_accuracies['LOGISTIC_KBEST'])}")
