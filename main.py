@@ -92,6 +92,7 @@ for index,year_for_testing in enumerate(years_for_testing):
     y_pred = logistic_pipeline.predict(test_x_input_features)
     logistic_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
     model_accuracies["LOGISTIC"].append(logistic_accuracy)
+    print(f'Logistic Coefs : {logistic_pipeline.named_steps["logisticregression"].coef_}')
     print(f'Logistic Accuracy : {logistic_accuracy}')
 
     svc_pipeline = make_pipeline(StandardScaler(), svc_model)

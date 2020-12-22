@@ -24,8 +24,8 @@ class Game(OrderedDict):
         super().__setitem__("AWAY_TEAM_ROAD_WINS", away_team_record["AWAY_WINS"])
         super().__setitem__("AWAY_TEAM_ROAD_LOSES", away_team_record["AWAY_LOSES"])
 
-        super().__setitem__("HOME_TEAM_HTH_RECORD", home_team_hth)
-        super().__setitem__("AWAY_TEAM_HTH_RECORD", away_team_hth)
+        # super().__setitem__("HOME_TEAM_HTH_RECORD", home_team_hth)
+        # super().__setitem__("AWAY_TEAM_HTH_RECORD", away_team_hth)
 
         '''
         get the teams record of the last 3 games
@@ -33,9 +33,9 @@ class Game(OrderedDict):
         home_team_history = home_team.getCurrentForm()
         away_team_history = away_team.getCurrentForm()
 
-        for game in range(0,NUMBER_OF_GAMES):
-            super().__setitem__(f"HOME_TEAM_FORM_{game}", home_team_history[game])
-            super().__setitem__(f"AWAY_TEAM_FORM_{game}", away_team_history[game])
+        # for game in range(0,NUMBER_OF_GAMES):
+        #     super().__setitem__(f"HOME_TEAM_FORM_{game}", home_team_history[game])
+        #     super().__setitem__(f"AWAY_TEAM_FORM_{game}", away_team_history[game])
 
         super().__setitem__("HOME_TEAM_WIN_RECORD", home_team.getWins())
         super().__setitem__("AWAY_TEAM_WIN_RECORD", away_team.getWins())
