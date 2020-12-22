@@ -1,7 +1,7 @@
-# NBA Machine Learning Model
+# NBA Machine Learning Model 🏀⛹
 
 <p align="middle">
-<img width=500 src="https://dl.dropboxusercontent.com/s/yjh9y7b60kdiwhs/bball.png?dl=0" />
+<img width=400 src="https://dl.dropboxusercontent.com/s/yjh9y7b60kdiwhs/bball.png?dl=0" />
 </p>
 
 ## TLDR: 
