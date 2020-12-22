@@ -48,8 +48,8 @@ class CSVGenerator:
             away_team_id = games_frame['away_team_id'].iloc[index]
 
             # get the Team objects for the two teams in the game
-            home_team = team_stats.getTeam(home_team_id)
-            away_team = team_stats.getTeam(away_team_id)
+            home_team = team_stats.get_team(home_team_id)
+            away_team = team_stats.get_team(away_team_id)
             home_team_win = games_frame['is_home_winner'].iloc[index]
 
             home_team_points = games_frame['home_team_score'].iloc[index]
@@ -73,9 +73,9 @@ class CSVGenerator:
 
             games_list.append(current_game)
 
-            team_stats.recordGame({"HOME_TEAM": home_team_id, "AWAY_TEAM": away_team_id, "RESULT": home_team_win,
-                                   "HOME_TEAM_POINTS": home_team_points,
-                                   "AWAY_TEAM_POINTS": away_team_points})
+            team_stats.record_game({"HOME_TEAM": home_team_id, "AWAY_TEAM": away_team_id, "RESULT": home_team_win,
+                                    "HOME_TEAM_POINTS": home_team_points,
+                                    "AWAY_TEAM_POINTS": away_team_points})
             # just for us so we can see the CSV being processed (its boring to wait)
             if index == next_progress_print:
                 print(f"{progress * 10}%")
@@ -132,12 +132,12 @@ class CSVGenerator:
     the season starting in October 2015 and ending in July 2016
     '''
 
-    def scrapeAllTrainingData(self, years_to_scrape=None):
+    def scrape_all_training_data(self, years_to_scrape=None):
         if years_to_scrape is None:
             years_to_scrape = [2015, 2016, 2017, 2018]
         for year in years_to_scrape:
             self.generate_game_stats(year)
-        self.stitchLocalCsvs(years_to_scrape)
+        self.stitch_local_csvs(years_to_scrape)
 
     '''
     combines the raw data scraped over multiple seasons into a single CSV
@@ -147,7 +147,7 @@ class CSVGenerator:
     '''
 
     @staticmethod
-    def stitchLocalCsvs(years_to_scrape=None):
+    def stitch_local_csvs(years_to_scrape=None):
         if years_to_scrape is None:
             years_to_scrape = [2015, 2016, 2017, 2018]
         output_filename = (f"data/training_data/"
@@ -170,7 +170,7 @@ class CSVGenerator:
     def generate_multiple_years(self, years_to_generate=None):
         if years_to_generate is None:
             years_to_generate = [2015, 2016, 2017, 2018]
-        self.stitchLocalCsvs(years_to_scrape=years_to_generate)
+        self.stitch_local_csvs(years_to_scrape=years_to_generate)
         filepath = f"data/training_data/training_data_{years_to_generate[0]}-{years_to_generate[-1]}.csv"
         output_filename = f"data/training_features/training_features_{str(years_to_generate)[1:-1]}.csv"
         if Path(output_filename).is_file():

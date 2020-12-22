@@ -42,7 +42,7 @@ class Team:
     }
     '''
 
-    def parseGame(self, game):
+    def parse_game(self, game):
         home_team = game["HOME_TEAM"]
         home_team_win = game["RESULT"]
 
@@ -94,7 +94,7 @@ class Team:
     which is a LIFO queue of wins losses over the last 3 games. 
     '''
 
-    def getCurrentForm(self):
+    def get_current_form(self):
         wins = 0
         loses = 0
 
@@ -109,41 +109,41 @@ class Team:
     returns the number of wins that a team has in the season up to a certain point
     '''
 
-    def getWins(self):
+    def get_wins(self):
         return self.num_away_wins + self.num_home_wins
 
     '''
     returns the number of losses a team has in a season up to a certain point
     '''
 
-    def getLoses(self):
+    def get_loses(self):
         return self.num_away_loses + self.num_home_loses
 
     '''
     returns the number of games that a team has played up to a certain point in the season
     '''
 
-    def getNumberGamesPlayed(self):
-        return self.getWins() + self.getLoses()
+    def get_number_games_played(self):
+        return self.get_wins() + self.get_loses()
 
     '''
     returns the arithmetic average of points scored per game divided by the number of games played
     '''
 
-    def getPointsPerGame(self):
-        number_games_played = self.getNumberGamesPlayed()
+    def get_points_per_game(self):
+        number_games_played = self.get_number_games_played()
         if number_games_played == 0:
             return 0
         else:
-            return int(self.points_per_game / self.getNumberGamesPlayed())
+            return int(self.points_per_game / self.get_number_games_played())
 
     '''
     returns the arithmetic average of points conceded per game divided by the number of games played
     '''
 
-    def getPointsConcededPerGame(self):
-        number_games_played = self.getNumberGamesPlayed()
-        return 0 if number_games_played == 0 else int(self.points_conceded_per_game / self.getNumberGamesPlayed())
+    def get_points_conceded_per_game(self):
+        number_games_played = self.get_number_games_played()
+        return 0 if number_games_played == 0 else int(self.points_conceded_per_game / self.get_number_games_played())
 
     '''
     Returns the win / loss percentage of team both when they play on their home court and when they play 
@@ -151,7 +151,7 @@ class Team:
     in the win loss percentage being 50:50 when there has been no games played yet 
     '''
 
-    def getTeamRecord(self):
+    def get_team_record(self):
         return {
             "HOME_WINS": round((1 + self.num_home_wins) / (1 + self.num_home_wins + 1 + self.num_home_loses), 3),
             "HOME_LOSES": round((1 + self.num_home_loses) / (1 + self.num_home_wins + 1 + self.num_home_loses), 3),

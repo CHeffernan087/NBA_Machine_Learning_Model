@@ -33,28 +33,28 @@ class TeamStats:
     }
     '''
 
-    def recordGame(self, home_away_result_dict):
+    def record_game(self, home_away_result_dict):
         home_team = self.team_map[home_away_result_dict["HOME_TEAM"]]
-        home_team.parseGame(home_away_result_dict)
+        home_team.parse_game(home_away_result_dict)
 
         away_team = self.team_map[home_away_result_dict["AWAY_TEAM"]]
-        away_team.parseGame(home_away_result_dict)
+        away_team.parse_game(home_away_result_dict)
 
     '''
     gets the results for the last three games for a particular team 
     @:team_id unique identifier for a team as in the teams_conf.json
     '''
 
-    def getTeamRecord(self, team_id):
+    def get_team_record(self, team_id):
         current_team = self.team_map[team_id]
-        return current_team.getCurrentForm()
+        return current_team.get_current_form()
 
     '''
     gets a Team object from the dict of teams maintained by this class
     based on that Team's team_id which are derived from the teams_conf.json
     '''
 
-    def getTeam(self, team_id):
+    def get_team(self, team_id):
         return self.team_map[team_id]
 
     '''

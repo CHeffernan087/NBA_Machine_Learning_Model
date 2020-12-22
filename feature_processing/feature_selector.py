@@ -48,7 +48,7 @@ class FeatureSelector:
                                     verbose=False):
         logistic_pipeline = make_pipeline(StandardScaler(), estimator)
         scaled_features = StandardScaler().fit_transform(self.features)
-        selector = RFECV(estimator, step=1, cv=5).fit(scaled_features, self.labels)
+        selector = RFECV(estimator, cv=5).fit(scaled_features, self.labels)
 
         selected_features = pd.DataFrame(self.features).iloc[:, selector.support_]
 
@@ -77,7 +77,7 @@ class FeatureSelector:
             print(f'Model Accuracy with {fn.__name__} : {accuracy_score(y_true=self.test_labels, y_pred=y_pred)}')
 
     def get_k_best_train_test_split(self, k=10):
-        feature_cols = self.select_k_best(k=k, verbose=False)
+        feature_cols = self.select_k_best(k=k)
         train_x = self.features[feature_cols]
         col_indices = [self.features.columns.get_loc(c) for c in feature_cols if c in self.features]
         test_x = self.test_features.iloc[:, col_indices]
@@ -85,7 +85,7 @@ class FeatureSelector:
         return train_x, test_x
 
     def get_rfe_train_test_split(self, estimator=LogisticRegression(class_weight='auto', max_iter=900, C=1)):
-        feature_cols = self.recursive_feature_selection(estimator=estimator, verbose=False)
+        feature_cols = self.recursive_feature_selection(estimator=estimator)
         train_x = self.features[feature_cols]
         col_indices = [self.features.columns.get_loc(c) for c in feature_cols if c in self.features]
         test_x = self.test_features.iloc[:, col_indices]

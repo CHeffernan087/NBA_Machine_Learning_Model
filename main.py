@@ -15,7 +15,7 @@ from CSVGenerator import CSVGenerator
 from feature_processing.feature_selector import FeatureSelector
 
 
-def parseInput(user_input):
+def parse_input(user_input):
     """
     returns if the user has given y or not when prompted
     :param user_input:
@@ -29,8 +29,8 @@ def parseInput(user_input):
 
 years_for_testing = [2015, 2016, 2017, 2018, 2019]  # list of seasons to test the models
 should_run_cross_validation = False
-should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
-should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
+should_scrape_data = parse_input(input("Do you want to scrape the data? (y/n)\n> "))
+should_gen_csv = parse_input(input("Do you want to generate CSV? (y/n)\n> "))
 model_accuracies = {"LOGISTIC": [], "SVC": [], "KNN": [], "LOGISTIC_RFECV": [], "LOGISTIC_KBEST": []}
 model_precision = {"LOGISTIC": [], "SVC": [], "KNN": [], "LOGISTIC_RFECV": [], "LOGISTIC_KBEST": []}
 model_recall = {"LOGISTIC": [], "SVC": [], "KNN": [], "LOGISTIC_RFECV": [], "LOGISTIC_KBEST": []}
@@ -44,7 +44,7 @@ for index, year_for_testing in enumerate(years_for_testing):  # iterate over yea
 
     first_iteration_of_k_fold = index == 0
     if should_scrape_data and first_iteration_of_k_fold:
-        CSVGenerator(0).scrapeAllTrainingData(training_years)  # scrape the necessary data to files
+        CSVGenerator(0).scrape_all_training_data(training_years)  # scrape the necessary data to files
         CSVGenerator(year_for_testing).generate_game_stats()  # generate stats for testing year
 
     if should_gen_csv:
