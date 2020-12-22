@@ -14,15 +14,15 @@ class Game(OrderedDict):
         home_team_record = home_team.getTeamRecord()
         away_team_record = away_team.getTeamRecord()
         super().__setitem__("HOME_TEAM_HOME_WINS", home_team_record["HOME_WINS"])
-        # super().__setitem__("HOME_TEAM_HOME_LOSES", home_team_record["HOME_LOSES"])
+        super().__setitem__("HOME_TEAM_HOME_LOSES", home_team_record["HOME_LOSES"])
         super().__setitem__("HOME_TEAM_ROAD_WINS", home_team_record["AWAY_WINS"])
-        # super().__setitem__("HOME_TEAM_ROAD_LOSES", home_team_record["AWAY_LOSES"])
+        super().__setitem__("HOME_TEAM_ROAD_LOSES", home_team_record["AWAY_LOSES"])
 
 
         super().__setitem__("AWAY_TEAM_HOME_WINS", away_team_record["HOME_WINS"])
-        # super().__setitem__("AWAY_TEAM_HOME_LOSES", away_team_record["HOME_LOSES"])
+        super().__setitem__("AWAY_TEAM_HOME_LOSES", away_team_record["HOME_LOSES"])
         super().__setitem__("AWAY_TEAM_ROAD_WINS", away_team_record["AWAY_WINS"])
-        # super().__setitem__("AWAY_TEAM_ROAD_LOSES", away_team_record["AWAY_LOSES"])
+        super().__setitem__("AWAY_TEAM_ROAD_LOSES", away_team_record["AWAY_LOSES"])
 
         super().__setitem__("HOME_TEAM_HTH_RECORD", home_team_hth)
         super().__setitem__("AWAY_TEAM_HTH_RECORD", away_team_hth)
