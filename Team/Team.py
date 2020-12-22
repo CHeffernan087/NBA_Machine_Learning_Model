@@ -1,5 +1,4 @@
-
-NUMBER_OF_GAMES =3
+NUMBER_OF_GAMES = 3
 
 '''
 Not all the features that we wanted to scrape were readily available on 
@@ -10,14 +9,17 @@ game by game. For example by aggregating the number of points a team had scored 
 all games, we were able to keep a rolling average of the number of points a team had 
 scored per game at any given point of the season. 
 '''
+
+
 class Team:
-    '''
+    """
     constructor just assigns a Team ID to the team so that we can infer on a high level which entity
     the Team represents e.g the LA Lakers
-    '''
+    """
+
     def __init__(self, team_id):
         self.team_id = team_id
-        self.game_history = [0]*NUMBER_OF_GAMES
+        self.game_history = [0] * NUMBER_OF_GAMES
         self.num_home_wins = 0
         self.num_home_loses = 0
         self.num_away_wins = 0
@@ -47,10 +49,10 @@ class Team:
         team_has_won = False
         is_home_team = self.team_id == home_team
 
-        if (is_home_team):
+        if is_home_team:
             self.points_per_game += game["HOME_TEAM_POINTS"]
             self.points_conceded_per_game += game["AWAY_TEAM_POINTS"]
-            if (home_team_win):
+            if home_team_win:
                 team_has_won = True
                 self.num_home_wins += 1
             else:
@@ -58,7 +60,7 @@ class Team:
         else:
             self.points_per_game += game["AWAY_TEAM_POINTS"]
             self.points_conceded_per_game += game["HOME_TEAM_POINTS"]
-            if (not home_team_win):
+            if not home_team_win:
                 team_has_won = True
                 self.num_away_wins += 1
             else:
@@ -75,6 +77,7 @@ class Team:
     :returns English representation which we can use to map a team to a team ID in the team_config.json
     e.g "Portland", "LA Lakers", "Chicago" etc etc
     '''
+
     @staticmethod
     def get_franchise(team_name):
         name_array = team_name.split(" ")
@@ -90,6 +93,7 @@ class Team:
     aggregates a teams performance over their last three games using the game_history 
     which is a LIFO queue of wins losses over the last 3 games. 
     '''
+
     def getCurrentForm(self):
         wins = 0
         loses = 0
@@ -104,44 +108,53 @@ class Team:
     '''
     returns the number of wins that a team has in the season up to a certain point
     '''
+
     def getWins(self):
         return self.num_away_wins + self.num_home_wins
+
     '''
     returns the number of losses a team has in a season up to a certain point
     '''
+
     def getLoses(self):
         return self.num_away_loses + self.num_home_loses
 
     '''
     returns the number of games that a team has played up to a certain point in the season
     '''
+
     def getNumberGamesPlayed(self):
         return self.getWins() + self.getLoses()
+
     '''
     returns the arithmetic average of points scored per game divided by the number of games played
     '''
+
     def getPointsPerGame(self):
         number_games_played = self.getNumberGamesPlayed()
         if number_games_played == 0:
             return 0
         else:
             return int(self.points_per_game / self.getNumberGamesPlayed())
+
     '''
     returns the arithmetic average of points conceded per game divided by the number of games played
     '''
+
     def getPointsConcededPerGame(self):
         number_games_played = self.getNumberGamesPlayed()
-        return 0 if number_games_played ==0  else int(self.points_conceded_per_game /self.getNumberGamesPlayed())
+        return 0 if number_games_played == 0 else int(self.points_conceded_per_game / self.getNumberGamesPlayed())
 
     '''
     Returns the win / loss percentage of team both when they play on their home court and when they play 
     away from their home court. The offset of +1 in the computations is to avoid a divide by zero error and results 
     in the win loss percentage being 50:50 when there has been no games played yet 
     '''
+
     def getTeamRecord(self):
         return {
-            "HOME_WINS": round((1+self.num_home_wins) / (1+self.num_home_wins + 1+self.num_home_loses),3),
-            "HOME_LOSES": round((1+self.num_home_loses) / (1+self.num_home_wins + 1+self.num_home_loses),3),
-            "AWAY_WINS": round((1+self.num_away_wins) / (1+self.num_away_wins+1+self.num_away_loses),3),
-            "AWAY_LOSES": round((1+self.num_away_loses) / (1+self.num_away_wins + 1+self.num_away_loses),3),
+            "HOME_WINS": round((1 + self.num_home_wins) / (1 + self.num_home_wins + 1 + self.num_home_loses), 3),
+            "HOME_LOSES": round((1 + self.num_home_loses) / (1 + self.num_home_wins + 1 + self.num_home_loses), 3),
+            "AWAY_WINS": round((1 + self.num_away_wins) / (1 + self.num_away_wins + 1 + self.num_away_loses), 3),
+            "AWAY_LOSES": round((1 + self.num_away_loses) / (1 + self.num_away_wins + 1 + self.num_away_loses), 3),
         }
