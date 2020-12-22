@@ -84,7 +84,7 @@ class FeatureSelector:
 
         return train_x, test_x
 
-    def get_rfe_train_test_split(self, estimator=LogisticRegression(class_weight='auto', max_iter=900, C=1)):
+    def get_rfe_train_test_split(self, estimator=LogisticRegression(class_weight='auto', max_iter=900, C=5)):
         feature_cols = self.recursive_feature_selection(estimator=estimator, verbose=False)
         train_x = self.features[feature_cols]
         col_indices = [self.features.columns.get_loc(c) for c in feature_cols if c in self.features]
