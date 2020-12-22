@@ -10,11 +10,20 @@ from score_writer.game import Game
 from score_writer.game_writer import GameWriter
 from score_writer.score_scraper import ScoreScraper
 
-
+'''
+Class used to stitch together data that has been scraped from basketball-reference.com
+We adopted an approach of scraping the data season by season, saving each season to 
+its own csv file and then using a method in this class to combine multiple seasons
+together to form the training and test data 
+'''
 class CSVGenerator:
     def __init__(self, year_to_generate):
         self._year_to_generate = year_to_generate
 
+    '''
+    Takes a the csv file of raw data which we scraped for a particular season and transforms
+    it into the features needed for the training
+    '''
     def generate(self, data_frame=None, output_location=None , append = False):
 
         teams = pd.read_csv("data/teams.csv")[['TEAM_ID', 'ABBREVIATION']]
@@ -43,7 +52,8 @@ class CSVGenerator:
             home_team_points = games_frame['home_team_score'].iloc[index]
             away_team_points = games_frame['away_team_score'].iloc[index]
 
-            # get the elo stats from the CSV
+            # get the elo stats from the CSV - deprecated. We were unable to scrape
+            # data for this from basketballreference.com
             home_team_elo = games_frame['home_team_elo'].iloc[index]
             away_team_elo = games_frame['away_team_elo'].iloc[index]
             home_team_raptor = games_frame['home_team_raptor'].iloc[index]
@@ -52,6 +62,8 @@ class CSVGenerator:
             home_team_hth_record= games_frame['home_team_hth_record'].iloc[index]
             away_team_hth_record = games_frame['away_team_hth_record'].iloc[index]
 
+            # game object is an order dict which we can write directly to a CSV file. This represents the
+            # feature which we are going to use for the model.
             current_game = Game(home_team, away_team, home_team_win, home_team_elo,
                                 away_team_elo, home_team_raptor, away_team_raptor, home_team_hth_record, away_team_hth_record)
 
@@ -69,18 +81,23 @@ class CSVGenerator:
         game_writer = GameWriter(output_file_name, games_list, append)
         game_writer.write()
 
+    '''
+    scrapes the data for a particular year and writes to a CSV 
+    :param year_to_generate : (INT) you can specify the year that you want to scrape for as opposed using the class attribute
+    :param output_file_name : (STRING) you can specify where you would like the data to be written 
+    :param shouldOverwriteCSV : (BOOL) you can specify whether you would like to append to the csv file (False) or Overwite it (True - default) 
+    :returns: void
+    '''
     def generate_game_stats(self, year_to_generate=None, output_file_name = None, shouldOverwriteCSV = True):
-
         season_start_year = self._year_to_generate if year_to_generate == None else year_to_generate
         start_date = date.fromisoformat(f'{season_start_year}-10-01')
         if(season_start_year==2019):
             end_date = date.fromisoformat(f'{season_start_year+1}-10-21')
         else:
             end_date = date.fromisoformat(f'{season_start_year+1}-07-01')
-
         gameScraper = ScoreScraper(start_date, end_date)
         game_results = gameScraper.results_list
-        # for game in game_results:
+
 
         outputFile = f"data/game_stats/{season_start_year}-{season_start_year+1}.csv" if output_file_name == None else output_file_name
         is_file_existing = Path(outputFile).is_file()
@@ -99,12 +116,24 @@ class CSVGenerator:
                     writer.writeheader()
                 writer.writerow(game_dict)
 
-
+    '''
+    scrapes the data for a given array of years. For the purposes of this programme it was 
+    assumed that the years specified in the array would be contiguous however this could 
+    be easily extended by modifying how the files are named
+    :param yearsToScrape - all the seasons that should be scraped. The number 2015 represents
+    the season starting in October 2015 and ending in July 2016
+    '''
     def scrapeAllTrainingData(self, yearsToScrape = [2015,2016,2017,2018]):
         for year in yearsToScrape:
             self.generate_game_stats(year, shouldOverwriteCSV=True)
         self.stitchLocalCsvs(yearsToScrape)
 
+    '''
+    combines the raw data scraped over multiple seasons into a single CSV
+    :param yearsToScrape all the seasons that you want in one file. This function 
+    should only be used after scrapeAllTraining data has been called over the 
+    same interval 
+    '''
     def stitchLocalCsvs(self, yearsToScrape = [2015,2016,2017,2018]):
         outputFileName = f"data/training_data/training_data_{yearsToScrape[0]}-{yearsToScrape[len(yearsToScrape)-1]}.csv"
         output_file = open(outputFileName, "w")
@@ -117,7 +146,9 @@ class CSVGenerator:
                 output_file.close()
 
             current_csv.to_csv(f'{outputFileName}', mode='a', header=False, index=False)
-
+    '''
+    combines the above scrapeAllTrainingData and stitchLocalCsv functions together
+    '''
     def generate_multiple_years(self,years_to_generate = [2015,2016,2017,2018] ):
         self.stitchLocalCsvs(yearsToScrape = years_to_generate)
         filepath = f"data/training_data/training_data_{years_to_generate[0]}-{years_to_generate[-1]}.csv"
