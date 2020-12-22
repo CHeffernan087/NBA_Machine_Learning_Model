@@ -14,6 +14,7 @@ from CSVGenerator import CSVGenerator
 from feature_processing.feature_selector import FeatureSelector
 
 
+
 def parseInput(user_input):
     user_input = user_input.lower()[0]
     if user_input == "y":
@@ -21,28 +22,31 @@ def parseInput(user_input):
     return False
 
 
-YEARS_FOR_TRAINING = [2015,2016, 2017, 2018, 2019]
+years_for_training = [2015,2016, 2017, 2018, 2019]
 
 should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
 should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
 model_accuracies = {"LOGISTIC":[], "SVC": [], "KNN":[]}
 
 
-for index,YEAR_FOR_TESTING in enumerate(YEARS_FOR_TRAINING):
-    print(f"\n-------  {index+1}/{len(YEARS_FOR_TRAINING)}: testing on {YEAR_FOR_TESTING}  --------\n")
-    training_years = [2015,2016, 2017, 2018, 2019].remove(YEAR_FOR_TESTING)
-    test_file_name = f"training_data_{YEARS_FOR_TRAINING[0]}-{YEARS_FOR_TRAINING[-1]}.csv"
+for index,year_for_testing in enumerate(years_for_training):
+    print(f"\n-------  {index+1}/{len(years_for_training)}: testing on {year_for_testing}  --------\n")
 
-    if should_scrape_data:
-        CSVGenerator(0).scrapeAllTrainingData(YEARS_FOR_TRAINING)
-        CSVGenerator(YEAR_FOR_TESTING).generate_game_stats()
+    training_years = [2015,2016, 2017, 2018, 2019]
+    training_years.remove(year_for_testing)
+    test_file_name = f"training_data_{years_for_training[0]}-{years_for_training[-1]}.csv"
+
+    first_iteration_of_k_fold = index == 0
+    if should_scrape_data and first_iteration_of_k_fold:
+        CSVGenerator(0).scrapeAllTrainingData(training_years)
+        CSVGenerator(year_for_testing).generate_game_stats()
 
     if should_gen_csv:
-        CSVGenerator(0).generate_multiple_years(YEARS_FOR_TRAINING)
-        CSVGenerator(YEAR_FOR_TESTING).generate()
+        CSVGenerator(0).generate_multiple_years(training_years)
+        CSVGenerator(year_for_testing).generate()
 
-    FILE_PATH_TEST = f"data/{YEAR_FOR_TESTING}_games.csv"
-    FILE_PATH_TRAIN = f"data/training_features/training_features_{str(YEARS_FOR_TRAINING)[1:-1]}.csv"
+    FILE_PATH_TEST = f"data/{year_for_testing}_games.csv"
+    FILE_PATH_TRAIN = f"data/training_features/training_features_{str(training_years)[1:-1]}.csv"
 
     training_csv_dataframe = pd.read_csv(FILE_PATH_TRAIN)
     testing_csv_dataframe = pd.read_csv(FILE_PATH_TEST)
@@ -104,17 +108,17 @@ for index,YEAR_FOR_TESTING in enumerate(YEARS_FOR_TRAINING):
     model_accuracies["KNN"].append(knn_accuracy)
     print(f'kNN Accuracy : {knn_accuracy}')
 
-
-    feature_selector = FeatureSelector(training_csv_dataframe, testing_csv_dataframe)
-    rfe_input_features, rfe_test_x_input_features = feature_selector.get_rfe_train_test_split()
-    logistic_pipeline.fit(rfe_input_features, np.array(y_output_data).ravel())
-    y_pred = logistic_pipeline.predict(rfe_test_x_input_features)
-    print(f'Logistic Accuracy with RFE selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
-
-    k_best_input_features, k_best_test_x_input_features = feature_selector.get_k_best_train_test_split()
-    logistic_pipeline.fit(k_best_input_features, np.array(y_output_data).ravel())
-    y_pred = logistic_pipeline.predict(k_best_test_x_input_features)
-    print(f'Logistic Accuracy with K best selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+    # cheffernan uncomment this
+    # feature_selector = FeatureSelector(training_csv_dataframe, testing_csv_dataframe)
+    # rfe_input_features, rfe_test_x_input_features = feature_selector.get_rfe_train_test_split()
+    # logistic_pipeline.fit(rfe_input_features, np.array(y_output_data).ravel())
+    # y_pred = logistic_pipeline.predict(rfe_test_x_input_features)
+    # print(f'Logistic Accuracy with RFE selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+    #
+    # k_best_input_features, k_best_test_x_input_features = feature_selector.get_k_best_train_test_split()
+    # logistic_pipeline.fit(k_best_input_features, np.array(y_output_data).ravel())
+    # y_pred = logistic_pipeline.predict(k_best_test_x_input_features)
+    # print(f'Logistic Accuracy with K best selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
 
     pyplot.title('ROC Curves')
     pyplot.ylabel('True Positive Rate')
@@ -144,22 +148,31 @@ for index,YEAR_FOR_TESTING in enumerate(YEARS_FOR_TRAINING):
     pyplot.plot(fpr, tpr, color="red", label='Baseline AUC = %0.8f' % roc_auc)
 
     pyplot.legend(loc='lower right')
-    pyplot.show()
+    # pyplot.show()
 
     best_pipeline = logistic_pipeline
     plot_confusion_matrix(best_pipeline, test_x_input_features, test_y_output_data)
     pyplot.title("Logistic Regression")
-    pyplot.show()
+    # pyplot.show()
 
     baseline_pipeline.fit(x_input_features, y_output_data)
     plot_confusion_matrix(baseline_pipeline, test_x_input_features, test_y_output_data)
     pyplot.title("Most Frequent Baseline")
-    pyplot.show()
+    # pyplot.show()
 
     print(f"Baseline Accuracy: {accuracy_score(y_pred=baseline_pipeline.predict(test_x_input_features), y_true=test_y_output_data)}")
-    print(f"\n-------  end of testing on {YEAR_FOR_TESTING}  --------\n")
+    print(f"\n-------  end of testing on {year_for_testing}  --------\n")
 
 print("------ AVERAGE ACCURACY -------")
-print(f"Logistic Regression :  {np.mean(model_accuracies['LOGISTIC'])}")
-print(f"SVC : {np.mean(model_accuracies['SVC'])}")
-print(f"KNN : {np.mean(model_accuracies['KNN'])}")
+print("\nLogistic Regression:")
+print(f"K-Fold Results : {np.array(model_accuracies['LOGISTIC'])}")
+print(f"Mean Accuracy : {np.mean(model_accuracies['LOGISTIC'])}")
+print(f"Variance:{np.var(model_accuracies['LOGISTIC'])}")
+print("\nSVC:")
+print(f"K-Fold Results : {np.array(model_accuracies['SVC'])}")
+print(f"Mean Accuracy : {np.mean(model_accuracies['SVC'])}")
+print(f"Variance:{np.var(model_accuracies['SVC'])}")
+print("\nKNN:")
+print(f"K-Fold Results : {np.array(model_accuracies['KNN'])}")
+print(f"Mean Accuracy : {np.mean(model_accuracies['KNN'])}")
+print(f"Variance:{np.var(model_accuracies['KNN'])}")
