@@ -80,9 +80,9 @@ for index, year_for_testing in enumerate(years_for_testing):  # iterate over yea
                        x_input_features, y_output_data, weights="distance")
         cross_validate(LogisticRegression, HyperParam.POWER, [1, 2], x_input_features, y_output_data, max_iter=1500)
 
-    logistic_model = LogisticRegression(class_weight='auto', max_iter=900, C=0.01)  # best LR from above plots
-    svc_model = SVC(gamma=0.001, C=5)  # best SVC from above plots
-    knn_model = KNeighborsClassifier(n_neighbors=150)  # best kNN from above plots
+    logistic_model = LogisticRegression(class_weight='auto', max_iter=900, C=5)  # best LR from above plots
+    svc_model = SVC(gamma=0.001, C=1)  # best SVC from above plots
+    knn_model = KNeighborsClassifier(n_neighbors=125)  # best kNN from above plots
 
     logistic_pipeline = make_pipeline(StandardScaler(), logistic_model)  # add normalisation to pipeline
     logistic_pipeline.fit(x_input_features, np.array(y_output_data).ravel())  # fit model
