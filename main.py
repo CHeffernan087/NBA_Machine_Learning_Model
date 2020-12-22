@@ -3,7 +3,8 @@ import pandas as pd
 from matplotlib import pyplot
 from sklearn.dummy import DummyClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, plot_confusion_matrix, roc_curve, auc
+from sklearn.metrics import \
+    accuracy_score, plot_confusion_matrix, roc_curve, auc, recall_score, precision_score, f1_score
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import make_pipeline
@@ -26,6 +27,9 @@ years_for_testing = [2015, 2016, 2017, 2018, 2019]
 should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
 should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
 model_accuracies = {"LOGISTIC": [], "SVC": [], "KNN": [], "LOGISTIC_RFECV": [], "LOGISTIC_KBEST": []}
+model_precision = {"LOGISTIC": [], "SVC": [], "KNN": [], "LOGISTIC_RFECV": [], "LOGISTIC_KBEST": []}
+model_recall = {"LOGISTIC": [], "SVC": [], "KNN": [], "LOGISTIC_RFECV": [], "LOGISTIC_KBEST": []}
+model_f1 = {"LOGISTIC": [], "SVC": [], "KNN": [], "LOGISTIC_RFECV": [], "LOGISTIC_KBEST": []}
 
 
 for index,year_for_testing in enumerate(years_for_testing):
@@ -88,37 +92,104 @@ for index,year_for_testing in enumerate(years_for_testing):
     logistic_pipeline = make_pipeline(StandardScaler(), logistic_model)
     logistic_pipeline.fit(x_input_features, np.array(y_output_data).ravel())
     y_pred = logistic_pipeline.predict(test_x_input_features)
+
     logistic_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
     model_accuracies["LOGISTIC"].append(logistic_accuracy)
     print(f'Logistic Accuracy : {logistic_accuracy}')
+
+    logistic_precision = precision_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_precision["LOGISTIC"].append(logistic_precision)
+    print(f'Logistic Precision : {logistic_precision}')
+
+    logistic_recall = recall_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_recall["LOGISTIC"].append(logistic_recall)
+    print(f'Logistic Recall : {logistic_recall}')
+
+    logistic_f1 = f1_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_f1["LOGISTIC"].append(logistic_f1)
+    print(f'Logistic f1 : {logistic_f1}')
 
     if year_for_testing == 2019:
         coefficients_dataframe = pd.DataFrame({'feature': x_input_features.columns,
                                                'coef': logistic_pipeline.named_steps["logisticregression"].coef_[0]})
         coefficients_dataframe['coef'] = coefficients_dataframe['coef'].apply(abs)
         coefficients_dataframe = coefficients_dataframe.sort_values(by='coef', ascending=False)
+        coefficients_dataframe_copy = coefficients_dataframe.copy()
 
-        pyplot.title("Feature coefficient magnitudes")
-        pyplot.xlabel('Feature')
-        pyplot.ylabel('Coefficient Magnitude')
+        accuracies = []
+        number_of_features = []
+        for i in range(len(coefficients_dataframe_copy.index)):
+            train_x = x_input_features[coefficients_dataframe_copy['feature']]
+            col_indices = [x_input_features.columns.get_loc(c) for c in train_x.columns if c in x_input_features]
+            test_x = test_x_input_features.iloc[:, col_indices]
+
+            logistic_pipeline.fit(train_x, np.array(y_output_data).ravel())
+            y_pred = logistic_pipeline.predict(test_x)
+            logistic_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
+
+            accuracies.append(logistic_accuracy)
+            number_of_features.append(len(coefficients_dataframe_copy.index))
+
+            coefficients_dataframe_copy = coefficients_dataframe_copy[:-1]
+
+        pyplot.rcParams["figure.figsize"] = (10, 8)
+        pyplot.rcParams["font.size"] = 12
+
+        fig, ax1 = pyplot.subplots()
+        ax1.bar(coefficients_dataframe['feature'], coefficients_dataframe['coef'], color='c', label='Coefficients')
+        ax1.set_xlabel('Feature')
+        ax1.set_ylabel('Coefficient Magnitude')
         pyplot.xticks(rotation=60, ha='right')
-        pyplot.bar(coefficients_dataframe['feature'], coefficients_dataframe['coef'])
+
+        x_values = list(map(lambda x: x - 1, number_of_features))
+        ax2 = ax1.twinx()
+        ax2.plot(x_values, accuracies, color='m', label='Accuracy')
+        ax2.set_ylabel('Accuracy')
+
+        ax1.legend(loc=1)
+        ax2.legend()
         pyplot.tight_layout()
         pyplot.show()
 
     svc_pipeline = make_pipeline(StandardScaler(), svc_model)
     svc_pipeline.fit(x_input_features, np.array(y_output_data).ravel())
     y_pred = svc_pipeline.predict(test_x_input_features)
+
     svc_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
     model_accuracies["SVC"].append(svc_accuracy)
     print(f'SVC Accuracy : {svc_accuracy}')
 
+    svc_precision = precision_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_precision["SVC"].append(svc_precision)
+    print(f'SVC Precision : {svc_precision}')
+
+    svc_recall = recall_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_recall["SVC"].append(svc_recall)
+    print(f'SVC Recall : {svc_recall}')
+
+    svc_f1 = f1_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_f1["SVC"].append(svc_f1)
+    print(f'SVC f1 : {svc_f1}')
+
     knn_pipeline = make_pipeline(StandardScaler(), knn_model)
     knn_pipeline.fit(x_input_features, np.array(y_output_data).ravel())
     y_pred = knn_pipeline.predict(test_x_input_features)
+
     knn_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
     model_accuracies["KNN"].append(knn_accuracy)
-    print(f'kNN Accuracy : {knn_accuracy}')
+    print(f'KNN Accuracy : {knn_accuracy}')
+
+    knn_precision = precision_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_precision["KNN"].append(knn_precision)
+    print(f'KNN Precision : {knn_precision}')
+
+    knn_recall = recall_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_recall["KNN"].append(knn_recall)
+    print(f'KNN Recall : {knn_recall}')
+
+    knn_f1 = f1_score(y_true=test_y_output_data, y_pred=y_pred)
+    model_f1["KNN"].append(knn_f1)
+    print(f'KNN f1 : {knn_f1}')
 
     feature_selector = FeatureSelector(training_csv_dataframe, testing_csv_dataframe)
     rfe_input_features, rfe_test_x_input_features = feature_selector.get_rfe_train_test_split()
@@ -180,22 +251,36 @@ for index,year_for_testing in enumerate(years_for_testing):
         print(f"\n-------  end of testing on {year_for_testing}  --------\n")
 
 print("------ AVERAGE ACCURACY -------")
+
 print("\nLogistic Regression:")
 print(f"K-Fold Results : {np.array(model_accuracies['LOGISTIC'])}")
 print(f"Mean Accuracy : {np.mean(model_accuracies['LOGISTIC'])}")
 print(f"Variance:{np.var(model_accuracies['LOGISTIC'])}")
+print(f"Mean Precision: {np.mean(model_precision['LOGISTIC'])}")
+print(f"Mean Recall: {np.mean(model_recall['LOGISTIC'])}")
+print(f"Mean f1: {np.mean(model_f1['LOGISTIC'])}")
+
 print("\nSVC:")
 print(f"K-Fold Results : {np.array(model_accuracies['SVC'])}")
 print(f"Mean Accuracy : {np.mean(model_accuracies['SVC'])}")
 print(f"Variance:{np.var(model_accuracies['SVC'])}")
+print(f"Mean Precision: {np.mean(model_precision['SVC'])}")
+print(f"Mean Recall: {np.mean(model_recall['SVC'])}")
+print(f"Mean f1: {np.mean(model_f1['SVC'])}")
+
 print("\nKNN:")
 print(f"K-Fold Results : {np.array(model_accuracies['KNN'])}")
 print(f"Mean Accuracy : {np.mean(model_accuracies['KNN'])}")
 print(f"Variance:{np.var(model_accuracies['KNN'])}")
+print(f"Mean Precision: {np.mean(model_precision['KNN'])}")
+print(f"Mean Recall: {np.mean(model_recall['KNN'])}")
+print(f"Mean f1: {np.mean(model_f1['KNN'])}")
+
 print("\nLogistic Regression with RFECV:")
 print(f"K-Fold Results : {np.array(model_accuracies['LOGISTIC_RFECV'])}")
 print(f"Mean Accuracy : {np.mean(model_accuracies['LOGISTIC_RFECV'])}")
 print(f"Variance:{np.var(model_accuracies['LOGISTIC_RFECV'])}")
+
 print("\nLogistic Regression with KBest:")
 print(f"K-Fold Results : {np.array(model_accuracies['LOGISTIC_KBEST'])}")
 print(f"Mean Accuracy : {np.mean(model_accuracies['LOGISTIC_KBEST'])}")
