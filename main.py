@@ -108,17 +108,17 @@ for index,year_for_testing in enumerate(years_for_training):
     model_accuracies["KNN"].append(knn_accuracy)
     print(f'kNN Accuracy : {knn_accuracy}')
 
-    # cheffernan uncomment this
-    # feature_selector = FeatureSelector(training_csv_dataframe, testing_csv_dataframe)
-    # rfe_input_features, rfe_test_x_input_features = feature_selector.get_rfe_train_test_split()
-    # logistic_pipeline.fit(rfe_input_features, np.array(y_output_data).ravel())
-    # y_pred = logistic_pipeline.predict(rfe_test_x_input_features)
-    # print(f'Logistic Accuracy with RFE selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
-    #
-    # k_best_input_features, k_best_test_x_input_features = feature_selector.get_k_best_train_test_split()
-    # logistic_pipeline.fit(k_best_input_features, np.array(y_output_data).ravel())
-    # y_pred = logistic_pipeline.predict(k_best_test_x_input_features)
-    # print(f'Logistic Accuracy with K best selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+
+    feature_selector = FeatureSelector(training_csv_dataframe, testing_csv_dataframe)
+    rfe_input_features, rfe_test_x_input_features = feature_selector.get_rfe_train_test_split()
+    logistic_pipeline.fit(rfe_input_features, np.array(y_output_data).ravel())
+    y_pred = logistic_pipeline.predict(rfe_test_x_input_features)
+    print(f'Logistic Accuracy with RFE selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+
+    k_best_input_features, k_best_test_x_input_features = feature_selector.get_k_best_train_test_split()
+    logistic_pipeline.fit(k_best_input_features, np.array(y_output_data).ravel())
+    y_pred = logistic_pipeline.predict(k_best_test_x_input_features)
+    print(f'Logistic Accuracy with K best selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
 
     pyplot.title('ROC Curves')
     pyplot.ylabel('True Positive Rate')
@@ -148,17 +148,17 @@ for index,year_for_testing in enumerate(years_for_training):
     pyplot.plot(fpr, tpr, color="red", label='Baseline AUC = %0.8f' % roc_auc)
 
     pyplot.legend(loc='lower right')
-    # pyplot.show()
+    pyplot.show()
 
     best_pipeline = logistic_pipeline
     plot_confusion_matrix(best_pipeline, test_x_input_features, test_y_output_data)
     pyplot.title("Logistic Regression")
-    # pyplot.show()
+    pyplot.show()
 
     baseline_pipeline.fit(x_input_features, y_output_data)
     plot_confusion_matrix(baseline_pipeline, test_x_input_features, test_y_output_data)
     pyplot.title("Most Frequent Baseline")
-    # pyplot.show()
+    pyplot.show()
 
     print(f"Baseline Accuracy: {accuracy_score(y_pred=baseline_pipeline.predict(test_x_input_features), y_true=test_y_output_data)}")
     print(f"\n-------  end of testing on {year_for_testing}  --------\n")
