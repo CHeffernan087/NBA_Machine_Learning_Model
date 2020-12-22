@@ -121,8 +121,8 @@ class CSVGenerator:
     def generate_multiple_years(self,years_to_generate = [2015,2016,2017,2018] ):
         self.stitchLocalCsvs(yearsToScrape = years_to_generate)
         filepath = f"data/training_data/training_data_{years_to_generate[0]}-{years_to_generate[-1]}.csv"
-        outputFileName = f"data/training_features/training_features_{years_to_generate[0]}-{years_to_generate[-1]}.csv"
-        if Path(outputFileName).is_file():
+        outputFileName = f"data/training_features/training_features_{str(years_to_generate)[1:-1]}.csv"
+        if(Path(outputFileName).is_file()):
             os.remove(outputFileName)
         games_frame = pd.read_csv(filepath)
         for year in years_to_generate:

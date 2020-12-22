@@ -1,6 +1,6 @@
 from collections import OrderedDict
 
-
+NUMBER_OF_GAMES =3
 class Game(OrderedDict):
     """
     teams are a team object
@@ -33,9 +33,9 @@ class Game(OrderedDict):
         home_team_history = home_team.getCurrentForm()
         away_team_history = away_team.getCurrentForm()
 
-        for index, game in enumerate(home_team_history):
-            super().__setitem__(f"HOME_TEAM_FORM_{index}", game)
-            super().__setitem__(f"AWAY_TEAM_FORM_{index}", away_team_history[index])
+        for game in range(0,NUMBER_OF_GAMES):
+            super().__setitem__(f"HOME_TEAM_FORM_{game}", home_team_history[game])
+            super().__setitem__(f"AWAY_TEAM_FORM_{game}", away_team_history[game])
 
         super().__setitem__("HOME_TEAM_WIN_RECORD", home_team.getWins())
         super().__setitem__("AWAY_TEAM_WIN_RECORD", away_team.getWins())
