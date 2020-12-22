@@ -1,5 +1,10 @@
 import sklearn.preprocessing as pp
 
+'''
+The feature_processor abstracts the different scaling functions we tested. We set out default values here so they
+do not need to be repeatedly set when using them.
+'''
+
 
 def min_max_scale_features(features):
     return pp.MinMaxScaler().fit_transform(features)
