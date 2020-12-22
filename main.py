@@ -9,70 +9,62 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
-from helper_functions import cross_validate, HyperParam
+
 from CSVGenerator import CSVGenerator
 from feature_processing.feature_selector import FeatureSelector
 
 
-
 def parseInput(user_input):
+    """
+    returns if the user has given y or not when prompted
+    :param user_input:
+    :return: true if input is y else false
+    """
     user_input = user_input.lower()[0]
     if user_input == "y":
         return True
     return False
 
 
-years_for_testing = [2015,2016, 2017, 2018, 2019]
+years_for_testing = [2015, 2016, 2017, 2018, 2019]  # list of seasons to test the models
 
 should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
 should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
-model_accuracies = {"LOGISTIC":[], "SVC": [], "KNN":[]}
+model_accuracies = {"LOGISTIC": [], "SVC": [], "KNN": []}  # dict for keeping track of model accuracies across seasons
 
+for index, year_for_testing in enumerate(years_for_testing):  # iterate over years to test
+    print(f"\n-------  {index + 1}/{len(years_for_testing)}: testing on {year_for_testing}  --------\n")
 
-for index,year_for_testing in enumerate(years_for_testing):
-    print(f"\n-------  {index+1}/{len(years_for_testing)}: testing on {year_for_testing}  --------\n")
-
-    training_years = [2015,2016, 2017, 2018, 2019]
-    training_years.remove(year_for_testing)
+    training_years = [2015, 2016, 2017, 2018, 2019]
+    training_years.remove(year_for_testing)  # remove testing year
 
     first_iteration_of_k_fold = index == 0
     if should_scrape_data and first_iteration_of_k_fold:
-        CSVGenerator(0).scrapeAllTrainingData(training_years)
-        CSVGenerator(year_for_testing).generate_game_stats()
+        CSVGenerator(0).scrapeAllTrainingData(training_years)  # scrape the necessary data to files
+        CSVGenerator(year_for_testing).generate_game_stats()  # generate stats for testing year
 
     if should_gen_csv:
+        # generate the csv containing info for all training seasons
         CSVGenerator(0).generate_multiple_years(training_years)
+        # make csv for testing year
         CSVGenerator(year_for_testing).generate()
 
     FILE_PATH_TEST = f"data/{year_for_testing}_games.csv"
     FILE_PATH_TRAIN = f"data/training_features/training_features_{str(training_years)[1:-1]}.csv"
 
-    training_csv_dataframe = pd.read_csv(FILE_PATH_TRAIN)
+    training_csv_dataframe = pd.read_csv(FILE_PATH_TRAIN)  # read csv files into dataframes
     testing_csv_dataframe = pd.read_csv(FILE_PATH_TEST)
     num_columns = len(training_csv_dataframe.columns)
 
-    x_input_features = training_csv_dataframe.iloc[:, range(0, num_columns - 1)]
-    y_output_data = training_csv_dataframe.iloc[:, [num_columns - 1]]
+    x_input_features = training_csv_dataframe.iloc[:, range(0, num_columns - 1)]  # get the input data for training
+    y_output_data = training_csv_dataframe.iloc[:, [num_columns - 1]]  # get output/label data for training
 
-    test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]
-    test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]
+    test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]  # get the input data for testing
+    test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]  # get output/label data for testing
 
-    if(year_for_testing == 2018):
-        num_features_to_accuracy_dit = {}
-        # for n in range(len(x_input_features.columns)):
-        #     selector = RFE(logistic_model, n_features_to_select=n + 1)
-        #     pipeline = make_pipeline(StandardScaler(), selector, logistic_model)
-        #     pipeline.fit(x_input_features, np.array(y_output_data).ravel())
-        #     y_pred = pipeline.predict(test_x_input_features)
-        #     num_features_to_accuracy_dit[n] = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
-        #
-        # ideal_num_features = 0
-        # current_accuracy = 0
-        # for key, value in num_features_to_accuracy_dit.items():
-        #     if value >= current_accuracy:
-        #         ideal_num_features = key
-        # print(f"Ideal num features = {ideal_num_features}")
-
+    if year_for_testing == 2018:  # only generate cross validation plots for 2018, just to make things easy to see
+        pass
+        # TODO delete pass when uncommenting below
         # cross_validate(LogisticRegression, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features, y_output_data)
         # cross_validate(SVC, HyperParam.GAMMA, [0.000001, 0.00001, 0.0001, 0.001, 0.005, 0.007], x_input_features, y_output_data)
         # cross_validate(SVC, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features, y_output_data)
@@ -82,33 +74,31 @@ for index,year_for_testing in enumerate(years_for_testing):
         #                x_input_features, y_output_data, weights="distance")
         # cross_validate(LogisticRegression, HyperParam.POWER, [1, 2], x_input_features, y_output_data, max_iter=1500)
 
+    logistic_model = LogisticRegression(class_weight='auto', max_iter=900, C=1)  # best LR from above plots
+    svc_model = SVC(gamma=0.001, C=1)  # best SVC from above plots
+    knn_model = KNeighborsClassifier(n_neighbors=100)  # best kNN from above plots
 
-    logistic_model = LogisticRegression(class_weight='auto', max_iter=900, C=1)  # best from above plots
-    svc_model = SVC(gamma=0.001, C=1)
-    knn_model = KNeighborsClassifier(n_neighbors=100)
-
-    logistic_pipeline = make_pipeline(StandardScaler(), logistic_model)
-    logistic_pipeline.fit(x_input_features, np.array(y_output_data).ravel())
-    y_pred = logistic_pipeline.predict(test_x_input_features)
-    logistic_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
+    logistic_pipeline = make_pipeline(StandardScaler(), logistic_model)  # add normalisation to pipeline
+    logistic_pipeline.fit(x_input_features, np.array(y_output_data).ravel())  # fit model
+    y_pred = logistic_pipeline.predict(test_x_input_features)  # get predictions
+    logistic_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)  # find and update accuracies
     model_accuracies["LOGISTIC"].append(logistic_accuracy)
     print(f'Logistic Coefs : {logistic_pipeline.named_steps["logisticregression"].coef_}')
     print(f'Logistic Accuracy : {logistic_accuracy}')
 
-    svc_pipeline = make_pipeline(StandardScaler(), svc_model)
-    svc_pipeline.fit(x_input_features, np.array(y_output_data).ravel())
-    y_pred = svc_pipeline.predict(test_x_input_features)
-    svc_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
+    svc_pipeline = make_pipeline(StandardScaler(), svc_model)  # add normalisation to pipeline
+    svc_pipeline.fit(x_input_features, np.array(y_output_data).ravel())  # fit model
+    y_pred = svc_pipeline.predict(test_x_input_features)  # get predictions
+    svc_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)  # find and update accuracies
     model_accuracies["SVC"].append(svc_accuracy)
     print(f'SVC Accuracy : {svc_accuracy}')
 
-    knn_pipeline = make_pipeline(StandardScaler(), knn_model)
-    knn_pipeline.fit(x_input_features, np.array(y_output_data).ravel())
-    y_pred = knn_pipeline.predict(test_x_input_features)
-    knn_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
+    knn_pipeline = make_pipeline(StandardScaler(), knn_model)  # add normalisation to pipeline
+    knn_pipeline.fit(x_input_features, np.array(y_output_data).ravel())  # fit model
+    y_pred = knn_pipeline.predict(test_x_input_features)  # get predictions
+    knn_accuracy = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)  # find and update accuracies
     model_accuracies["KNN"].append(knn_accuracy)
     print(f'kNN Accuracy : {knn_accuracy}')
-
 
     feature_selector = FeatureSelector(training_csv_dataframe, testing_csv_dataframe)
     rfe_input_features, rfe_test_x_input_features = feature_selector.get_rfe_train_test_split()
@@ -119,13 +109,14 @@ for index,year_for_testing in enumerate(years_for_testing):
     k_best_input_features, k_best_test_x_input_features = feature_selector.get_k_best_train_test_split()
     logistic_pipeline.fit(k_best_input_features, np.array(y_output_data).ravel())
     y_pred = logistic_pipeline.predict(k_best_test_x_input_features)
-    print(f'Logistic Accuracy with K best selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
+    print(
+        f'Logistic Accuracy with K best selected features: {accuracy_score(y_true=test_y_output_data, y_pred=y_pred)}')
 
     pyplot.title('ROC Curves')
     pyplot.ylabel('True Positive Rate')
     pyplot.xlabel('False Positive Rate')
 
-    if(year_for_testing == 2018):
+    if year_for_testing == 2018:  # plot roc curves for 2018
         # split into x and y testing & training data
         x_train, x_test, y_train, y_test = train_test_split(x_input_features, y_output_data, test_size=0.2)
         knn_pipeline.fit(x_train, np.array(y_train).ravel())
@@ -152,17 +143,18 @@ for index,year_for_testing in enumerate(years_for_testing):
         pyplot.legend(loc='lower right')
         pyplot.show()
 
-        best_pipeline = logistic_pipeline
+        best_pipeline = logistic_pipeline  # make confusion matrix for logistic regression model
         plot_confusion_matrix(best_pipeline, test_x_input_features, test_y_output_data)
         pyplot.title("Logistic Regression")
         pyplot.show()
 
-        baseline_pipeline.fit(x_input_features, y_output_data)
+        baseline_pipeline.fit(x_input_features, y_output_data)  # make confusion matrix for most_frequent model
         plot_confusion_matrix(baseline_pipeline, test_x_input_features, test_y_output_data)
         pyplot.title("Most Frequent Baseline")
         pyplot.show()
 
-        print(f"Baseline Accuracy: {accuracy_score(y_pred=baseline_pipeline.predict(test_x_input_features), y_true=test_y_output_data)}")
+        print(
+            f"Baseline Accuracy: {accuracy_score(y_pred=baseline_pipeline.predict(test_x_input_features), y_true=test_y_output_data)}")
         print(f"\n-------  end of testing on {year_for_testing}  --------\n")
 
 print("------ AVERAGE ACCURACY -------")
