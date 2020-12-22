@@ -22,19 +22,18 @@ def parseInput(user_input):
     return False
 
 
-years_for_training = [2015,2016, 2017, 2018, 2019]
+years_for_testing = [2015,2016, 2017, 2018, 2019]
 
 should_scrape_data = parseInput(input("Do you want to scrape the data? (y/n)\n> "))
 should_gen_csv = parseInput(input("Do you want to generate CSV? (y/n)\n> "))
 model_accuracies = {"LOGISTIC":[], "SVC": [], "KNN":[]}
 
 
-for index,year_for_testing in enumerate(years_for_training):
-    print(f"\n-------  {index+1}/{len(years_for_training)}: testing on {year_for_testing}  --------\n")
+for index,year_for_testing in enumerate(years_for_testing):
+    print(f"\n-------  {index+1}/{len(years_for_testing)}: testing on {year_for_testing}  --------\n")
 
     training_years = [2015,2016, 2017, 2018, 2019]
     training_years.remove(year_for_testing)
-    test_file_name = f"training_data_{years_for_training[0]}-{years_for_training[-1]}.csv"
 
     first_iteration_of_k_fold = index == 0
     if should_scrape_data and first_iteration_of_k_fold:
@@ -58,29 +57,30 @@ for index,year_for_testing in enumerate(years_for_training):
     test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]
     test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]
 
-    # num_features_to_accuracy_dit = {}
-    # for n in range(len(x_input_features.columns)):
-    #     selector = RFE(logistic_model, n_features_to_select=n + 1)
-    #     pipeline = make_pipeline(StandardScaler(), selector, logistic_model)
-    #     pipeline.fit(x_input_features, np.array(y_output_data).ravel())
-    #     y_pred = pipeline.predict(test_x_input_features)
-    #     num_features_to_accuracy_dit[n] = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
-    #
-    # ideal_num_features = 0
-    # current_accuracy = 0
-    # for key, value in num_features_to_accuracy_dit.items():
-    #     if value >= current_accuracy:
-    #         ideal_num_features = key
-    # print(f"Ideal num features = {ideal_num_features}")
+    if(year_for_testing == 2019):
+        num_features_to_accuracy_dit = {}
+        # for n in range(len(x_input_features.columns)):
+        #     selector = RFE(logistic_model, n_features_to_select=n + 1)
+        #     pipeline = make_pipeline(StandardScaler(), selector, logistic_model)
+        #     pipeline.fit(x_input_features, np.array(y_output_data).ravel())
+        #     y_pred = pipeline.predict(test_x_input_features)
+        #     num_features_to_accuracy_dit[n] = accuracy_score(y_true=test_y_output_data, y_pred=y_pred)
+        #
+        # ideal_num_features = 0
+        # current_accuracy = 0
+        # for key, value in num_features_to_accuracy_dit.items():
+        #     if value >= current_accuracy:
+        #         ideal_num_features = key
+        # print(f"Ideal num features = {ideal_num_features}")
 
-    # cross_validate(LogisticRegression, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features, y_output_data)
-    # cross_validate(SVC, HyperParam.GAMMA, [0.000001, 0.00001, 0.0001, 0.001, 0.005, 0.007], x_input_features, y_output_data)
-    # cross_validate(SVC, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features, y_output_data)
-    # cross_validate(KNeighborsClassifier, HyperParam.K, [1, 5, 10, 15, 25, 50, 75, 100, 125, 150, 175, 200],
-    #                x_input_features, y_output_data)
-    # cross_validate(KNeighborsClassifier, HyperParam.K, [1, 5, 10, 15, 25, 50, 75, 100, 125, 150, 175, 200],
-    #                x_input_features, y_output_data, weights="distance")
-    # cross_validate(LogisticRegression, HyperParam.POWER, [1, 2], x_input_features, y_output_data, max_iter=1500)
+        # cross_validate(LogisticRegression, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features, y_output_data)
+        # cross_validate(SVC, HyperParam.GAMMA, [0.000001, 0.00001, 0.0001, 0.001, 0.005, 0.007], x_input_features, y_output_data)
+        # cross_validate(SVC, HyperParam.C, [0.001, 0.01, 0.1, 1, 5, 10, 15, 20], x_input_features, y_output_data)
+        # cross_validate(KNeighborsClassifier, HyperParam.K, [1, 5, 10, 15, 25, 50, 75, 100, 125, 150, 175, 200],
+        #                x_input_features, y_output_data)
+        # cross_validate(KNeighborsClassifier, HyperParam.K, [1, 5, 10, 15, 25, 50, 75, 100, 125, 150, 175, 200],
+        #                x_input_features, y_output_data, weights="distance")
+        # cross_validate(LogisticRegression, HyperParam.POWER, [1, 2], x_input_features, y_output_data, max_iter=1500)
 
 
     logistic_model = LogisticRegression(class_weight='auto', max_iter=900, C=1)  # best from above plots
@@ -124,44 +124,45 @@ for index,year_for_testing in enumerate(years_for_training):
     pyplot.ylabel('True Positive Rate')
     pyplot.xlabel('False Positive Rate')
 
-    # split into x and y testing & training data
-    x_train, x_test, y_train, y_test = train_test_split(x_input_features, y_output_data, test_size=0.2)
-    knn_pipeline.fit(x_train, np.array(y_train).ravel())
-    fpr, tpr, _ = roc_curve(y_test, knn_pipeline.predict_proba(x_test)[:, 1])
-    roc_auc = auc(fpr, tpr)  # get the area under the curve
-    pyplot.plot(fpr, tpr, color="blue", label='KNN AUC = %0.8f' % roc_auc)  # plot the curve
+    if(year_for_testing == 2019):
+        # split into x and y testing & training data
+        x_train, x_test, y_train, y_test = train_test_split(x_input_features, y_output_data, test_size=0.2)
+        knn_pipeline.fit(x_train, np.array(y_train).ravel())
+        fpr, tpr, _ = roc_curve(y_test, knn_pipeline.predict_proba(x_test)[:, 1])
+        roc_auc = auc(fpr, tpr)  # get the area under the curve
+        pyplot.plot(fpr, tpr, color="blue", label='KNN AUC = %0.8f' % roc_auc)  # plot the curve
 
-    svc_pipeline.fit(x_train, np.array(y_train).ravel())
-    fpr, tpr, _ = roc_curve(y_test, svc_pipeline.decision_function(x_test))
-    roc_auc = auc(fpr, tpr)
-    pyplot.plot(fpr, tpr, color="green", label='SVC AUC = %0.8f' % roc_auc)
+        svc_pipeline.fit(x_train, np.array(y_train).ravel())
+        fpr, tpr, _ = roc_curve(y_test, svc_pipeline.decision_function(x_test))
+        roc_auc = auc(fpr, tpr)
+        pyplot.plot(fpr, tpr, color="green", label='SVC AUC = %0.8f' % roc_auc)
 
-    logistic_pipeline.fit(x_train, np.array(y_train).ravel())
-    fpr, tpr, _ = roc_curve(y_test, logistic_pipeline.decision_function(x_test))
-    roc_auc = auc(fpr, tpr)
-    pyplot.plot(fpr, tpr, color="orange", label='Logistic Regression AUC = %0.8f' % roc_auc)
+        logistic_pipeline.fit(x_train, np.array(y_train).ravel())
+        fpr, tpr, _ = roc_curve(y_test, logistic_pipeline.decision_function(x_test))
+        roc_auc = auc(fpr, tpr)
+        pyplot.plot(fpr, tpr, color="orange", label='Logistic Regression AUC = %0.8f' % roc_auc)
 
-    baseline_pipeline = make_pipeline(StandardScaler(), DummyClassifier(strategy="most_frequent"))
-    baseline_pipeline.fit(x_train, np.array(y_train).ravel())
-    fpr, tpr, _ = roc_curve(y_test, baseline_pipeline.predict_proba(x_test)[:, 1])
-    roc_auc = auc(fpr, tpr)
-    pyplot.plot(fpr, tpr, color="red", label='Baseline AUC = %0.8f' % roc_auc)
+        baseline_pipeline = make_pipeline(StandardScaler(), DummyClassifier(strategy="most_frequent"))
+        baseline_pipeline.fit(x_train, np.array(y_train).ravel())
+        fpr, tpr, _ = roc_curve(y_test, baseline_pipeline.predict_proba(x_test)[:, 1])
+        roc_auc = auc(fpr, tpr)
+        pyplot.plot(fpr, tpr, color="red", label='Baseline AUC = %0.8f' % roc_auc)
 
-    pyplot.legend(loc='lower right')
-    pyplot.show()
+        pyplot.legend(loc='lower right')
+        pyplot.show()
 
-    best_pipeline = logistic_pipeline
-    plot_confusion_matrix(best_pipeline, test_x_input_features, test_y_output_data)
-    pyplot.title("Logistic Regression")
-    pyplot.show()
+        best_pipeline = logistic_pipeline
+        plot_confusion_matrix(best_pipeline, test_x_input_features, test_y_output_data)
+        pyplot.title("Logistic Regression")
+        pyplot.show()
 
-    baseline_pipeline.fit(x_input_features, y_output_data)
-    plot_confusion_matrix(baseline_pipeline, test_x_input_features, test_y_output_data)
-    pyplot.title("Most Frequent Baseline")
-    pyplot.show()
+        baseline_pipeline.fit(x_input_features, y_output_data)
+        plot_confusion_matrix(baseline_pipeline, test_x_input_features, test_y_output_data)
+        pyplot.title("Most Frequent Baseline")
+        pyplot.show()
 
-    print(f"Baseline Accuracy: {accuracy_score(y_pred=baseline_pipeline.predict(test_x_input_features), y_true=test_y_output_data)}")
-    print(f"\n-------  end of testing on {year_for_testing}  --------\n")
+        print(f"Baseline Accuracy: {accuracy_score(y_pred=baseline_pipeline.predict(test_x_input_features), y_true=test_y_output_data)}")
+        print(f"\n-------  end of testing on {year_for_testing}  --------\n")
 
 print("------ AVERAGE ACCURACY -------")
 print("\nLogistic Regression:")
