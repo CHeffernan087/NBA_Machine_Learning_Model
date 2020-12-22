@@ -57,7 +57,7 @@ for index,year_for_testing in enumerate(years_for_testing):
     test_x_input_features = testing_csv_dataframe.iloc[:, range(0, num_columns - 1)]
     test_y_output_data = testing_csv_dataframe.iloc[:, [num_columns - 1]]
 
-    if(year_for_testing == 2018):
+    if(year_for_testing == 2019):
         num_features_to_accuracy_dit = {}
         # for n in range(len(x_input_features.columns)):
         #     selector = RFE(logistic_model, n_features_to_select=n + 1)
@@ -124,7 +124,7 @@ for index,year_for_testing in enumerate(years_for_testing):
     pyplot.ylabel('True Positive Rate')
     pyplot.xlabel('False Positive Rate')
 
-    if(year_for_testing == 2018):
+    if(year_for_testing == 2019):
         # split into x and y testing & training data
         x_train, x_test, y_train, y_test = train_test_split(x_input_features, y_output_data, test_size=0.2)
         knn_pipeline.fit(x_train, np.array(y_train).ravel())
