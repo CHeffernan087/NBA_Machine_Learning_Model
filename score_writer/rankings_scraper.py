@@ -22,7 +22,7 @@ URL_TEMPLATE = PUPPETEER_URL_PREFIX + ("https://www.basketball-reference.com/lea
                                        "#expanded_standings::none")
 
 
-def getCellValueInRow(row, data_stat):
+def get_cell_value_in_row(row, data_stat):
     """
     Helper function to extract a particular datum from a string representing a row in a HTML table
     :param row: A string representing a row in a html table
@@ -33,7 +33,7 @@ def getCellValueInRow(row, data_stat):
     return row.xpath(f'td[@data-stat="{data_stat}"]')[0].text
 
 
-def getTeamId(team_name_to_id_dict, team_name):
+def get_team_id(team_name_to_id_dict, team_name):
     """
     :param team_name_to_id_dict: dictionary of team abbr to id
     :param team_name: The English name of a team e.g "Chicago Bulls"
@@ -79,13 +79,13 @@ def main():
             row_has_data = len(rank_cell) > 0
             if row_has_data and rank_cell[0].text != "Rk":
                 team_name = row.xpath(f'td[@data-stat="team_name"]/a')[0].text
-                team_id = getTeamId(team_name_to_id_dict, team_name)
-                overall = getCellValueInRow(row, "Overall")
-                home_record = getCellValueInRow(row, "Home")
-                road_record = getCellValueInRow(row, "Road")
-                post_season_record = getCellValueInRow(row, "Post")
-                record_close_games = getCellValueInRow(row, "3")
-                record_normal_games = getCellValueInRow(row, "10")
+                team_id = get_team_id(team_name_to_id_dict, team_name)
+                overall = get_cell_value_in_row(row, "Overall")
+                home_record = get_cell_value_in_row(row, "Home")
+                road_record = get_cell_value_in_row(row, "Road")
+                post_season_record = get_cell_value_in_row(row, "Post")
+                record_close_games = get_cell_value_in_row(row, "3")
+                record_normal_games = get_cell_value_in_row(row, "10")
                 writer.writerow(
                     {'TEAM_ID': team_id, 'TEAM_NAME': team_name, 'OVERALL': overall, 'HOME_RECORD': home_record,
                      'ROAD_RECORD': road_record, "POST_SEASON_RECORD": post_season_record,

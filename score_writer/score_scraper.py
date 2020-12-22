@@ -6,7 +6,6 @@ import pandas as pd
 import requests
 from lxml import html
 
-from Team.Team import Team
 from Team.TeamStats import TeamStats
 
 URL_TEMPLATE = "https://www.basketball-reference.com/boxscores/?month={month}&day={day}&year={year}"
@@ -52,8 +51,8 @@ class ScoreScraper:
 
                 home_team_id = game_results_dict["home_team_id"]
                 away_team_id = game_results_dict["away_team_id"]
-                home_team = team_stats.getTeam(home_team_id)
-                away_team = team_stats.getTeam(away_team_id)
+                home_team = team_stats.get_team(home_team_id)
+                away_team = team_stats.get_team(away_team_id)
 
                 self.get_home_and_road_record(game_results_dict, home_team, away_team)
 
@@ -70,7 +69,7 @@ class ScoreScraper:
                 game_results_dict["is_home_winner"] = game_result
 
                 # record the game to compute stats on the fly
-                team_stats.recordGame(
+                team_stats.record_game(
                     {"HOME_TEAM": game_results_dict["home_team_id"], "AWAY_TEAM": game_results_dict["away_team_id"],
                      "RESULT": game_results_dict["is_home_winner"],
                      "HOME_TEAM_POINTS": game_results_dict['home_team_score'],
@@ -88,16 +87,6 @@ class ScoreScraper:
         for day_offset in range((end_date - start_date + timedelta(days=1)).days):
             yield start_date + timedelta(day_offset)
 
-    # TODO function not used - can delete
-    def getTeamId(self, team_name):
-        """
-        returns the team id for given team name
-        :param team_name: franchise name of the basketball team
-        :return: the team id of the team
-        """
-        franchise = Team.get_franchise(team_name)
-        return self._team_name_to_id_dict[franchise]
-
     @staticmethod
     def get_home_and_road_record(game_results_dict, home_team, away_team):
         """
@@ -107,8 +96,8 @@ class ScoreScraper:
         :param away_team: instance of team representing the away team
         :return: None
         """
-        home_team_record = home_team.getTeamRecord()
-        away_team_record = away_team.getTeamRecord()
+        home_team_record = home_team.get_team_record()
+        away_team_record = away_team.get_team_record()
         game_results_dict["home_team_home_wins"] = home_team_record["HOME_WINS"]
         game_results_dict["home_team_home_loses"] = home_team_record["HOME_LOSES"]
         game_results_dict["home_team_road_wins"] = home_team_record["AWAY_WINS"]
@@ -127,27 +116,14 @@ class ScoreScraper:
         :param away_team: instance of team representing the away team
         :return: None
         """
-        team_score_dict["home_team_wins"] = home_team.getWins()
-        team_score_dict["home_team_loses"] = home_team.getLoses()
-        team_score_dict["home_team_points_per_game"] = home_team.getPointsPerGame()
-        team_score_dict["home_team_points_against_per_game"] = home_team.getPointsConcededPerGame()
-        team_score_dict["away_team_wins"] = away_team.getWins()
-        team_score_dict["away_team_loses"] = away_team.getLoses()
-        team_score_dict["away_team_points_per_game"] = away_team.getPointsPerGame()
-        team_score_dict["away_team_points_against_per_game"] = away_team.getPointsConcededPerGame()
-
-    # TODO function not used - can delete
-    @staticmethod
-    def add_ppg_to_record(team_record, games_played, team_score, other_team_score):
-        if games_played == 1:
-            team_record["points_per_game"] = 0
-            team_record["points_against_per_game"] = 0
-        else:
-            team_record["points_per_game"] = ((team_record["points_per_game"] * games_played) -
-                                              team_score) / games_played - 1
-            team_record["points_against_per_game"] = ((team_record["points_against_per_game"] * games_played) -
-                                                      other_team_score) / games_played - 1
-        return team_record
+        team_score_dict["home_team_wins"] = home_team.get_wins()
+        team_score_dict["home_team_loses"] = home_team.get_loses()
+        team_score_dict["home_team_points_per_game"] = home_team.get_points_per_game()
+        team_score_dict["home_team_points_against_per_game"] = home_team.get_points_conceded_per_game()
+        team_score_dict["away_team_wins"] = away_team.get_wins()
+        team_score_dict["away_team_loses"] = away_team.get_loses()
+        team_score_dict["away_team_points_per_game"] = away_team.get_points_per_game()
+        team_score_dict["away_team_points_against_per_game"] = away_team.get_points_conceded_per_game()
 
     def get_teams_and_scores_dict(self, game_result_element, team_score_dict):
         """

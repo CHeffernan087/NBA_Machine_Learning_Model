@@ -22,7 +22,7 @@ URL_TEMPLATE = PUPPETEER_URL_PREFIX + ("https://www.basketball-reference.com/lea
                                        "#expanded_standings::none")
 
 
-def getTeamIdFromAbbreviation(team_name_to_id_dict, team_abbreviation):
+def get_team_id_from_abbreviation(team_name_to_id_dict, team_abbreviation):
     """
     :param team_name_to_id_dict: dictionary of team abbr to id
     :param team_abbreviation: The Abbreviation of a team (CHI)
@@ -33,7 +33,7 @@ def getTeamIdFromAbbreviation(team_name_to_id_dict, team_abbreviation):
     return team_name_to_id_dict[team_abbreviation]
 
 
-def getTeamId(team_name_to_id_dict, team_name):
+def get_team_id(team_name_to_id_dict, team_name):
     """
     :param team_name_to_id_dict: dictionary of team abbr to id
     :param team_name: the English name of the team e.g Chicago Bulls
@@ -78,7 +78,7 @@ def main():
         column_headings = [heading.text for heading in table_headings]
         encoded_column_headings = []
         for heading in column_headings:
-            encoded_heading = getTeamIdFromAbbreviation(team_name_to_id_dict, heading)
+            encoded_heading = get_team_id_from_abbreviation(team_name_to_id_dict, heading)
             encoded_column_headings.append(encoded_heading)
         writer = csv.DictWriter(output_csv, fieldnames=encoded_column_headings, lineterminator='\n')
         writer.writeheader()
@@ -97,7 +97,7 @@ def main():
                 data_cells = row.xpath("td")
                 team_cell = data_cells[0]
                 team_name = team_cell.xpath("a")[0].text
-                output_dict = {"Team": getTeamId(team_name_to_id_dict, team_name)}
+                output_dict = {"Team": get_team_id(team_name_to_id_dict, team_name)}
                 for index, data_cells in enumerate(data_cells):
                     if index > 0:
                         output_dict[encoded_column_headings[index]] = data_cells.text
